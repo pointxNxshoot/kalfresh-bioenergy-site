@@ -6,20 +6,20 @@
   <title>Kalfresh Bioenergy</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="image" href="assets/img/hero-ai-02.jpg">
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     :root {
       --c-paper: #FFFFFF;
-      --c-panel: #F2F4F0; /* Sage */
+      --c-panel: #EAF4EE; /* Sage */
       --c-hairline: #E1E5DC;
       --c-ink: #0E130F;
       --c-body: #5F6861;
       --c-dark: #0B0F0C;
-      --c-dark-card: #121814;
       
       --c-brand: #215732; /* Deep green */
       --c-signal: #00B140; /* Bright green */
-      --c-lime: #D0DF00;
+      --c-lime: #D0DF00; /* Lime */
       
       --f-sans: 'Outfit', sans-serif;
       --f-mono: 'IBM Plex Mono', monospace;
@@ -33,27 +33,16 @@
     }
     
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; font-size: 16px; background: var(--c-dark); color: var(--c-ink); }
+    html { scroll-behavior: smooth; font-size: 16px; background: var(--c-paper); color: var(--c-ink); }
     body { font-family: var(--f-sans); background: var(--c-paper); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
     /* Utilities */
     .notch { clip-path: polygon(0 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%); }
-    .notch-tl { clip-path: polygon(18px 0, 100% 0, 100% 100%, 0 100%, 0 18px); }
-    .notch-bl { clip-path: polygon(0 0, 100% 0, 100% 100%, 18px 100%, 0 calc(100% - 18px)); }
-    .notch-br { clip-path: polygon(0 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%); }
-    .notch-lg { clip-path: polygon(0 0, 100% 0, 100% calc(100% - 28px), calc(100% - 28px) 100%, 0 100%); }
+    .notch-lg { clip-path: polygon(0 0, 100% 0, 100% calc(100% - 32px), calc(100% - 32px) 100%, 0 100%); }
     .notch-sm { clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%); }
     .hero-cut { clip-path: polygon(0 0, 100% 0, 100% 100%, 80px 100%, 0 calc(100% - 80px)); }
     @media (max-width: 768px) { .hero-cut { clip-path: polygon(0 0, 100% 0, 100% 100%, 40px 100%, 0 calc(100% - 40px)); } }
     
-    .step-corner { 
-      clip-path: polygon(0 0, 72% 0, 72% 90px, 100% 90px, 100% 100%, 0 100%); 
-      border-radius: 24px;
-    }
-    @media (max-width: 768px) { 
-      .step-corner { clip-path: polygon(0 0, 72% 0, 72% 60px, 100% 60px, 100% 100%, 0 100%); } 
-    }
-
     .sage-panel {
       background: var(--c-panel);
       border-left: 4px solid var(--c-signal);
@@ -72,6 +61,8 @@
       content: '+'; position: absolute; font-family: var(--f-mono); font-size: 14px; 
       line-height: 1; color: inherit; opacity: 0.5; pointer-events: none;
     }
+    .cross-corners::before { top: 12px; left: 12px; }
+    .cross-corners::after { bottom: 12px; right: 12px; }
 
     /* Typography */
     h1, h2, h3, h4 { font-weight: 300; letter-spacing: -0.03em; line-height: 1.1; color: var(--c-ink); }
@@ -93,7 +84,7 @@
     
     /* Layout */
     .section { padding: clamp(60px, 8vw, 120px) max(20px, 4vw); position: relative; }
-    .dark-sec { background: var(--c-dark); color: var(--c-paper); }
+    .dark-sec { background: var(--c-brand); color: var(--c-paper); }
     .dark-sec h1, .dark-sec h2, .dark-sec h3 { color: var(--c-paper); }
     .dark-sec p { color: rgba(255,255,255,0.7); }
     
@@ -110,11 +101,11 @@
       transition: all 0.3s var(--ease);
     }
     .btn-lime { background: var(--c-lime); color: var(--c-ink); padding: 0 24px; min-height: 44px; font-weight: 500; }
-    .btn-lime:hover { background: #E1F000; }
+    .btn-lime:hover { filter: brightness(0.95); }
     .btn-lime .arrow { transition: transform 0.3s var(--ease); }
     .btn-lime:hover .arrow { transform: translateX(4px); }
-    .btn-grey { background: var(--c-panel); color: var(--c-ink); padding: 0 24px; min-height: 44px; border: 1px solid var(--c-hairline); }
-    .btn-grey:hover { background: var(--c-hairline); }
+    .btn-grey { background: transparent; color: var(--c-brand); padding: 0 24px; min-height: 44px; border: 1px solid var(--c-brand); }
+    .btn-grey:hover { background: var(--c-panel); }
     .btn-grey:hover .arrow { transform: translateX(4px); }
     
     .link-hover { position: relative; text-decoration: none; color: inherit; }
@@ -153,7 +144,7 @@
     .nav.is-light-section .logo-dark { display: block; }
     
     .nav-links { display: none; gap: 32px; }
-    @media (min-width: 1024px) { .nav-links { display: flex; } }
+    @media (min-width: 1024px) { .nav-links { display: flex; } .menu-btn { display:none; } }
     .nav-link { color: var(--c-paper); font-family: var(--f-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; text-decoration: none; position: relative; }
     .nav.is-light-section .nav-link { color: var(--c-ink); }
     .nav-link.active::before { content: ''; position: absolute; left: -14px; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; background: var(--c-signal); border-radius: 50%; }
@@ -163,16 +154,16 @@
 
     /* Mobile Menu */
     .menu-overlay {
-      position: fixed; inset: 0; background: var(--c-dark); z-index: 200;
+      position: fixed; inset: 0; background: var(--c-brand); z-index: 200;
       display: flex; flex-direction: column; padding: clamp(40px, 8vw, 80px) max(20px, 4vw);
       opacity: 0; pointer-events: none; transition: opacity 0.4s var(--ease); color: var(--c-paper);
     }
     .menu-overlay.is-open { opacity: 1; pointer-events: auto; }
-    .menu-close { position: absolute; top: max(16px, 2vw); right: max(20px, 4vw); width: 44px; height: 44px; border: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 24px; line-height: 1; border-radius: 0; }
+    .menu-close { position: absolute; top: max(16px, 2vw); right: max(20px, 4vw); width: 44px; height: 44px; border: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 24px; line-height: 1; border-radius: 0; background: transparent; }
     .menu-nav { display: flex; flex-direction: column; gap: 24px; margin-top: 40px; }
     .menu-nav a { color: #fff; font-size: clamp(32px, 5vw, 48px); text-decoration: none; font-weight: 300; letter-spacing: -0.02em; }
-    .menu-nav a:hover { color: var(--c-signal); }
-    .menu-facts { margin-top: auto; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); font-family: var(--f-mono); font-size: 12px; line-height: 1.6; color: rgba(255,255,255,0.6); }
+    .menu-nav a:hover { color: var(--c-lime); }
+    .menu-facts { margin-top: auto; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); font-family: var(--f-mono); font-size: 12px; line-height: 1.6; color: rgba(255,255,255,0.8); }
 
     /* Hero */
     .hero {
@@ -183,12 +174,11 @@
     .hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(11,15,12,0.4) 0%, rgba(11,15,12,0.1) 50%, rgba(11,15,12,0.6) 100%); }
     .hero-content { position: relative; z-index: 1; flex: 1; display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; }
     
-    .hero-top { display: flex; justify-content: space-between; align-items: flex-start; }
-    .hero-breadcrumb { color: var(--c-paper); }
+    .hero-top { display: flex; justify-content: flex-end; align-items: flex-start; }
     .hero-desc { color: rgba(255,255,255,0.8); max-width: 32ch; text-align: right; }
     @media (max-width: 768px) { .hero-desc { display: none; } }
     
-    .hero-mid { display: flex; align-items: flex-end; justify-content: space-between; padding-bottom: 80px; }
+    .hero-mid { display: flex; align-items: flex-end; justify-content: space-between; padding-bottom: 40px; }
     .hero-h1 { color: var(--c-paper); max-width: 14ch; }
     .hero-card { padding: 24px; min-width: 300px; transform: translateY(-20px); }
     .hero-card .row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 14px; }
@@ -199,89 +189,72 @@
       .hero-card { transform: none; }
     }
     
-    .hero-bottom { display: grid; grid-template-columns: 1fr; gap: 24px; max-width: 600px; align-self: end; justify-self: end; }
-    @media (min-width: 600px) { .hero-bottom { grid-template-columns: 1fr 1fr; } }
-    .h-p { color: rgba(255,255,255,0.7); font-size: 14px; }
-    .h-lbl { display: block; margin-bottom: 8px; color: var(--c-signal); }
+    .hero-bottom { display: flex; justify-content: flex-start; padding-bottom: 24px; }
 
-    /* Process Flow */
-    .flow-sec { background: var(--c-paper); overflow: hidden; }
-    .how-header { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; margin-bottom: 64px; flex-wrap: wrap; }
-    .how-header .label { margin-bottom: 24px; }
+    /* Process Flow Map */
+    .flow-sec { background: var(--c-paper); }
+    .how-header { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; margin-bottom: 48px; flex-wrap: wrap; }
     .how-desc { max-width: 30ch; text-align: right; color: var(--c-body); }
     @media (max-width: 768px) { .how-desc { text-align: left; } }
 
-    .flow-container { position: relative; }
-    .flow-track { 
-      position: relative; display: flex; justify-content: space-between; 
-      margin-bottom: 32px; z-index: 10;
+    .flow-map-wrap { max-width: 1280px; margin: 0 auto; position: relative; }
+    .flow-map { position: relative; width: 100%; aspect-ratio: 2064/1152; background: url('assets/img/flow-map.png') center/contain no-repeat; }
+    
+    .hotspot { 
+      position: absolute; transform: translate(-50%, -50%); width: 36px; height: 36px; 
+      border-radius: 50%; background: var(--c-signal); display: flex; align-items: center; 
+      justify-content: center; z-index: 10; border: none; color: #fff; cursor: pointer; padding: 0;
     }
-    .flow-line { 
-      position: absolute; top: 60px; left: 60px; right: 60px; height: 2px; 
-      z-index: -1;
-      background: repeating-linear-gradient(90deg, var(--c-hairline) 0, var(--c-hairline) 8px, transparent 8px, transparent 16px);
-      background-size: 16px 2px;
-      animation: dashAnim 1s linear infinite;
+    .hotspot::before { 
+      content: ''; position: absolute; inset: -4px; border-radius: 50%; 
+      border: 2px solid var(--c-signal); opacity: 0.4;
     }
-    .flow-return-line {
-      position: absolute; top: 60px; left: 60px; right: 60px; height: 100px;
-      border: 2px dashed var(--c-lime); border-bottom: none; border-radius: 40px 40px 0 0;
-      z-index: -2; opacity: 0.4;
-      transform: translateY(-100%);
+    @media (prefers-reduced-motion: no-preference) {
+      .hotspot::before { animation: pulse 2s infinite ease-out; }
     }
-    .flow-return-lbl {
-      position: absolute; top: -30px; left: 50%; transform: translateX(-50%);
-      color: var(--c-signal); background: var(--c-paper); padding: 0 16px;
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.6; }
+      100% { transform: scale(1.6); opacity: 0; }
+    }
+    .hotspot-label { 
+      position: absolute; left: 100%; margin-left: 12px; background: #fff; 
+      color: var(--c-ink); padding: 4px 12px; font-family: var(--f-sans); font-size: 14px; 
+      font-weight: 500; border-radius: 20px; white-space: nowrap; pointer-events: none; 
+      opacity: 0; transform: translateX(-10px); transition: all 0.3s var(--ease); 
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1); border: 1px solid var(--c-hairline);
+    }
+    .hotspot:hover .hotspot-label, .hotspot:focus-visible .hotspot-label, .hotspot[aria-expanded="true"] .hotspot-label { 
+      opacity: 1; transform: translateX(0); 
     }
     
-    @keyframes dashAnim {
-      from { background-position: 0 0; }
-      to { background-position: -16px 0; }
+    .map-info { 
+      position: absolute; background: #fff; border: 1px solid var(--c-hairline); 
+      border-left: 4px solid var(--c-signal); padding: 24px; width: 320px; z-index: 20; 
+      display: none; box-shadow: 0 8px 24px rgba(0,0,0,0.08); 
     }
-    @media (prefers-reduced-motion: reduce) { .flow-line { animation: none; } }
-
-    .stage { 
-      display: flex; flex-direction: column; align-items: center; gap: 16px; 
-      width: 140px; cursor: pointer; position: relative;
-    }
-    .stage-img-wrap {
-      width: 120px; height: 120px; background: #fff; border: 1px solid var(--c-hairline);
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.3s var(--ease); position: relative;
-    }
-    .stage-img-wrap img { width: 80px; height: 80px; object-fit: contain; }
-    .stage:hover .stage-img-wrap, .stage:focus-visible .stage-img-wrap { transform: scale(1.04); border-color: var(--c-signal); }
-    .stage.active .stage-img-wrap { border: 2px solid var(--c-signal); transform: scale(1.04); }
+    .map-info.active { display: block; animation: fade 0.3s var(--ease); }
     
-    .stage-title { font-size: 16px; font-weight: 500; text-transform: none; letter-spacing: 0; color: var(--c-ink); font-family: var(--f-sans); text-align: center; }
+    .chip { display: inline-flex; background: var(--c-panel); border: 1px solid var(--c-hairline); padding: 4px 12px; margin: 4px 4px 4px 0; font-size: 11px; color: var(--c-brand); font-family: var(--f-mono); text-transform: uppercase; border-radius: 0; }
     
-    .stage-info { display: none; padding: clamp(24px, 4vw, 48px); margin-top: 32px; }
-    .stage-info.active { display: grid; animation: fade 0.4s var(--ease); }
-    .stage-info-grid { grid-template-columns: 1fr; gap: 32px; align-items: center; }
-    @media (min-width: 768px) { .stage-info-grid { grid-template-columns: auto 1fr; gap: 64px; } }
-    
-    .stage-info-img { width: 200px; height: 200px; object-fit: contain; margin: 0 auto; display: block; }
-    @media (min-width: 768px) { .stage-info-img { width: 240px; height: 240px; } }
-    
-    .chip { display: inline-flex; background: rgba(255,255,255,0.5); border: 1px solid var(--c-hairline); border-radius: 16px; padding: 4px 12px; margin: 4px; font-size: 11px; color: var(--c-brand); }
+    /* Mobile flow */
+    .flow-accordion { display: none; margin-top: 32px; flex-direction: column; gap: 16px; }
+    .mob-card { background: var(--c-panel); border-left: 4px solid var(--c-signal); overflow: hidden; }
+    .mob-card-head { width: 100%; text-align: left; padding: 20px 24px; font-size: 18px; font-family: var(--f-sans); color: var(--c-brand); display: flex; justify-content: space-between; align-items: center; border: none; background: transparent; cursor: pointer; text-transform: none; letter-spacing: 0; font-weight: 400; }
+    .mob-card-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s var(--ease); padding: 0 24px; }
+    .mob-card-inner { overflow: hidden; color: var(--c-body); font-size: 14px; }
+    .mob-card.active .mob-card-body { grid-template-rows: 1fr; padding-bottom: 24px; }
+    .mob-card-icon { font-family: var(--f-mono); font-size: 20px; font-weight: 300; transition: transform 0.3s; color: var(--c-signal); }
+    .mob-card.active .mob-card-icon { transform: rotate(45deg); }
     
     @media (max-width: 759px) {
-      .flow-track { flex-direction: column; align-items: flex-start; gap: 16px; }
-      .flow-line { top: 60px; bottom: 60px; left: 60px; right: auto; width: 2px; height: auto; background-size: 2px 16px; animation: none; }
-      .flow-return-line { display: none; }
-      .stage { flex-direction: row; width: 100%; text-align: left; }
-      .stage-img-wrap { width: 120px; height: 120px; flex-shrink: 0; }
-      .stage-title { text-align: left; }
-      /* Mobile puts panels directly inside track, desktop uses separate container */
-      .desktop-panels { display: none; }
-      .mobile-panel { width: 100%; }
-    }
-    @media (min-width: 760px) {
-      .mobile-panels { display: none; }
+      .map-info { display: none !important; }
+      .hotspot-label { display: none; }
+      .flow-accordion { display: flex; }
+      .flow-map { pointer-events: none; } 
     }
 
     /* Marquee */
-    .marquee-sec { background: var(--c-paper); padding: 40px 0; border-bottom: 1px solid var(--c-hairline); overflow: hidden; }
+    .marquee-sec { background: var(--c-paper); padding: 40px 0; overflow: hidden; }
     .marquee-pill { margin: 0 auto 32px; border: 1px solid var(--c-hairline); border-radius: 20px; padding: 4px 12px; width: max-content; }
     .marquee { display: flex; width: max-content; animation: scroll 30s linear infinite; align-items: center; }
     .marquee:hover { animation-play-state: paused; }
@@ -289,13 +262,10 @@
     @media(min-width: 768px) { .marquee img { height: 44px; } }
     .marquee img:hover { filter: grayscale(0%); opacity: 1; }
     @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-    .ruler { height: 20px; width: 100%; margin-top: 40px; background: repeating-linear-gradient(90deg, var(--c-hairline) 0px, var(--c-hairline) 1px, transparent 1px, transparent 100px); position: relative; }
-    .ruler::after { content: ''; position: absolute; top: 0; left: 50%; width: 2px; height: 30px; background: var(--c-ink); transform: translateX(-50%); }
 
     /* Statement */
-    .statement-sec { background: var(--c-paper); }
-    .st-links { display: flex; flex-direction: column; gap: 16px; align-items: flex-end; margin-top: 40px; }
-    @media (min-width: 900px) { .st-links { margin-top: -60px; } }
+    .statement-sec { background: var(--c-paper); padding-top: 0; }
+    .st-links { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; margin-top: 24px; }
     
     /* Outputs */
     .out-row { display: grid; grid-template-columns: 1fr; margin-bottom: clamp(24px, 4vw, 48px); }
@@ -311,8 +281,8 @@
     /* Tabs */
     .work-sec { background: var(--c-paper); }
     .tabs { display: flex; gap: 16px; border-bottom: 1px solid var(--c-hairline); margin-bottom: 48px; overflow-x: auto; scrollbar-width: none; }
-    .tab { padding: 16px 0; color: var(--c-body); font-size: 18px; position: relative; white-space: nowrap; text-transform: none; font-family: var(--f-sans); font-weight: 400; letter-spacing: 0; }
-    .tab[aria-selected="true"] { color: var(--c-ink); }
+    .tab { padding: 16px 0; color: var(--c-body); font-size: 18px; position: relative; white-space: nowrap; text-transform: none; font-family: var(--f-sans); font-weight: 400; letter-spacing: 0; background: transparent; border: none; cursor: pointer; }
+    .tab[aria-selected="true"] { color: var(--c-brand); font-weight: 500; }
     .tab[aria-selected="true"]::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 2px; background: var(--c-signal); }
     .tab-panel { display: none; }
     .tab-panel.active { display: block; animation: fade 0.4s var(--ease); }
@@ -320,7 +290,7 @@
     
     .ww-grid { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: center; }
     @media (min-width: 900px) { .ww-grid { grid-template-columns: 1fr 1fr; } }
-    .ww-img { aspect-ratio: 1; object-fit: cover; }
+    .ww-img { aspect-ratio: 4/3; object-fit: cover; }
     .num-list { border-top: 1px solid var(--c-hairline); margin-bottom: 32px; }
     .num-row { display: flex; gap: 24px; padding: 24px 0; border-bottom: 1px solid var(--c-hairline); }
     .num { color: var(--c-signal); }
@@ -329,21 +299,20 @@
     .loc-wrapper { position: relative; margin: 48px 0; }
     .loc-img { width: 100%; aspect-ratio: 16/9; min-height: 400px; object-fit: cover; }
     .loc-tooltip { position: absolute; top: 10%; left: 5%; padding: 24px; min-width: 260px; }
-    @media (max-width: 600px) { .loc-tooltip { position: relative; top: auto; left: auto; margin-top: 16px; } }
-    .legend { display: flex; gap: 24px; margin-top: 24px; flex-wrap: wrap; }
+    @media (max-width: 600px) { .loc-tooltip { position: relative; top: auto; left: auto; margin-top: 16px; background: var(--c-brand); border-color: transparent; } }
     
     .impact-grid-wrap { background: var(--c-paper); padding: 1px; }
-    .impact-grid { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--c-hairline); border: 1px solid var(--c-hairline); margin-top: 64px; }
+    .impact-grid { display: grid; grid-template-columns: 1fr; gap: 1px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.15); margin-top: 64px; }
     @media (min-width: 600px) { .impact-grid { grid-template-columns: 1fr 1fr; } }
     @media (min-width: 900px) { .impact-grid { grid-template-columns: repeat(4, 1fr); } }
-    .ig-tile { background: linear-gradient(180deg, #D0DF00 0%, #E6F28C 45%, #F6FBE6 100%); padding: 40px 24px; position: relative; overflow: hidden; }
-    .ig-tile::before { content: '+'; position: absolute; top: 8px; left: 8px; font-family: var(--f-mono); opacity: 0.3; color: var(--c-brand); }
-    .ig-tile::after { content: '+'; position: absolute; bottom: 8px; right: 8px; font-family: var(--f-mono); opacity: 0.3; color: var(--c-brand); }
-    .ig-val { font-size: clamp(32px, 4vw, 48px); font-weight: 300; color: var(--c-brand); margin-bottom: 8px; line-height: 1; display: inline-block; }
-    .ig-unit { color: var(--c-brand); opacity: 0.7; }
-    .ig-tile p { color: var(--c-brand); }
+    .ig-tile { background: var(--c-brand); padding: 40px 24px; position: relative; overflow: hidden; }
+    .ig-tile::before { content: '+'; position: absolute; top: 8px; left: 8px; font-family: var(--f-mono); opacity: 0.4; color: #fff; }
+    .ig-tile::after { content: '+'; position: absolute; bottom: 8px; right: 8px; font-family: var(--f-mono); opacity: 0.4; color: #fff; }
+    .ig-val { font-size: clamp(32px, 4vw, 48px); font-weight: 300; color: #fff; margin-bottom: 8px; line-height: 1; display: inline-block; }
+    .ig-unit { color: rgba(255,255,255,0.7); }
+    .ig-tile p { color: rgba(255,255,255,0.85); }
     
-    .progress-rule { position: absolute; bottom: 0; left: 0; height: 2px; background: var(--c-signal); width: 0; transition: width 1.2s var(--ease); }
+    .progress-rule { position: absolute; top: 0; left: 0; height: 2px; background: var(--c-signal); width: 0; transition: width 1.2s var(--ease); }
     .ig-tile.draw-line .progress-rule { width: 100%; }
 
     /* Timeline */
@@ -353,28 +322,15 @@
     .tl-btn { width: 44px; height: 44px; border: 1px solid var(--c-hairline); background: var(--c-panel); }
     .tl-btn:hover { background: var(--c-hairline); }
     .tl-track { display: flex; gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 24px; }
-    .tl-card { flex: 0 0 85vw; max-width: 400px; scroll-snap-align: start; position: relative; display: flex; flex-direction: column; }
+    .tl-card { flex: 0 0 85vw; max-width: 400px; scroll-snap-align: start; position: relative; display: flex; flex-direction: column; background: var(--c-panel); border-left: 4px solid var(--c-signal); padding: 16px; }
     .tl-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; margin-bottom: 24px; }
-    .tl-strip { background: rgba(255,255,255,0.8); backdrop-filter: var(--blur); border: 1px solid var(--c-hairline); padding: 16px; margin-top: auto; }
-    .now-mark { background: var(--c-signal); color: var(--c-paper); padding: 2px 8px; display: inline-block; margin-left: 8px; font-size: 10px; vertical-align: middle; }
-
-    /* Quote */
-    .quote-sec { background: var(--c-paper); text-align: center; padding-top: 0; }
-    .quote-mark { font-size: 120px; color: var(--c-signal); line-height: 0.5; margin-bottom: 24px; font-family: var(--f-sans); font-weight: 500; }
-    .quote-text { font-size: clamp(32px, 4vw, 56px); max-width: 24ch; margin: 0 auto 40px; }
-
-    /* Gallery */
-    .gal-sec { background: var(--c-paper); padding-top: 0; }
-    .gal-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-    @media (min-width: 768px) { .gal-grid { grid-template-columns: repeat(4, 1fr); } }
-    .gal-item { display: block; aspect-ratio: 1; border: none; padding: 0; cursor: zoom-in; }
-    .gal-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
-    .gal-img { width: 100%; height: 100%; object-fit: cover; }
+    .tl-card h3 { color: var(--c-brand); font-family: var(--f-mono); font-size: 14px; font-weight: 500; }
+    .now-mark { background: var(--c-signal); color: var(--c-paper); padding: 2px 8px; display: inline-block; margin-left: 8px; font-size: 10px; vertical-align: middle; font-family: var(--f-mono); }
 
     /* News */
     .news-sec { background: var(--c-paper); }
     .news-grid { display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 48px; }
-    @media (min-width: 768px) { .news-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 768px) { .news-grid { grid-template-columns: repeat(2, 1fr); } }
     .n-card { text-decoration: none; color: inherit; display: block; border: 1px solid var(--c-hairline); }
     .n-card:hover { background: var(--c-panel); }
     .n-content { padding: 24px; }
@@ -388,67 +344,61 @@
     .faq-icon { font-family: var(--f-mono); font-size: 24px; font-weight: 300; transition: transform 0.3s; color: var(--c-signal); }
     .faq-ans { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s var(--ease); padding: 0 24px; }
     .faq-ans-inner { overflow: hidden; color: var(--c-body); }
-    .faq-item.is-open { background: var(--c-panel); border-bottom-color: transparent; margin: 16px 0; border-radius: 0; }
-    .faq-item.is-open .faq-btn { padding-bottom: 16px; }
+    .faq-item.is-open { background: var(--c-panel); border-bottom-color: transparent; margin: 16px 0; border-radius: 0; border-left: 4px solid var(--c-signal); }
+    .faq-item.is-open .faq-btn { padding-bottom: 16px; color: var(--c-brand); }
     .faq-item.is-open .faq-ans { grid-template-rows: 1fr; padding-bottom: 32px; }
     .faq-item.is-open .faq-icon { transform: rotate(45deg); }
 
     /* CTA */
-    .cta-sec { text-align: center; padding: 120px max(20px, 4vw); position: relative; overflow: hidden; }
-    .rings { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 800px; height: 800px; pointer-events: none; border-radius: 50%; border: 1px solid rgba(255,255,255,0.05); }
-    .rings::before, .rings::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%; border: 1px solid rgba(255,255,255,0.05); }
+    .cta-sec { text-align: center; padding: 120px max(20px, 4vw); position: relative; overflow: hidden; background: var(--c-brand); color: #fff; margin: 0; width: 100%; }
+    .cta-sec h2 { color: #fff; }
+    .cta-sec .mono { color: rgba(255,255,255,0.7); }
+    .rings { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 800px; height: 800px; pointer-events: none; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1); }
+    .rings::before, .rings::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%; border: 1px solid rgba(255,255,255,0.1); }
     .rings::before { width: 600px; height: 600px; }
     .rings::after { width: 400px; height: 400px; }
     .cta-content { position: relative; z-index: 1; }
     
     /* Footer */
-    .footer { padding: 64px max(20px, 4vw) 32px; background: linear-gradient(180deg, #D0DF00 0%, #E6F28C 45%, #F6FBE6 100%); color: var(--c-brand); margin: 0 20px 20px; }
+    .footer { padding: 64px max(20px, 4vw) 32px; background: var(--c-brand); color: #fff; }
     .f-grid { display: grid; grid-template-columns: 1fr; gap: 48px; margin-bottom: 64px; }
     @media (min-width: 900px) { .f-grid { grid-template-columns: 2fr 1fr 1fr 1fr; } }
-    .f-col h4 { color: rgba(33,87,50,0.6); margin-bottom: 24px; font-size: 11px; text-transform: uppercase; font-family: var(--f-mono); letter-spacing: 0.08em; }
+    .f-col h4 { color: rgba(255,255,255,0.6); margin-bottom: 24px; font-size: 11px; text-transform: uppercase; font-family: var(--f-mono); letter-spacing: 0.08em; }
     .f-links { list-style: none; }
     .f-links li { margin-bottom: 12px; }
-    .f-links a { color: var(--c-brand); text-decoration: none; font-size: 14px; opacity: 0.9; transition: opacity 0.3s; }
-    .f-links a:hover { opacity: 1; color: var(--c-signal); }
+    .f-links a { color: #fff; text-decoration: none; font-size: 14px; opacity: 0.9; transition: opacity 0.3s; display: inline-block; padding: 6px 0; }
+    .f-links a:hover { opacity: 1; color: var(--c-lime); }
     .email-form { display: flex; gap: 8px; margin-top: 24px; max-width: 400px; }
-    .email-input { flex: 1; background: rgba(255,255,255,0.4); border: 1px solid rgba(33,87,50,0.2); padding: 0 16px; color: var(--c-ink); font-family: var(--f-sans); min-height: 44px; outline: none; }
-    .email-input:focus { border-color: var(--c-brand); }
+    .email-input { flex: 1; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); padding: 0 16px; color: #fff; font-family: var(--f-sans); min-height: 44px; outline: none; }
+    .email-input:focus { border-color: var(--c-lime); }
     
-    .f-giant { font-size: clamp(72px, 15vw, 220px); font-weight: 500; color: var(--c-brand); line-height: 0.8; letter-spacing: -0.04em; margin-bottom: 48px; word-break: break-all; }
-    .f-bottom { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px; border-top: 1px solid rgba(33,87,50,0.2); padding-top: 32px; color: rgba(33,87,50,0.6); font-size: 14px; }
+    .f-giant { font-size: clamp(72px, 13vw, 220px); font-weight: 500; color: var(--c-signal); line-height: 0.8; letter-spacing: -0.04em; margin-bottom: 48px; word-break: break-all; }
+    .f-bottom { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 32px; color: rgba(255,255,255,0.6); font-size: 14px; }
 
-    /* Modal / Lightbox */
+    /* Modal */
     dialog { margin: auto; border: none; background: transparent; padding: 0; max-width: 600px; width: calc(100% - 40px); }
     dialog::backdrop { background: rgba(11,15,12,0.8); backdrop-filter: var(--blur); }
     .modal-panel { background: var(--c-paper); padding: clamp(32px, 5vw, 64px); position: relative; color: var(--c-ink); }
-    .modal-close { position: absolute; top: 16px; right: 16px; width: 44px; height: 44px; font-size: 24px; color: var(--c-ink); }
+    .modal-close { position: absolute; top: 16px; right: 16px; width: 44px; height: 44px; font-size: 24px; color: var(--c-ink); background: transparent; border: none; cursor: pointer; }
     .form-group { margin-bottom: 24px; }
     .form-control { width: 100%; border: none; border-bottom: 1px solid var(--c-hairline); padding: 12px 0; font-family: var(--f-sans); font-size: 16px; color: var(--c-ink); background: transparent; outline: none; transition: border-color 0.3s; }
     .form-control:focus { border-bottom-color: var(--c-signal); }
-    select.form-control { appearance: none; border-radius: 0; }
-    
-    #lightbox { max-width: 90vw; width: max-content; }
-    .lb-img { max-height: 80vh; max-width: 100%; object-fit: contain; display: block; }
-    .lb-nav { display: flex; justify-content: space-between; margin-top: 16px; }
+    select.form-control { appearance: none; -webkit-appearance: none; border-radius: 0; color: var(--c-ink); background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%230E130F' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 4px center; padding-right: 24px; cursor: pointer; }
+    select.form-control option { color: #0E130F; background: #fff; }
 
     @media (max-width: 759px) {
-      .f-giant { font-size: 17.5vw !important; letter-spacing: -0.04em; white-space: nowrap; line-height: 0.9; }
+      .f-giant { font-size: 13vw !important; letter-spacing: -0.04em; white-space: nowrap; line-height: 0.9; }
       .glass { width: 100%; max-width: 100%; box-sizing: border-box; overflow: hidden; }
       .glass * { max-width: 100%; overflow-wrap: anywhere; }
     }
-    .grid-2 > * { min-width: 0; }
-    select.form-control { appearance: none; -webkit-appearance: none; border-radius: 0; color: var(--c-ink); background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%230E130F' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 4px center; padding-right: 24px; cursor: pointer; }
-    select.form-control option { color: #0E130F; background: #fff; }
-    @media (max-width: 759px) { .fact-row { gap: 14px; padding: 18px 0; } .fact-row span:last-child { overflow-wrap: anywhere; } }
-      /* v5 fixes */
-    .step-corner { clip-path: polygon(0 0, 78% 0, 78% 64px, 100% 64px, 100% 100%, 0 100%); }
-    @media (max-width: 768px) { .step-corner { clip-path: polygon(0 0, 70% 0, 70% 44px, 100% 44px, 100% 100%, 0 100%); } }
-    @media (min-width: 761px) {
-      .flow-track .stage-wrapper .stage-info { display: none !important; }
-      .flow-track .stage-wrapper { width: 140px; flex: 0 0 140px; }
-      .flow-track { justify-content: space-between; }
-    }
-      @media (max-width: 759px) { .f-giant { font-size: 15vw !important; letter-spacing: -0.05em; white-space: nowrap; line-height: 0.9; margin-left: -2px; } }
+      /* v6 fixes */
+    .map-info { width: min(360px, 34%); padding: 20px 22px; pointer-events: none; }
+    .map-info * { pointer-events: auto; }
+    @media (max-width: 1100px) { .map-info { width: 40%; } }
+    .flow-map .hotspot { z-index: 30; }
+    .cta-sec { background: var(--c-ink); margin: 0 20px 20px; width: auto; }
+    .cta-sec h2 { color: #fff; }
+    .footer { border-top: 1px solid rgba(255,255,255,0.18); }
   </style>
 </head>
 <body id="top">
@@ -478,13 +428,13 @@
       <a href="#questions" class="nav-link">Questions</a>
     </div>
     <div class="nav-right">
-      <button class="btn btn-lime notch" onclick="openModal('General', 'Other')">Contact us <svg width="12" height="12"><use href="#ic-arrow"/></svg></button>
-      <button class="menu-btn notch" id="menuBtn" aria-label="Menu">⋯</button>
+      <button class="btn btn-lime notch" onclick="openModal('Other', 'General')">Contact us <svg width="12" height="12"><use href="#ic-arrow"/></svg></button>
+      <button class="menu-btn notch" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="menuOverlay">⋯</button>
     </div>
   </nav>
 
   <div class="menu-overlay" id="menuOverlay">
-    <button class="menu-close" id="menuClose" aria-label="Close menu"><svg width="24" height="24"><use href="#ic-close"/></svg></button>
+    <button class="menu-close notch-sm" id="menuClose" aria-label="Close menu"><svg width="24" height="24"><use href="#ic-close"/></svg></button>
     <nav class="menu-nav">
       <a href="#how" class="menu-link">How it works</a>
       <a href="#outputs" class="menu-link">Outputs</a>
@@ -503,14 +453,12 @@
 
   <header class="hero hero-cut" data-theme="dark">
     <div class="hero-bg">
-      <link rel="preload" as="image" href="assets/img/hero-ai-02.jpg">
-      <img src="assets/img/hero-ai-02.jpg" alt="Aerial of Kalfresh digesters" class="img-fluid">
+      <img src="assets/img/hero-ai-02.jpg" alt="Artist's impression of the Kalfresh Bioenergy facility at Kalbar" class="img-fluid">
     </div>
     
     <div class="hero-content">
       <div class="hero-top reveal">
-        <span class="mono hero-breadcrumb c-signal">● Home</span>
-        <p class="hero-desc">Renewable gas, electricity, biogenic CO2 and bio-fertiliser from the region's crop residues and food waste. First production 2027.</p>
+        <p class="hero-desc" style="border-top: 1px solid var(--c-lime); padding-top: 16px;">Renewable natural gas, electricity, biogenic CO2 and bio-fertiliser from the region's crop residues and food waste. First production <span>2027</span>.</p>
       </div>
       
       <div class="hero-mid">
@@ -518,20 +466,13 @@
         <div class="hero-card glass notch reveal" style="transition-delay: 0.3s">
           <div class="row"><span class="lbl">Location</span><span>Kalbar, Scenic Rim</span></div>
           <div class="row"><span class="lbl">Process</span><span>Anaerobic digestion</span></div>
-          <div class="row"><span class="lbl">First production</span>2027</div>
+          <div class="row"><span class="lbl">First production</span><span>2027</span></div>
           <div class="row"><span class="lbl">Developer</span><span>Kalfresh</span></div>
         </div>
       </div>
       
       <div class="hero-bottom reveal" style="transition-delay: 0.2s">
-        <div>
-          <span class="mono h-lbl">[FEEDSTOCK]</span>
-          <p class="h-p">Crop residues, rotational crops and food-processing waste from farms and manufacturers around Kalbar.</p>
-        </div>
-        <div>
-          <span class="mono h-lbl">[TECHNOLOGY]</span>
-          <p class="h-p">Anaerobic digestion delivered with WELTEC BIOPOWER, backed by $80M from Wollemi Capital and QIC.</p>
-        </div>
+         <button class="btn btn-lime notch" onclick="openModal('Other', 'General')">Talk to our team <span class="arrow">→</span></button>
       </div>
     </div>
   </header>
@@ -539,71 +480,129 @@
   <section id="how" class="section flow-sec" data-theme="light">
     <div class="how-header reveal">
       <div>
-         <div class="label">How it works</div>
+         <div class="label" style="margin-bottom:24px;">How it works</div>
          <h2>From paddock to power and back to the paddock.</h2>
       </div>
-      <p class="how-desc">Hover or tap each stage. The same loop runs every day at Kalbar.</p>
+      <p class="how-desc">Hover or tap a point on the map.</p>
     </div>
 
-    <div class="flow-container reveal">
-      <div class="flow-track">
-        <div class="flow-line"></div>
-        <div class="flow-return-line"><span class="mono flow-return-lbl">DIGESTATE RETURNS TO THE PADDOCK</span></div>
-        
-        <!-- Node 1 -->
-        <div class="stage-wrapper mobile-panel" data-stage="1">
-          <button class="stage" aria-expanded="true">
-            <div class="stage-img-wrap notch-sm"><img src="assets/img/stage-1.png" alt="Grow"></div>
-            <div class="stage-title"><span class="mono c-signal" style="display:block; margin-bottom:4px;">01</span> Grow</div>
-          </button>
-          <div class="stage-info active sage-panel step-corner mobile-panels"></div>
-        </div>
-        
-        <!-- Node 2 -->
-        <div class="stage-wrapper mobile-panel" data-stage="2">
-          <button class="stage" aria-expanded="false">
-            <div class="stage-img-wrap notch-sm"><img src="assets/img/stage-2.png" alt="Collect"></div>
-            <div class="stage-title"><span class="mono c-signal" style="display:block; margin-bottom:4px;">02</span> Collect</div>
-          </button>
-          <div class="stage-info sage-panel step-corner mobile-panels"></div>
-        </div>
+    <div class="flow-map-wrap reveal" id="flowWrap">
+      <div class="flow-map" id="flowMap">
+        <!-- Hotspots -->
+        <button class="hotspot notch-sm" data-stage="0" aria-expanded="true" aria-controls="map-info-0" style="left:19.6%; top:27%">
+          <span class="mono">1</span>
+          <span class="hotspot-label">Grow</span>
+        </button>
+        <button class="hotspot notch-sm" data-stage="1" aria-expanded="false" aria-controls="map-info-1" style="left:51%; top:21%">
+          <span class="mono">2</span>
+          <span class="hotspot-label">Collect</span>
+        </button>
+        <button class="hotspot notch-sm" data-stage="2" aria-expanded="false" aria-controls="map-info-2" style="left:80.7%; top:31%">
+          <span class="mono">3</span>
+          <span class="hotspot-label" style="left:auto; right:100%; margin-left:0; margin-right:12px; transform:translateX(10px);">Digest</span>
+        </button>
+        <button class="hotspot notch-sm" data-stage="3" aria-expanded="false" aria-controls="map-info-3" style="left:80%; top:73%">
+          <span class="mono">4</span>
+          <span class="hotspot-label" style="left:auto; right:100%; margin-left:0; margin-right:12px; transform:translateX(10px);">Upgrade &amp; generate</span>
+        </button>
+        <button class="hotspot notch-sm" data-stage="4" aria-expanded="false" aria-controls="map-info-4" style="left:48.7%; top:78%">
+          <span class="mono">5</span>
+          <span class="hotspot-label">Deliver to the precinct</span>
+        </button>
+        <button class="hotspot notch-sm" data-stage="5" aria-expanded="false" aria-controls="map-info-5" style="left:19%; top:64%">
+          <span class="mono">6</span>
+          <span class="hotspot-label">Return</span>
+        </button>
 
-        <!-- Node 3 -->
-        <div class="stage-wrapper mobile-panel" data-stage="3">
-          <button class="stage" aria-expanded="false">
-            <div class="stage-img-wrap notch-sm"><img src="assets/img/stage-3.png" alt="Digest"></div>
-            <div class="stage-title"><span class="mono c-signal" style="display:block; margin-bottom:4px;">03</span> Digest</div>
-          </button>
-          <div class="stage-info sage-panel step-corner mobile-panels"></div>
+        <!-- Info Cards Desktop -->
+        <div class="map-info notch active" id="map-info-0" style="left:50%; top:50%; transform:translate(-50%,-50%);">
+          <span class="mono c-signal" style="display:block; margin-bottom:8px;">STAGE 01</span>
+          <h3 class="h-brand" style="margin-bottom:12px;">Grow</h3>
+          <p style="font-size:14px; margin-bottom:16px;">Kalfresh grows carrots, sweet corn, beans, onions and more across the Scenic Rim. Every harvest leaves residues and rotational crops.</p>
+          <div style="display:flex; flex-wrap:wrap;"><span class="chip">Crop residues</span><span class="chip">Rotational crops</span><span class="chip">Since 1992</span></div>
         </div>
-
-        <!-- Node 4 -->
-        <div class="stage-wrapper mobile-panel" data-stage="4">
-          <button class="stage" aria-expanded="false">
-            <div class="stage-img-wrap notch-sm"><img src="assets/img/stage-4.png" alt="Upgrade and generate"></div>
-            <div class="stage-title"><span class="mono c-signal" style="display:block; margin-bottom:4px;">04</span> Upgrade &amp; generate</div>
-          </button>
-          <div class="stage-info sage-panel step-corner mobile-panels"></div>
+        <div class="map-info notch" id="map-info-1" style="left:50%; top:50%; transform:translate(-50%,-50%);">
+          <span class="mono c-signal" style="display:block; margin-bottom:8px;">STAGE 02</span>
+          <h3 class="h-brand" style="margin-bottom:12px;">Collect</h3>
+          <p style="font-size:14px; margin-bottom:16px;">Residues, rotational crops and food-processing waste from farms and manufacturers around Kalbar are collected and brought to the facility.</p>
+          <div style="display:flex; flex-wrap:wrap;"><span class="chip">Farms</span><span class="chip">Food manufacturers</span><span class="chip">Councils</span></div>
         </div>
-
-        <!-- Node 5 -->
-        <div class="stage-wrapper mobile-panel" data-stage="5">
-          <button class="stage" aria-expanded="false">
-            <div class="stage-img-wrap notch-sm"><img src="assets/img/stage-5.png" alt="Return"></div>
-            <div class="stage-title"><span class="mono c-signal" style="display:block; margin-bottom:4px;">05</span> Return</div>
-          </button>
-          <div class="stage-info sage-panel step-corner mobile-panels"></div>
+        <div class="map-info notch" id="map-info-2" style="left:50%; top:50%; transform:translate(-50%,-50%);">
+          <span class="mono c-signal" style="display:block; margin-bottom:8px;">STAGE 03</span>
+          <h3 class="h-brand" style="margin-bottom:12px;">Digest</h3>
+          <p style="font-size:14px; margin-bottom:16px;">Inside sealed tanks, microbes break the material down without oxygen and release biogas. The technology is delivered with WELTEC BIOPOWER.</p>
+          <div style="display:flex; flex-wrap:wrap;"><span class="chip">Anaerobic digestion</span><span class="chip">Sealed tanks</span><span class="chip">WELTEC BIOPOWER</span></div>
+        </div>
+        <div class="map-info notch" id="map-info-3" style="left:50%; top:50%; transform:translate(-50%,-50%);">
+          <span class="mono c-signal" style="display:block; margin-bottom:8px;">STAGE 04</span>
+          <h3 class="h-brand" style="margin-bottom:12px;">Upgrade and generate</h3>
+          <p style="font-size:14px; margin-bottom:16px;">Biogas is upgraded to renewable natural gas or used to generate electricity, with biogenic CO2 captured on the way.</p>
+          <div style="display:flex; flex-wrap:wrap;"><span class="chip">Renewable natural gas</span><span class="chip">Electricity</span><span class="chip">Biogenic CO2</span></div>
+        </div>
+        <div class="map-info notch" id="map-info-4" style="left:50%; top:50%; transform:translate(-50%,-50%);">
+          <span class="mono c-signal" style="display:block; margin-bottom:8px;">STAGE 05</span>
+          <h3 class="h-brand" style="margin-bottom:12px;">Deliver to the precinct</h3>
+          <p style="font-size:14px; margin-bottom:16px;">Gas and power go to food manufacturers in the Scenic Rim Agricultural Industrial Precinct next door, and to the grid and transport fleets.</p>
+          <div style="display:flex; flex-wrap:wrap;"><span class="chip">Precinct</span><span class="chip">Grid</span><span class="chip">Transport</span></div>
+        </div>
+        <div class="map-info notch" id="map-info-5" style="left:50%; top:50%; transform:translate(-50%,-50%);">
+          <span class="mono c-signal" style="display:block; margin-bottom:8px;">STAGE 06</span>
+          <h3 class="h-brand" style="margin-bottom:12px;">Return</h3>
+          <p style="font-size:14px; margin-bottom:16px;">The digestate left after digestion is a nutrient-rich fertiliser. It goes back onto local paddocks, closing the loop.</p>
+          <div style="display:flex; flex-wrap:wrap;"><span class="chip">Bio-fertiliser</span><span class="chip">Back to the paddock</span><span class="chip">Closed loop</span></div>
         </div>
       </div>
       
-      <div class="desktop-panels">
-        <div class="stage-info active sage-panel step-corner" id="stage-panel-desktop"></div>
+      <!-- Mobile Accordion -->
+      <div class="flow-accordion">
+        <div class="mob-card notch-sm active" data-mob-stage="0">
+          <button class="mob-card-head" aria-expanded="true"><span><span class="mono c-signal" style="margin-right:8px;">01</span> Grow</span> <span class="mob-card-icon">+</span></button>
+          <div class="mob-card-body"><div class="mob-card-inner">
+            <p style="margin-bottom:16px;">Kalfresh grows carrots, sweet corn, beans, onions and more across the Scenic Rim. Every harvest leaves residues and rotational crops.</p>
+            <div style="display:flex; flex-wrap:wrap; margin-bottom:8px;"><span class="chip">Crop residues</span><span class="chip">Rotational crops</span><span class="chip">Since 1992</span></div>
+          </div></div>
+        </div>
+        <div class="mob-card notch-sm" data-mob-stage="1">
+          <button class="mob-card-head" aria-expanded="false"><span><span class="mono c-signal" style="margin-right:8px;">02</span> Collect</span> <span class="mob-card-icon">+</span></button>
+          <div class="mob-card-body"><div class="mob-card-inner">
+            <p style="margin-bottom:16px;">Residues, rotational crops and food-processing waste from farms and manufacturers around Kalbar are collected and brought to the facility.</p>
+            <div style="display:flex; flex-wrap:wrap; margin-bottom:8px;"><span class="chip">Farms</span><span class="chip">Food manufacturers</span><span class="chip">Councils</span></div>
+          </div></div>
+        </div>
+        <div class="mob-card notch-sm" data-mob-stage="2">
+          <button class="mob-card-head" aria-expanded="false"><span><span class="mono c-signal" style="margin-right:8px;">03</span> Digest</span> <span class="mob-card-icon">+</span></button>
+          <div class="mob-card-body"><div class="mob-card-inner">
+            <p style="margin-bottom:16px;">Inside sealed tanks, microbes break the material down without oxygen and release biogas. The technology is delivered with WELTEC BIOPOWER.</p>
+            <div style="display:flex; flex-wrap:wrap; margin-bottom:8px;"><span class="chip">Anaerobic digestion</span><span class="chip">Sealed tanks</span><span class="chip">WELTEC BIOPOWER</span></div>
+          </div></div>
+        </div>
+        <div class="mob-card notch-sm" data-mob-stage="3">
+          <button class="mob-card-head" aria-expanded="false"><span><span class="mono c-signal" style="margin-right:8px;">04</span> Upgrade and generate</span> <span class="mob-card-icon">+</span></button>
+          <div class="mob-card-body"><div class="mob-card-inner">
+            <p style="margin-bottom:16px;">Biogas is upgraded to renewable natural gas or used to generate electricity, with biogenic CO2 captured on the way.</p>
+            <div style="display:flex; flex-wrap:wrap; margin-bottom:8px;"><span class="chip">Renewable natural gas</span><span class="chip">Electricity</span><span class="chip">Biogenic CO2</span></div>
+          </div></div>
+        </div>
+        <div class="mob-card notch-sm" data-mob-stage="4">
+          <button class="mob-card-head" aria-expanded="false"><span><span class="mono c-signal" style="margin-right:8px;">05</span> Deliver to the precinct</span> <span class="mob-card-icon">+</span></button>
+          <div class="mob-card-body"><div class="mob-card-inner">
+            <p style="margin-bottom:16px;">Gas and power go to food manufacturers in the Scenic Rim Agricultural Industrial Precinct next door, and to the grid and transport fleets.</p>
+            <div style="display:flex; flex-wrap:wrap; margin-bottom:8px;"><span class="chip">Precinct</span><span class="chip">Grid</span><span class="chip">Transport</span></div>
+          </div></div>
+        </div>
+        <div class="mob-card notch-sm" data-mob-stage="5">
+          <button class="mob-card-head" aria-expanded="false"><span><span class="mono c-signal" style="margin-right:8px;">06</span> Return</span> <span class="mob-card-icon">+</span></button>
+          <div class="mob-card-body"><div class="mob-card-inner">
+            <p style="margin-bottom:16px;">The digestate left after digestion is a nutrient-rich fertiliser. It goes back onto local paddocks, closing the loop.</p>
+            <div style="display:flex; flex-wrap:wrap; margin-bottom:8px;"><span class="chip">Bio-fertiliser</span><span class="chip">Back to the paddock</span><span class="chip">Closed loop</span></div>
+          </div></div>
+        </div>
       </div>
     </div>
   </section>
 
   <div id="partners" class="marquee-sec" data-theme="light">
-    <div class="marquee-pill mono label">Delivered with</div>
+    <div class="marquee-pill mono label">Partners and supporters</div>
     <div class="marquee">
       <img src="assets/logos/kalfresh.png" alt="Kalfresh">
       <img src="assets/logos/weltec.svg" alt="WELTEC BIOPOWER">
@@ -619,7 +618,6 @@
       <img src="assets/logos/sraip.png" alt="Scenic Rim Agricultural Industrial Precinct">
       <img src="assets/logos/qld-gov.svg" alt="Queensland Government">
     </div>
-    <div class="ruler"></div>
   </div>
 
   <section class="section statement-sec" data-theme="light">
@@ -628,26 +626,25 @@
       Kalfresh has farmed the Scenic Rim since 1992. Our bioenergy facility turns the region's crop residues and food waste into renewable gas and power, and returns the nutrients to the paddock as fertiliser.
     </p>
     <div class="st-links reveal">
-      <a href="https://www.kalfresh.com.au/about/" class="btn btn-grey notch-sm">Our story <span class="arrow">→</span></a>
-      <a href="https://www.agprecinct.com.au/" class="btn btn-grey notch-sm">The precinct <span class="arrow">→</span></a>
-      <p class="mono" style="color: var(--c-body);">More about our farming roots</p>
+      <a href="https://www.kalfresh.com.au/about/" class="link-hover" style="color:var(--c-brand); font-weight:500;">More about Kalfresh →</a>
     </div>
   </section>
 
   <section id="outputs" class="section" style="background: var(--c-paper);" data-theme="light">
+    <div class="label reveal" style="margin-bottom:24px;">Outputs</div>
     <h2 class="reveal" style="margin-bottom: 64px;">What we produce.</h2>
     
     <div class="out-row reveal">
-      <div class="img-wrap notch-lg"><img src="assets/img/hero-ai-02.jpg" alt="Renewable gas" class="img-fluid" loading="lazy"></div>
+      <div class="img-wrap notch-lg"><img src="assets/img/hero-ai-02.jpg" alt="Artist's impression of the Kalfresh Bioenergy facility at Kalbar" class="img-fluid" loading="lazy"></div>
       <div class="out-panel notch-lg">
         <span class="mono c-signal">01</span>
         <h3 class="h-brand">Renewable natural gas</h3>
-        <p>Pipeline-quality biomethane for industry and transport. Fuel for up to 98 million truck or bus kilometres a year.</p>
+        <p>Biomethane for industry and transport. Fuel for up to 98 million truck or bus kilometres a year.</p>
         <div class="cap-list">
           <span class="mono c-signal" style="margin-bottom:16px; display:block;">Capabilities:</span>
-          <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-pipe"/></svg></div><span class="mono-value">Pipeline-quality biomethane</span></div>
-          <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-pipe"/></svg></div><span class="mono-value">Transport fuel</span></div>
-          <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-pipe"/></svg></div><span class="mono-value">Certificates on request</span></div>
+          <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-pipe"/></svg></div><span class="mono-value">Biomethane for industry and transport</span></div>
+          <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-pipe"/></svg></div><span class="mono-value">Renewable natural gas</span></div>
+          <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-pipe"/></svg></div><span class="mono-value">First production 2027</span></div>
         </div>
         <button class="btn btn-grey notch-sm" style="width: max-content;" onclick="openModal('Off-taker', 'Renewable natural gas')">Request a briefing <span class="arrow">→</span></button>
       </div>
@@ -657,29 +654,29 @@
       <div class="out-panel notch-lg">
         <span class="mono c-signal">02</span>
         <h3 class="h-brand">Electricity</h3>
-        <p>A regional peaking plant fed by agriculture, available 24/7. Enough for up to <span data-count="31000">31,000</span> homes.</p>
+        <p>Electricity for up to 31,000 homes, generated from biogas.</p>
         <div class="cap-list">
           <span class="mono c-signal" style="margin-bottom:16px; display:block;">Capabilities:</span>
-          <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-zap"/></svg></div><span class="mono-value">Dispatchable supply</span></div>
-          <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-zap"/></svg></div><span class="mono-value">Behind-the-meter for the precinct</span></div>
-          <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-zap"/></svg></div><span class="mono-value">Grid export</span></div>
+          <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-zap"/></svg></div><span class="mono-value">Up to 31,000 homes</span></div>
+          <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-zap"/></svg></div><span class="mono-value">Generated from biogas</span></div>
+          <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-zap"/></svg></div><span class="mono-value">First production 2027</span></div>
         </div>
         <button class="btn btn-grey notch-sm" style="width: max-content;" onclick="openModal('Off-taker', 'Electricity')">Request a briefing <span class="arrow">→</span></button>
       </div>
-      <div class="img-wrap notch-lg out-img-col"><img src="assets/img/precinct-aerial.jpg" alt="Electricity" class="img-fluid" loading="lazy"></div>
+      <div class="img-wrap notch-lg out-img-col"><img src="assets/img/scenic-rim-ag-precinct-overview.jpg" alt="Aerial of the region" class="img-fluid" loading="lazy"></div>
     </div>
 
     <div class="out-row reveal">
-      <div class="img-wrap notch-lg"><img src="assets/img/Scenic-Rim-Industrial-Agricultural-Precinct.jpg" alt="CO2" class="img-fluid" loading="lazy"></div>
+      <div class="img-wrap notch-lg"><img src="assets/img/precinct-render-co2.jpg" alt="Artist's impression of the precinct" class="img-fluid" loading="lazy"></div>
       <div class="out-panel notch-lg">
         <span class="mono c-signal">03</span>
         <h3 class="h-brand">Biogenic CO2</h3>
-        <p>Food-grade carbon dioxide for growers and manufacturers.</p>
+        <p>Biogenic carbon dioxide captured from the digestion process.</p>
         <div class="cap-list">
           <span class="mono c-signal" style="margin-bottom:16px; display:block;">Capabilities:</span>
-          <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-cloud"/></svg></div><span class="mono-value">Food grade</span></div>
-          <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-cloud"/></svg></div><span class="mono-value">Local supply</span></div>
-          <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-cloud"/></svg></div><span class="mono-value">Captured from the process</span></div>
+          <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-cloud"/></svg></div><span class="mono-value">Biogenic CO2</span></div>
+          <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-cloud"/></svg></div><span class="mono-value">Captured during upgrading</span></div>
+          <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-cloud"/></svg></div><span class="mono-value">First production 2027</span></div>
         </div>
         <button class="btn btn-grey notch-sm" style="width: max-content;" onclick="openModal('Off-taker', 'Biogenic CO2')">Request a briefing <span class="arrow">→</span></button>
       </div>
@@ -689,65 +686,65 @@
       <div class="out-panel notch-lg">
         <span class="mono c-signal">04</span>
         <h3 class="h-brand">Bio-fertiliser</h3>
-        <p>Nutrient-rich digestate that replaces synthetic fertiliser and goes back to local paddocks.</p>
+        <p>Nutrient-rich digestate that goes back to local paddocks as bio-fertiliser.</p>
         <div class="cap-list">
           <span class="mono c-signal" style="margin-bottom:16px; display:block;">Capabilities:</span>
           <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-leaf"/></svg></div><span class="mono-value">Returned to farms</span></div>
-          <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-leaf"/></svg></div><span class="mono-value">Replaces synthetic inputs</span></div>
+          <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-leaf"/></svg></div><span class="mono-value">Nutrients back to the paddock</span></div>
           <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-leaf"/></svg></div><span class="mono-value">Closes the loop</span></div>
         </div>
         <button class="btn btn-grey notch-sm" style="width: max-content;" onclick="openModal('Off-taker', 'Bio-fertiliser')">Request a briefing <span class="arrow">→</span></button>
       </div>
-      <div class="img-wrap notch-lg out-img-col"><img src="assets/img/scenic-rim-ag-precinct-overview.jpg" alt="Fertiliser" class="img-fluid" loading="lazy"></div>
+      <div class="img-wrap notch-lg out-img-col"><img src="assets/img/kalfresh-vegetables-scenic-rim-fassifern-valley-farmers-growers-products.jpg" alt="Farm harvest" class="img-fluid" loading="lazy"></div>
     </div>
   </section>
 
   <section id="work" class="section work-sec" data-theme="light">
-    <div class="label reveal" style="margin-bottom: 24px;">Who we work with</div>
+    <div class="label reveal" style="margin-bottom: 24px;">Work with us</div>
     <h2 class="reveal" style="margin-bottom: 48px;">Four ways in.</h2>
     
     <div class="tabs reveal" role="tablist">
-      <button class="tab" role="tab" aria-selected="true" aria-controls="panel-1" id="tab-1">Off-takers</button>
-      <button class="tab" role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2">Feedstock suppliers</button>
-      <button class="tab" role="tab" aria-selected="false" aria-controls="panel-3" id="tab-3">Precinct tenants</button>
-      <button class="tab" role="tab" aria-selected="false" aria-controls="panel-4" id="tab-4">Government and investors</button>
+      <button class="tab notch-sm" role="tab" aria-selected="true" aria-controls="panel-1" id="tab-1">Off-takers</button>
+      <button class="tab notch-sm" role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2">Feedstock suppliers</button>
+      <button class="tab notch-sm" role="tab" aria-selected="false" aria-controls="panel-3" id="tab-3">Precinct tenants</button>
+      <button class="tab notch-sm" role="tab" aria-selected="false" aria-controls="panel-4" id="tab-4">Government and investors</button>
     </div>
 
     <div class="tab-content reveal">
       <div id="panel-1" class="tab-panel active" role="tabpanel" aria-labelledby="tab-1">
         <div class="ww-grid">
-          <div class="img-wrap notch-lg"><img src="assets/img/precinct-render-co2.jpg" alt="Off-takers" class="img-fluid ww-img" loading="lazy"></div>
+          <div class="img-wrap notch-lg"><img src="assets/img/Scenic-Rim-Agricultural-Industrial-Precinct.jpg" alt="Artist's impression of the precinct" class="img-fluid ww-img" loading="lazy"></div>
           <div>
             <div class="num-list">
               <div class="num-row"><span class="mono num">01</span><p class="mono-value">Buy renewable gas, electricity, CO2 or bio-fertiliser</p></div>
-              <div class="num-row"><span class="mono num">02</span><p class="mono-value">Contract structures, volumes and certification on request</p></div>
+              <div class="num-row"><span class="mono num">02</span><p class="mono-value">Volumes and contract terms on request</p></div>
               <div class="num-row"><span class="mono num">03</span><p class="mono-value">First production 2027</p></div>
             </div>
-            <button class="btn btn-lime notch" onclick="openModal('Off-taker', 'General')">Talk offtake <span class="arrow">→</span></button>
+            <button class="btn btn-lime notch" onclick="openModal('Off-taker', 'General')">Talk about offtake <span class="arrow">→</span></button>
           </div>
         </div>
       </div>
       <div id="panel-2" class="tab-panel" role="tabpanel" aria-labelledby="tab-2">
         <div class="ww-grid">
-          <div class="img-wrap notch-lg"><img src="assets/img/kalfresh-vegetables-scenic-rim-fassifern-valley-farmers-growers-products.jpg" alt="Feedstock" class="img-fluid ww-img" loading="lazy"></div>
+          <div class="img-wrap notch-lg"><img src="assets/img/kalfresh-vegetables-scenic-rim-fassifern-valley-farmers-growers-products.jpg" alt="Farming fields" class="img-fluid ww-img" loading="lazy"></div>
           <div>
             <div class="num-list">
               <div class="num-row"><span class="mono num">01</span><p class="mono-value">Crop residues and rotational crops</p></div>
               <div class="num-row"><span class="mono num">02</span><p class="mono-value">Food-processing waste</p></div>
               <div class="num-row"><span class="mono num">03</span><p class="mono-value">Council organics and farm waste</p></div>
             </div>
-            <button class="btn btn-lime notch" onclick="openModal('Feedstock supplier', 'Feedstock supply')">Ask for assessment <span class="arrow">→</span></button>
+            <button class="btn btn-lime notch" onclick="openModal('Feedstock supplier', 'Feedstock supply')">Request an assessment <span class="arrow">→</span></button>
           </div>
         </div>
       </div>
       <div id="panel-3" class="tab-panel" role="tabpanel" aria-labelledby="tab-3">
         <div class="ww-grid">
-          <div class="img-wrap notch-lg"><img src="assets/img/precinct-aerial.jpg" alt="Precinct" class="img-fluid ww-img" loading="lazy"></div>
+          <div class="img-wrap notch-lg"><img src="assets/img/precinct-aerial.jpg" alt="Aerial of Kalbar" class="img-fluid ww-img" loading="lazy"></div>
           <div>
             <div class="num-list">
-              <div class="num-row"><span class="mono num">01</span><p class="mono-value">Inside the <span data-count="40">40</span> ha Scenic Rim Agricultural Industrial Precinct</p></div>
-              <div class="num-row"><span class="mono num">02</span><p class="mono-value"><span data-count="75">75</span> km from retail distribution centres</p></div>
-              <div class="num-row"><span class="mono num">03</span><p class="mono-value">On-site renewable gas and power for food manufacturers</p></div>
+              <div class="num-row"><span class="mono num">01</span><p class="mono-value">Inside the 40 ha Scenic Rim Agricultural Industrial Precinct</p></div>
+              <div class="num-row"><span class="mono num">02</span><p class="mono-value">75 km from retail distribution centres</p></div>
+              <div class="num-row"><span class="mono num">03</span><p class="mono-value">Next to the bioenergy facility inside the precinct</p></div>
             </div>
             <a href="https://www.agprecinct.com.au/" class="btn btn-lime notch">Visit agprecinct.com.au <span class="arrow">→</span></a>
           </div>
@@ -755,14 +752,14 @@
       </div>
       <div id="panel-4" class="tab-panel" role="tabpanel" aria-labelledby="tab-4">
         <div class="ww-grid">
-          <div class="img-wrap notch-lg"><img src="assets/img/0033_Kalfresh-Vegetables-Community.jpg" alt="Government" class="img-fluid ww-img" loading="lazy"></div>
+          <div class="img-wrap notch-lg"><img src="assets/img/precinct-aerial.jpg" alt="Aerial of Kalbar" class="img-fluid ww-img" loading="lazy"></div>
           <div>
             <div class="num-list">
               <div class="num-row"><span class="mono num">01</span><p class="mono-value">Queensland Government coordinated project since 2019, approved 2024</p></div>
-              <div class="num-row"><span class="mono num">02</span><p class="mono-value">$<span data-count="291">291</span>M fully developed precinct; <span data-count="641">641</span> construction and <span data-count="475">475</span> operational jobs</p></div>
+              <div class="num-row"><span class="mono num">02</span><p class="mono-value">$<span data-count="291">291</span>M precinct; <span data-count="641">641</span> construction and <span data-count="475">475</span> operational jobs</p></div>
               <div class="num-row"><span class="mono num">03</span><p class="mono-value">$<span data-count="80">80</span>M from Wollemi Capital and QIC</p></div>
             </div>
-            <button class="btn btn-lime notch" onclick="openModal('Investor', 'General')">Contact team <span class="arrow">→</span></button>
+            <button class="btn btn-lime notch" onclick="openModal('Investor', 'General')">Contact the team <span class="arrow">→</span></button>
           </div>
         </div>
       </div>
@@ -770,30 +767,24 @@
   </section>
 
   <section id="location" class="section" data-theme="light">
-    <div class="label reveal" style="margin-bottom: 24px;">Where we operate</div>
+    <div class="label reveal" style="margin-bottom: 24px;">Location</div>
     <h2 class="reveal">Where we are.</h2>
     
     <div class="loc-wrapper reveal">
-      <div class="img-wrap notch-lg"><img src="assets/img/Scenic-Rim-Industrial-Agricultural-Precinct.jpg" alt="Location" class="img-fluid loc-img" loading="lazy"></div>
+      <div class="img-wrap notch-lg"><img src="assets/img/Scenic-Rim-Agricultural-Industrial-Precinct-Lot-Plan.jpg" alt="Lot plan aerial map" class="img-fluid loc-img" loading="lazy"></div>
       <div class="loc-tooltip glass notch">
         <span class="mono" style="display:block; margin-bottom:8px; color:rgba(255,255,255,0.6);">SITE</span>
         <p class="mono-value" style="color:#fff; margin-bottom:16px;">Kalbar, Scenic Rim, Queensland</p>
-        <p style="font-size:14px; color:rgba(255,255,255,0.8);">Inside the Scenic Rim Agricultural Industrial Precinct. 75 km to retail distribution centres. Fronts the Cunningham Highway.</p>
+        <p style="font-size:14px; color:rgba(255,255,255,0.8);">Inside the Scenic Rim Agricultural Industrial Precinct. 75 km to retail distribution centres. New Cunningham Highway intersection in 2027.</p>
       </div>
     </div>
     
-    <div class="legend mono reveal c-signal">
-      <span>+ FACILITY</span>
-      <span>● PRECINCT</span>
-      <span>○ FARMS</span>
-    </div>
-    
-    <div class="impact-grid-wrap step-corner reveal">
-      <div class="impact-grid cross-corners">
-        <div class="ig-tile"><div class="ig-val" data-count="40">40</div> <span class="ig-unit mono">[ha]</span><p>precinct</p><div class="progress-rule"></div></div>
-        <div class="ig-tile"><div class="ig-val" data-count="31000">31,000</div> <span class="ig-unit mono">[homes]</span><p>electricity for up to</p><div class="progress-rule"></div></div>
-        <div class="ig-tile"><div class="ig-val" data-count="430000">430,000</div> <span class="ig-unit mono">[t CO2-e]</span><p>avoided a year, up to</p><div class="progress-rule"></div></div>
-        <div class="ig-tile"><div class="ig-val" data-count="21" data-suffix="M">21M</div> <span class="ig-unit mono">[trees]</span><p>equivalent emissions reduction a year</p><div class="progress-rule"></div></div>
+    <div class="impact-grid-wrap notch-lg reveal">
+      <div class="impact-grid">
+        <div class="ig-tile"><div class="ig-val" data-count="40">40</div> <span class="ig-unit mono">[ha]</span><p>hectare precinct</p><div class="progress-rule"></div></div>
+        <div class="ig-tile"><div class="ig-val" data-count="31000">31,000</div> <span class="ig-unit mono">[homes]</span><p>homes, electricity for up to</p><div class="progress-rule"></div></div>
+        <div class="ig-tile"><div class="ig-val" data-count="430000">430,000</div> <span class="ig-unit mono">[t CO2-e]</span><p>CO2-e avoided a year, up to</p><div class="progress-rule"></div></div>
+        <div class="ig-tile"><div class="ig-val" data-count="21" data-suffix="M">21M</div> <span class="ig-unit mono">[trees]</span><p>trees equivalent, about</p><div class="progress-rule"></div></div>
       </div>
     </div>
   </section>
@@ -812,49 +803,30 @@
     
     <div class="tl-track reveal" id="tl-track">
       <div class="tl-card notch-lg">
-        <div class="img-wrap"><img src="assets/img/0033_Kalfresh-Vegetables-Community.jpg" alt="2019" class="img-fluid tl-img" loading="lazy"></div>
-        <h3 class="mono-value c-signal" style="margin-bottom: 16px;">[2019]</h3>
+        <div class="img-wrap"><img src="assets/img/Scenic-Rim-Agricultural-Industrial-Precinct.jpg" alt="Artist's impression of the precinct" class="img-fluid tl-img" loading="lazy"></div>
+        <h3 class="mono-value c-brand" style="margin-bottom: 16px;">[2019]</h3>
         <p>Queensland Government coordinated project</p>
       </div>
       <div class="tl-card notch-lg">
-        <div class="img-wrap"><img src="assets/img/precinct-aerial.jpg" alt="2024" class="img-fluid tl-img" loading="lazy"></div>
-        <h3 class="mono-value c-signal" style="margin-bottom: 16px;">[2024]</h3>
+        <div class="img-wrap"><img src="assets/img/precinct-render-co2.jpg" alt="Artist's impression of the precinct" class="img-fluid tl-img" loading="lazy"></div>
+        <h3 class="mono-value c-brand" style="margin-bottom: 16px;">[2024]</h3>
         <p>Precinct and bioenergy facility approved</p>
       </div>
       <div class="tl-card notch-lg">
-        <div class="img-wrap"><img src="assets/img/Kalfresh-Sep-2026_068.jpg" alt="2025" class="img-fluid tl-img" loading="lazy"></div>
-        <h3 class="mono-value c-signal" style="margin-bottom: 16px;">[2025]</h3>
+        <div class="img-wrap"><img src="assets/img/Scenic-Rim-Agricultural-Industrial-Precinct-Lot-Plan.jpg" alt="Lot plan map" class="img-fluid tl-img" loading="lazy"></div>
+        <h3 class="mono-value c-brand" style="margin-bottom: 16px;">[2025]</h3>
         <p>Bulk earthworks began</p>
       </div>
       <div class="tl-card notch-lg">
-        <div class="img-wrap"><img src="assets/img/Alexander-and-Andreas-e1791345198816.jpg" alt="2026" class="img-fluid tl-img" loading="lazy"></div>
-        <h3 class="mono-value c-signal" style="margin-bottom: 16px;">[2026] <span class="now-mark notch-sm">NOW</span></h3>
+        <div class="img-wrap"><img src="assets/img/Kalfresh-Sep-2026_068.jpg" alt="Concrete base pouring on site" class="img-fluid tl-img" loading="lazy"></div>
+        <h3 class="mono-value c-brand" style="margin-bottom: 16px;">[2026] <span class="now-mark notch-sm">NOW</span></h3>
         <p>Civil construction; $80M from Wollemi Capital and QIC; WELTEC BIOPOWER appointed</p>
       </div>
       <div class="tl-card notch-lg">
-        <div class="img-wrap"><img src="assets/img/hero-ai-02.jpg" alt="2027" class="img-fluid tl-img" loading="lazy"></div>
-        <h3 class="mono-value c-signal" style="margin-bottom: 16px;">[2027]</h3>
+        <div class="img-wrap"><img src="assets/img/precinct-aerial.jpg" alt="Aerial of Kalbar" class="img-fluid tl-img" loading="lazy"></div>
+        <h3 class="mono-value c-brand" style="margin-bottom: 16px;">[2027]</h3>
         <p>New Cunningham Highway intersection; first renewable energy production</p>
       </div>
-    </div>
-  </section>
-
-  <section class="section quote-sec" data-theme="light">
-    <div class="quote-mark reveal">"</div>
-    <p class="quote-text reveal">Our mission is to grow a better farming future for our community, consumers and the environment.</p>
-    <div class="reveal" style="display:flex; align-items:center; justify-content:center; gap:16px;">
-      <img src="assets/img/kalfresh-bioenergy-logo.png" alt="Kalfresh" style="height:24px;" loading="lazy">
-    </div>
-  </section>
-
-  <section class="section gal-sec" data-theme="light">
-    <div class="label reveal" style="margin-bottom: 48px;">On site</div>
-    <div class="gal-grid reveal">
-      <button class="gal-item notch-lg img-wrap" onclick="openLightbox('assets/img/Kalfresh-Sep-2026_068.jpg')"><img src="assets/img/Kalfresh-Sep-2026_068.jpg" alt="Site construction" class="gal-img" loading="lazy"></button>
-      <button class="gal-item notch-sm img-wrap" onclick="openLightbox('assets/img/Alexander-and-Andreas-e1791345198816.jpg')"><img src="assets/img/Alexander-and-Andreas-e1791345198816.jpg" alt="Team" class="gal-img" loading="lazy"></button>
-      <button class="gal-item notch-sm img-wrap" onclick="openLightbox('assets/img/Euro-trip-DK.jpeg')"><img src="assets/img/Euro-trip-DK.jpeg" alt="Denmark trip" class="gal-img" loading="lazy"></button>
-      <button class="gal-item notch-sm img-wrap" onclick="openLightbox('assets/img/0033_Kalfresh-Vegetables-Community.jpg')"><img src="assets/img/0033_Kalfresh-Vegetables-Community.jpg" alt="Community" class="gal-img" loading="lazy"></button>
-      <button class="gal-item notch-sm img-wrap" onclick="openLightbox('assets/img/kalfresh-vegetables-scenic-rim-fassifern-valley-farmers-growers-products.jpg')"><img src="assets/img/kalfresh-vegetables-scenic-rim-fassifern-valley-farmers-growers-products.jpg" alt="Farm" class="gal-img" loading="lazy"></button>
     </div>
   </section>
 
@@ -864,22 +836,16 @@
       <a href="https://www.agprecinct.com.au/news/" class="link-hover mono reveal">All news →</a>
     </div>
     <div class="news-grid reveal">
-      <a href="https://www.agprecinct.com.au/news/" class="n-card notch-lg">
+      <a href="https://www.agprecinct.com.au/news/" class="n-card notch-sm">
         <div class="n-content">
           <span class="mono n-date">[8 Jul 2026]</span>
           <p class="mono-value" style="color:var(--c-ink);">WELTEC BIOPOWER secured as technology partner</p>
         </div>
       </a>
-      <a href="https://www.agprecinct.com.au/news/" class="n-card notch-lg">
+      <a href="https://www.agprecinct.com.au/news/" class="n-card notch-sm">
         <div class="n-content">
           <span class="mono n-date">[19 Feb 2026]</span>
           <p class="mono-value" style="color:var(--c-ink);">$80M backing for paddock to power precinct</p>
-        </div>
-      </a>
-      <a href="https://www.agprecinct.com.au/news/" class="n-card notch-lg">
-        <div class="n-content">
-          <span class="mono n-date">[Sep 2026]</span>
-          <p class="mono-value" style="color:var(--c-ink);">Digester base poured at Kalbar</p>
         </div>
       </a>
     </div>
@@ -915,7 +881,7 @@
     </div>
   </section>
 
-  <section class="cta-sec dark-sec cross-corners step-corner" style="margin: 0 20px 20px; width: calc(100% - 40px);" data-theme="dark">
+  <section class="cta-sec notch-lg cross-corners" data-theme="dark">
     <div class="rings"></div>
     <div class="cta-content reveal">
       <h2 style="margin-bottom: 32px;">Ready to talk?</h2>
@@ -924,12 +890,12 @@
     </div>
   </section>
 
-  <footer class="footer step-corner" data-theme="light">
+  <footer class="footer notch-lg" data-theme="dark">
     <div class="f-grid">
       <div class="f-col">
-        <p style="color:var(--c-brand); font-size:18px; max-width:20ch;">Talk with the Kalfresh Bioenergy team</p>
+        <p style="color:#fff; font-size:18px; max-width:20ch;">Get project updates by email</p>
         <form class="email-form" onsubmit="newsletter(event)">
-          <input type="email" class="email-input notch-sm" placeholder="Your email" required>
+          <input type="email" class="email-input notch-sm" placeholder="Your email" aria-label="Email address" required>
           <button type="submit" class="btn btn-lime notch-sm" style="padding:0 16px;">Sign up</button>
         </form>
       </div>
@@ -951,7 +917,7 @@
           <li><a href="https://www.kalfresh.com.au/">kalfresh.com.au</a></li>
           <li><a href="https://www.kalfresh.com.au/about/">About</a></li>
           <li><a href="https://www.agprecinct.com.au/">The precinct</a></li>
-          <li><a href="https://www.agprecinct.com.au/news/">News</a></li>
+          <li><a href="https://www.agprecinct.com.au/news/">Precinct news</a></li>
         </ul>
       </div>
       <div class="f-col">
@@ -967,18 +933,18 @@
     
     <div class="f-bottom">
       <div>A Kalfresh company · © 2026<br>We acknowledge the Traditional Owners of the land and pay respects to Elders past and present.</div>
-      <button id="back-to-top" class="btn btn-grey notch-sm" style="background:transparent; color:var(--c-brand); border-color:rgba(33,87,50,0.2);">Back to top ↑</button>
+      <button id="back-to-top" class="btn btn-grey notch-sm" style="background:transparent; color:var(--c-lime); border-color:rgba(255,255,255,0.3);">Back to top ↑</button>
     </div>
   </footer>
 
   <dialog id="contactModal">
     <div class="modal-panel notch-lg">
-      <button class="menu-close notch-sm" style="color:var(--c-ink); border-color:var(--c-hairline);" onclick="closeModal()" aria-label="Close modal"><svg width="24" height="24"><use href="#ic-close"/></svg></button>
+      <button class="modal-close notch-sm" onclick="closeModal()" aria-label="Close modal"><svg width="24" height="24"><use href="#ic-close"/></svg></button>
       <h2 style="margin-bottom: 32px;">Talk to Kalfresh Bioenergy</h2>
       
       <form id="modalForm" onsubmit="submitContact(event)">
         <div class="form-group">
-          <label class="mono c-signal" style="display:block; margin-bottom:8px;">I am a...</label>
+          <label for="m-audience" class="mono c-signal" style="display:block; margin-bottom:8px;">I am a...</label>
           <select class="form-control" id="m-audience" required>
             <option value="Off-taker">Off-taker</option>
             <option value="Feedstock supplier">Feedstock supplier</option>
@@ -990,7 +956,7 @@
           </select>
         </div>
         <div class="form-group">
-          <label class="mono c-signal" style="display:block; margin-bottom:8px;">Interested in...</label>
+          <label for="m-interest" class="mono c-signal" style="display:block; margin-bottom:8px;">Interested in...</label>
           <select class="form-control" id="m-interest" required>
             <option value="Renewable natural gas">Renewable natural gas</option>
             <option value="Electricity">Electricity</option>
@@ -1001,10 +967,10 @@
             <option value="General">General</option>
           </select>
         </div>
-        <div class="form-group"><input type="text" class="form-control" id="m-name" placeholder="Name" required></div>
-        <div class="form-group"><input type="text" class="form-control" id="m-org" placeholder="Organisation" required></div>
-        <div class="form-group"><input type="email" class="form-control" id="m-email" placeholder="Email" required></div>
-        <div class="form-group"><textarea class="form-control" id="m-msg" placeholder="Message" rows="3" required></textarea></div>
+        <div class="form-group"><input type="text" class="form-control" id="m-name" aria-label="Name" placeholder="Name" required></div>
+        <div class="form-group"><input type="text" class="form-control" id="m-org" aria-label="Organisation" placeholder="Organisation" required></div>
+        <div class="form-group"><input type="email" class="form-control" id="m-email" aria-label="Email" placeholder="Email" required></div>
+        <div class="form-group"><textarea class="form-control" id="m-msg" aria-label="Message" placeholder="Message" rows="3" required></textarea></div>
         
         <button type="submit" class="btn btn-lime notch" style="width:100%;">Send message <span class="arrow">→</span></button>
       </form>
@@ -1013,17 +979,6 @@
         <h3 class="h-brand" style="margin-bottom:16px;">Opening mail client...</h3>
         <p style="margin-bottom:24px;">If your email app didn't open, copy the details below.</p>
         <button class="btn btn-grey notch-sm" onclick="copyDetails()">Copy details</button>
-      </div>
-    </div>
-  </dialog>
-
-  <dialog id="lightbox">
-    <div style="position:relative;">
-      <button class="menu-close notch-sm" style="top:-16px; right:-16px; background:var(--c-paper); color:var(--c-ink); border:none; z-index:10;" onclick="closeLightbox()" aria-label="Close gallery"><svg width="24" height="24"><use href="#ic-close"/></svg></button>
-      <img src="" id="lb-img" class="lb-img notch-lg" alt="Gallery image full size">
-      <div class="lb-nav">
-        <button class="btn btn-grey notch-sm" style="background:var(--c-paper);" onclick="lbPrev()">← Prev</button>
-        <button class="btn btn-grey notch-sm" style="background:var(--c-paper);" onclick="lbNext()">Next →</button>
       </div>
     </div>
   </dialog>
@@ -1071,9 +1026,11 @@
     const toggleMenu = (open) => {
       if(open) {
         menuOverlay.classList.add('is-open');
+        menuBtn.setAttribute('aria-expanded', 'true');
         document.body.style.overflow = 'hidden';
       } else {
         menuOverlay.classList.remove('is-open');
+        menuBtn.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
       }
     };
@@ -1094,83 +1051,63 @@
       });
     });
 
-    // Flow Interactive
-    const stageData = [
-      { num: '01', title: 'Grow', desc: 'Kalfresh grows carrots, sweet corn, beans, onions and more across the Scenic Rim. Every harvest leaves residues and rotational crops.', chips: ['Crop residues','Rotational crops','Since 1992'] },
-      { num: '02', title: 'Collect', desc: 'Residues, rotational crops and food-processing waste from farms and manufacturers around Kalbar are collected and brought to the facility.', chips: ['Farms','Food manufacturers','Councils'] },
-      { num: '03', title: 'Digest', desc: 'Inside sealed tanks, microbes break the material down without oxygen and release biogas. The technology is delivered with WELTEC BIOPOWER.', chips: ['Anaerobic digestion','Sealed tanks','WELTEC BIOPOWER'] },
-      { num: '04', title: 'Upgrade and generate', desc: 'Biogas is cleaned to pipeline-quality biomethane, or burned to generate electricity, with food-grade CO2 captured on the way.', chips: ['Renewable natural gas','Electricity','Biogenic CO2'] },
-      { num: '05', title: 'Return', desc: 'The digestate left after digestion is a nutrient-rich fertiliser. It goes back onto local paddocks, closing the loop.', chips: ['Bio-fertiliser','Back to the paddock','Closed loop'] }
-    ];
-    
-    const stageNodes = document.querySelectorAll('.stage');
-    const desktopPanel = document.getElementById('stage-panel-desktop');
-    const mobilePanels = document.querySelectorAll('.mobile-panels');
-    
-    const renderPanel = (idx) => {
-      const d = stageData[idx];
-      return `
-        <div class="stage-info-grid" style="display:grid; width:100%;">
-          <img src="assets/img/stage-${idx+1}.png" alt="${d.title}" class="stage-info-img">
-          <div>
-            <span class="mono c-signal" style="display:block; margin-bottom:8px;">STAGE ${d.num}</span>
-            <h3 class="h-brand" style="margin-bottom:16px;">${d.title}</h3>
-            <p style="margin-bottom:24px;">${d.desc}</p>
-            <div style="display:flex; flex-wrap:wrap; gap:4px; margin-left:-4px;">
-              ${d.chips.map(c => `<span class="chip">${c}</span>`).join('')}
-            </div>
-          </div>
-        </div>
-      `;
-    };
+    // Flow Map Interaction
+    const hotspots = document.querySelectorAll('.hotspot');
+    const mapInfos = document.querySelectorAll('.map-info');
+    let activeStageIdx = 0;
 
     const activateStage = (idx) => {
-      stageNodes.forEach(btn => {
-        btn.setAttribute('aria-expanded', 'false');
-        btn.classList.remove('active');
+      activeStageIdx = idx;
+      hotspots.forEach((h, i) => {
+        h.setAttribute('aria-expanded', i === idx ? 'true' : 'false');
       });
-      stageNodes[idx].setAttribute('aria-expanded', 'true');
-      stageNodes[idx].classList.add('active');
-      
-      // Update desktop panel
-      desktopPanel.innerHTML = renderPanel(idx);
-      
-      // Update mobile panels
-      mobilePanels.forEach((p, i) => {
-        if(i === idx) {
-          p.innerHTML = renderPanel(idx);
-          p.classList.add('active');
-        } else {
-          p.classList.remove('active');
-          p.innerHTML = '';
-        }
+      mapInfos.forEach((info, i) => {
+        if(i === idx) info.classList.add('active');
+        else info.classList.remove('active');
       });
     };
 
-    stageNodes.forEach((btn, idx) => {
+    hotspots.forEach((btn, idx) => {
       btn.addEventListener('click', () => activateStage(idx));
       btn.addEventListener('mouseenter', () => activateStage(idx));
       btn.addEventListener('focus', () => activateStage(idx));
     });
     
+    const flowWrap = document.getElementById('flowWrap');
     document.addEventListener('keydown', (e) => {
-      const activeIdx = Array.from(stageNodes).findIndex(b => b.classList.contains('active'));
-      if(activeIdx === -1) return;
+      if(!document.activeElement || !document.activeElement.classList.contains('hotspot')) return;
       if(e.key === 'ArrowRight' || e.key === 'ArrowDown') {
         e.preventDefault();
-        const nxt = (activeIdx + 1) % stageNodes.length;
-        stageNodes[nxt].focus();
+        const nxt = (activeStageIdx + 1) % hotspots.length;
+        hotspots[nxt].focus();
         activateStage(nxt);
       } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
         e.preventDefault();
-        const prev = (activeIdx - 1 + stageNodes.length) % stageNodes.length;
-        stageNodes[prev].focus();
+        const prev = (activeStageIdx - 1 + hotspots.length) % hotspots.length;
+        hotspots[prev].focus();
         activateStage(prev);
+      } else if (e.key === 'Escape') {
+        hotspots[0].focus();
+        activateStage(0);
       }
     });
 
-    // Initialize Flow
-    activateStage(0);
+    // Flow Mobile Accordion
+    const mobCardHeads = document.querySelectorAll('.mob-card-head');
+    mobCardHeads.forEach((btn, idx) => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const isOpen = item.classList.contains('active');
+        document.querySelectorAll('.mob-card').forEach(el => {
+          el.classList.remove('active');
+          el.querySelector('.mob-card-head').setAttribute('aria-expanded', 'false');
+        });
+        if(!isOpen) {
+          item.classList.add('active');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
 
     // Timeline Scroll
     const track = document.getElementById('tl-track');
@@ -1216,23 +1153,25 @@
             return;
           }
           
-          let duration = 1200;
+          let duration = 900;
           let start = performance.now();
           
           const update = (t) => {
             let progress = (t - start) / duration;
             if(progress > 1) progress = 1;
-            let ease = progress >= 1 ? 1 : 1 - Math.pow(1 - progress, 4); // easeOutQuart
+            let ease = progress >= 1 ? 1 : 1 - Math.pow(1 - progress, 4);
             let current = target * ease;
             
             let val;
             if(dec === 0) val = Math.round(current).toLocaleString('en-AU');
             else val = current.toLocaleString('en-AU', {minimumFractionDigits: dec, maximumFractionDigits: dec});
             
-            el.textContent = prefix + val + suffix;
-            
-            if(progress < 1) requestAnimationFrame(update);
-            else el.textContent = prefix + target.toLocaleString('en-AU') + suffix;
+            if(progress < 1) {
+              el.textContent = prefix + val + suffix;
+              requestAnimationFrame(update);
+            } else {
+              el.textContent = prefix + target.toLocaleString('en-AU') + suffix;
+            }
           };
           requestAnimationFrame(update);
         }
@@ -1287,25 +1226,9 @@
     
     window.newsletter = (e) => {
       e.preventDefault();
-      window.location.href = `mailto:info@agprecinct.com.au?subject=Newsletter`;
+      window.location.href = `mailto:info@agprecinct.com.au?subject=Project%20updates%20sign-up`;
     };
 
-    // Lightbox
-    const lb = document.getElementById('lightbox');
-    const lbImg = document.getElementById('lb-img');
-    const images = Array.from(document.querySelectorAll('.gal-img')).map(img => img.src);
-    let currentLbIdx = 0;
-    
-    window.openLightbox = (src) => {
-      currentLbIdx = images.findIndex(s => s.includes(src));
-      lbImg.src = src;
-      lb.showModal();
-      document.body.style.overflow = 'hidden';
-    };
-    window.closeLightbox = () => { lb.close(); document.body.style.overflow = ''; };
-    window.lbNext = () => { currentLbIdx = (currentLbIdx + 1) % images.length; lbImg.src = images[currentLbIdx]; };
-    window.lbPrev = () => { currentLbIdx = (currentLbIdx - 1 + images.length) % images.length; lbImg.src = images[currentLbIdx]; };
-    lb.addEventListener('click', (e) => { if(e.target === lb) closeLightbox(); });
     // back-to-top
     const btt = document.getElementById('back-to-top');
     if (btt) btt.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); });
