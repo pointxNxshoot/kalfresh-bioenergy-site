@@ -399,6 +399,7 @@
     .cta-sec { background: var(--c-ink); margin: 0 20px 20px; width: auto; }
     .cta-sec h2 { color: #fff; }
     .footer { border-top: 1px solid rgba(255,255,255,0.18); }
+      .mob-only{display:none}@media (max-width:759px){.desk-only{display:none}.mob-only{display:inline}}
   </style>
 </head>
 <body id="top">
@@ -483,7 +484,7 @@
          <div class="label" style="margin-bottom:24px;">How it works</div>
          <h2>From paddock to power and back to the paddock.</h2>
       </div>
-      <p class="how-desc">Hover or tap a point on the map.</p>
+      <p class="how-desc"><span class="desk-only">Hover or tap a point on the map.</span><span class="mob-only">Tap a stage below.</span></p>
     </div>
 
     <div class="flow-map-wrap reveal" id="flowWrap">
@@ -515,37 +516,37 @@
         </button>
 
         <!-- Info Cards Desktop -->
-        <div class="map-info notch active" id="map-info-0" style="left:50%; top:50%; transform:translate(-50%,-50%);">
+        <div class="map-info notch active" id="map-info-0" style="left:50%; top:56%; transform:translate(-50%,-50%);">
           <span class="mono c-signal" style="display:block; margin-bottom:8px;">STAGE 01</span>
           <h3 class="h-brand" style="margin-bottom:12px;">Grow</h3>
-          <p style="font-size:14px; margin-bottom:16px;">Kalfresh grows carrots, sweet corn, beans, onions and more across the Scenic Rim. Every harvest leaves residues and rotational crops.</p>
+          <p style="font-size:14px; margin-bottom:16px;">Kalfresh grows carrots, sweet corn, green beans, onions and more across the Scenic Rim. Every harvest leaves residues and rotational crops.</p>
           <div style="display:flex; flex-wrap:wrap;"><span class="chip">Crop residues</span><span class="chip">Rotational crops</span><span class="chip">Since 1992</span></div>
         </div>
-        <div class="map-info notch" id="map-info-1" style="left:50%; top:50%; transform:translate(-50%,-50%);">
+        <div class="map-info notch" id="map-info-1" style="left:50%; top:56%; transform:translate(-50%,-50%);">
           <span class="mono c-signal" style="display:block; margin-bottom:8px;">STAGE 02</span>
           <h3 class="h-brand" style="margin-bottom:12px;">Collect</h3>
           <p style="font-size:14px; margin-bottom:16px;">Residues, rotational crops and food-processing waste from farms and manufacturers around Kalbar are collected and brought to the facility.</p>
           <div style="display:flex; flex-wrap:wrap;"><span class="chip">Farms</span><span class="chip">Food manufacturers</span><span class="chip">Councils</span></div>
         </div>
-        <div class="map-info notch" id="map-info-2" style="left:50%; top:50%; transform:translate(-50%,-50%);">
+        <div class="map-info notch" id="map-info-2" style="left:50%; top:56%; transform:translate(-50%,-50%);">
           <span class="mono c-signal" style="display:block; margin-bottom:8px;">STAGE 03</span>
           <h3 class="h-brand" style="margin-bottom:12px;">Digest</h3>
           <p style="font-size:14px; margin-bottom:16px;">Inside sealed tanks, microbes break the material down without oxygen and release biogas. The technology is delivered with WELTEC BIOPOWER.</p>
           <div style="display:flex; flex-wrap:wrap;"><span class="chip">Anaerobic digestion</span><span class="chip">Sealed tanks</span><span class="chip">WELTEC BIOPOWER</span></div>
         </div>
-        <div class="map-info notch" id="map-info-3" style="left:50%; top:50%; transform:translate(-50%,-50%);">
+        <div class="map-info notch" id="map-info-3" style="left:50%; top:56%; transform:translate(-50%,-50%);">
           <span class="mono c-signal" style="display:block; margin-bottom:8px;">STAGE 04</span>
           <h3 class="h-brand" style="margin-bottom:12px;">Upgrade and generate</h3>
           <p style="font-size:14px; margin-bottom:16px;">Biogas is upgraded to renewable natural gas or used to generate electricity, with biogenic CO2 captured on the way.</p>
           <div style="display:flex; flex-wrap:wrap;"><span class="chip">Renewable natural gas</span><span class="chip">Electricity</span><span class="chip">Biogenic CO2</span></div>
         </div>
-        <div class="map-info notch" id="map-info-4" style="left:50%; top:50%; transform:translate(-50%,-50%);">
+        <div class="map-info notch" id="map-info-4" style="left:50%; top:56%; transform:translate(-50%,-50%);">
           <span class="mono c-signal" style="display:block; margin-bottom:8px;">STAGE 05</span>
           <h3 class="h-brand" style="margin-bottom:12px;">Deliver to the precinct</h3>
-          <p style="font-size:14px; margin-bottom:16px;">Gas and power go to food manufacturers in the Scenic Rim Agricultural Industrial Precinct next door, and to the grid and transport fleets.</p>
+          <p style="font-size:14px; margin-bottom:16px;">Renewable gas and electricity are supplied to the Scenic Rim Agricultural Industrial Precinct around the facility, to the grid and to transport fleets.</p>
           <div style="display:flex; flex-wrap:wrap;"><span class="chip">Precinct</span><span class="chip">Grid</span><span class="chip">Transport</span></div>
         </div>
-        <div class="map-info notch" id="map-info-5" style="left:50%; top:50%; transform:translate(-50%,-50%);">
+        <div class="map-info notch" id="map-info-5" style="left:50%; top:56%; transform:translate(-50%,-50%);">
           <span class="mono c-signal" style="display:block; margin-bottom:8px;">STAGE 06</span>
           <h3 class="h-brand" style="margin-bottom:12px;">Return</h3>
           <p style="font-size:14px; margin-bottom:16px;">The digestate left after digestion is a nutrient-rich fertiliser. It goes back onto local paddocks, closing the loop.</p>
@@ -558,7 +559,7 @@
         <div class="mob-card notch-sm active" data-mob-stage="0">
           <button class="mob-card-head" aria-expanded="true"><span><span class="mono c-signal" style="margin-right:8px;">01</span> Grow</span> <span class="mob-card-icon">+</span></button>
           <div class="mob-card-body"><div class="mob-card-inner">
-            <p style="margin-bottom:16px;">Kalfresh grows carrots, sweet corn, beans, onions and more across the Scenic Rim. Every harvest leaves residues and rotational crops.</p>
+            <p style="margin-bottom:16px;">Kalfresh grows carrots, sweet corn, green beans, onions and more across the Scenic Rim. Every harvest leaves residues and rotational crops.</p>
             <div style="display:flex; flex-wrap:wrap; margin-bottom:8px;"><span class="chip">Crop residues</span><span class="chip">Rotational crops</span><span class="chip">Since 1992</span></div>
           </div></div>
         </div>
@@ -586,7 +587,7 @@
         <div class="mob-card notch-sm" data-mob-stage="4">
           <button class="mob-card-head" aria-expanded="false"><span><span class="mono c-signal" style="margin-right:8px;">05</span> Deliver to the precinct</span> <span class="mob-card-icon">+</span></button>
           <div class="mob-card-body"><div class="mob-card-inner">
-            <p style="margin-bottom:16px;">Gas and power go to food manufacturers in the Scenic Rim Agricultural Industrial Precinct next door, and to the grid and transport fleets.</p>
+            <p style="margin-bottom:16px;">Renewable gas and electricity are supplied to the Scenic Rim Agricultural Industrial Precinct around the facility, to the grid and to transport fleets.</p>
             <div style="display:flex; flex-wrap:wrap; margin-bottom:8px;"><span class="chip">Precinct</span><span class="chip">Grid</span><span class="chip">Transport</span></div>
           </div></div>
         </div>
@@ -675,7 +676,7 @@
         <div class="cap-list">
           <span class="mono c-signal" style="margin-bottom:16px; display:block;">Capabilities:</span>
           <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-cloud"/></svg></div><span class="mono-value">Biogenic CO2</span></div>
-          <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-cloud"/></svg></div><span class="mono-value">Captured during upgrading</span></div>
+          <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-cloud"/></svg></div><span class="mono-value">Captured from the process</span></div>
           <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-cloud"/></svg></div><span class="mono-value">First production 2027</span></div>
         </div>
         <button class="btn btn-grey notch-sm" style="width: max-content;" onclick="openModal('Off-taker', 'Biogenic CO2')">Request a briefing <span class="arrow">→</span></button>
@@ -752,7 +753,7 @@
       </div>
       <div id="panel-4" class="tab-panel" role="tabpanel" aria-labelledby="tab-4">
         <div class="ww-grid">
-          <div class="img-wrap notch-lg"><img src="assets/img/precinct-aerial.jpg" alt="Aerial of Kalbar" class="img-fluid ww-img" loading="lazy"></div>
+          <div class="img-wrap notch-lg"><img src="assets/img/Euro-trip-DK.jpeg" alt="Kalfresh team visiting a biogas plant in Denmark" class="img-fluid ww-img" loading="lazy"></div>
           <div>
             <div class="num-list">
               <div class="num-row"><span class="mono num">01</span><p class="mono-value">Queensland Government coordinated project since 2019, approved 2024</p></div>
@@ -771,7 +772,7 @@
     <h2 class="reveal">Where we are.</h2>
     
     <div class="loc-wrapper reveal">
-      <div class="img-wrap notch-lg"><img src="assets/img/Scenic-Rim-Agricultural-Industrial-Precinct-Lot-Plan.jpg" alt="Lot plan aerial map" class="img-fluid loc-img" loading="lazy"></div>
+      <div class="img-wrap notch-lg"><img src="assets/img/Scenic-Rim-Industrial-Agricultural-Precinct.jpg" alt="Lot plan aerial map" class="img-fluid loc-img" loading="lazy"></div>
       <div class="loc-tooltip glass notch">
         <span class="mono" style="display:block; margin-bottom:8px; color:rgba(255,255,255,0.6);">SITE</span>
         <p class="mono-value" style="color:#fff; margin-bottom:16px;">Kalbar, Scenic Rim, Queensland</p>
@@ -813,7 +814,7 @@
         <p>Precinct and bioenergy facility approved</p>
       </div>
       <div class="tl-card notch-lg">
-        <div class="img-wrap"><img src="assets/img/Scenic-Rim-Agricultural-Industrial-Precinct-Lot-Plan.jpg" alt="Lot plan map" class="img-fluid tl-img" loading="lazy"></div>
+        <div class="img-wrap"><img src="assets/img/Scenic-Rim-Industrial-Agricultural-Precinct.jpg" alt="Lot plan map" class="img-fluid tl-img" loading="lazy"></div>
         <h3 class="mono-value c-brand" style="margin-bottom: 16px;">[2025]</h3>
         <p>Bulk earthworks began</p>
       </div>
@@ -1193,6 +1194,7 @@
       modal.showModal();
       document.body.style.overflow = 'hidden';
     };
+    modal.addEventListener('close', () => { document.body.style.overflow = ''; if (activeOpener && activeOpener.focus) activeOpener.focus(); });
     window.closeModal = () => {
       modal.close();
       document.body.style.overflow = '';
