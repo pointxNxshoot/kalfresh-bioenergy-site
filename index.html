@@ -6,7 +6,7 @@
   <title>Kalfresh Bioenergy</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="image" href="assets/img/hero-ai-02.jpg">
+  <link rel="preload" as="image" href="assets/img/real/hero-drone-19.jpg">
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -20,6 +20,13 @@
       --c-brand: #215732; /* Deep green */
       --c-signal: #00B140; /* Bright green */
       --c-lime: #D0DF00; /* Lime */
+
+      --radius: 20px;
+      --radius-lg: 28px;
+      --radius-pill: 999px;
+      
+      --grad: linear-gradient(135deg, #D0DF00 0%, #00B140 55%, #215732 100%);
+      --grad-radial: radial-gradient(circle at 30% 20%, #D0DF00 0%, #00B140 45%, #215732 100%);
       
       --f-sans: 'Outfit', sans-serif;
       --f-mono: 'IBM Plex Mono', monospace;
@@ -37,11 +44,12 @@
     body { font-family: var(--f-sans); background: var(--c-paper); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
     /* Utilities */
-    .notch { clip-path: polygon(0 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%); }
-    .notch-lg { clip-path: polygon(0 0, 100% 0, 100% calc(100% - 32px), calc(100% - 32px) 100%, 0 100%); }
-    .notch-sm { clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%); }
-    .hero-cut { clip-path: polygon(0 0, 100% 0, 100% 100%, 80px 100%, 0 calc(100% - 80px)); }
-    @media (max-width: 768px) { .hero-cut { clip-path: polygon(0 0, 100% 0, 100% 100%, 40px 100%, 0 calc(100% - 40px)); } }
+    .rounded { border-radius: var(--radius); }
+    .rounded-lg { border-radius: var(--radius-lg); }
+    .pill { border-radius: var(--radius-pill); }
+    
+    .grad { background: var(--grad); color: #fff; }
+    .grad * { color: #fff !important; }
     
     .sage-panel {
       background: var(--c-panel);
@@ -99,6 +107,7 @@
       font-family: var(--f-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
       text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
       transition: all 0.3s var(--ease);
+      border-radius: var(--radius-pill);
     }
     .btn-lime { background: var(--c-lime); color: var(--c-ink); padding: 0 24px; min-height: 44px; font-weight: 500; }
     .btn-lime:hover { filter: brightness(0.95); }
@@ -115,7 +124,7 @@
     }
     .link-hover:hover::after { transform: scaleX(1); }
     
-    .img-wrap { overflow: hidden; position: relative; }
+    .img-wrap { overflow: hidden; position: relative; border-radius: var(--radius-lg); }
     .img-wrap img { transition: transform 0.6s var(--ease); }
     .img-wrap:hover img { transform: scale(1.03); }
 
@@ -150,7 +159,7 @@
     .nav-link.active::before { content: ''; position: absolute; left: -14px; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; background: var(--c-signal); border-radius: 50%; }
     
     .nav-right { display: flex; gap: 12px; align-items: center; }
-    .menu-btn { width: 44px; height: 44px; background: var(--c-panel); color: var(--c-ink); font-size: 16px; }
+    .menu-btn { width: 44px; height: 44px; background: var(--c-panel); color: var(--c-ink); font-size: 16px; border-radius: var(--radius-pill); }
 
     /* Mobile Menu */
     .menu-overlay {
@@ -159,7 +168,7 @@
       opacity: 0; pointer-events: none; transition: opacity 0.4s var(--ease); color: var(--c-paper);
     }
     .menu-overlay.is-open { opacity: 1; pointer-events: auto; }
-    .menu-close { position: absolute; top: max(16px, 2vw); right: max(20px, 4vw); width: 44px; height: 44px; border: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 24px; line-height: 1; border-radius: 0; background: transparent; }
+    .menu-close { position: absolute; top: max(16px, 2vw); right: max(20px, 4vw); width: 44px; height: 44px; border: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 24px; line-height: 1; border-radius: var(--radius-pill); background: transparent; }
     .menu-nav { display: flex; flex-direction: column; gap: 24px; margin-top: 40px; }
     .menu-nav a { color: #fff; font-size: clamp(32px, 5vw, 48px); text-decoration: none; font-weight: 300; letter-spacing: -0.02em; }
     .menu-nav a:hover { color: var(--c-lime); }
@@ -167,29 +176,30 @@
 
     /* Hero */
     .hero {
-      height: 100svh; min-height: 600px; position: relative; background: var(--c-ink);
+      height: 100svh; min-height: 600px; padding: 16px; background: var(--c-paper);
+    }
+    .hero-inner {
+      position: relative; width: 100%; height: 100%; border-radius: var(--radius-lg); overflow: hidden;
       display: flex; flex-direction: column; padding: max(20px, 4vw); padding-top: 100px;
     }
     .hero-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
-    .hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(11,15,12,0.4) 0%, rgba(11,15,12,0.1) 50%, rgba(11,15,12,0.6) 100%); }
-    .hero-content { position: relative; z-index: 1; flex: 1; display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; }
+    .hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top right, rgba(11,15,12,0.6) 0%, rgba(11,15,12,0) 60%); }
+    .hero-content { position: relative; z-index: 1; flex: 1; display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; height: 100%; }
     
-    .hero-top { display: flex; justify-content: flex-end; align-items: flex-start; }
-    .hero-desc { color: rgba(255,255,255,0.8); max-width: 32ch; text-align: right; }
+    .hero-top { display: flex; justify-content: flex-start; align-items: flex-start; }
+    .hero-h1 { color: var(--c-paper); max-width: 14ch; }
+    
+    .hero-desc { color: rgba(255,255,255,0.8); max-width: 32ch; text-align: left; }
     @media (max-width: 768px) { .hero-desc { display: none; } }
     
-    .hero-mid { display: flex; align-items: flex-end; justify-content: space-between; padding-bottom: 40px; }
-    .hero-h1 { color: var(--c-paper); max-width: 14ch; }
-    .hero-card { padding: 24px; min-width: 300px; transform: translateY(-20px); }
+    .hero-mid { display: flex; align-items: flex-end; justify-content: flex-start; padding-bottom: 40px; }
+    
+    .hero-card { padding: 24px; min-width: 300px; border-radius: var(--radius); }
     .hero-card .row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 14px; }
     .hero-card .row:last-child { border-bottom: none; padding-bottom: 0; }
     .hero-card .lbl { color: rgba(255,255,255,0.6); }
-    @media (max-width: 1024px) {
-      .hero-mid { flex-direction: column; align-items: flex-start; gap: 32px; padding-bottom: 40px; }
-      .hero-card { transform: none; }
-    }
     
-    .hero-bottom { display: flex; justify-content: flex-start; padding-bottom: 24px; }
+    .hero-bottom { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 24px; flex-wrap: wrap; gap: 24px; }
 
     /* Process Flow Map */
     .flow-sec { background: var(--c-paper); }
@@ -198,12 +208,12 @@
     @media (max-width: 768px) { .how-desc { text-align: left; } }
 
     .flow-map-wrap { max-width: 1280px; margin: 0 auto; position: relative; }
-    .flow-map { position: relative; width: 100%; aspect-ratio: 2064/1152; background: url('assets/img/flow-map.png') center/contain no-repeat; }
+    .flow-map { position: relative; width: 100%; aspect-ratio: 3000/1688; background: url('assets/img/real/ad-diagram.png') center/contain no-repeat; }
     
     .hotspot { 
-      position: absolute; transform: translate(-50%, -50%); width: 36px; height: 36px; 
+      position: absolute; transform: translate(-50%, -50%); width: 34px; height: 34px; 
       border-radius: 50%; background: var(--c-signal); display: flex; align-items: center; 
-      justify-content: center; z-index: 10; border: none; color: #fff; cursor: pointer; padding: 0;
+      justify-content: center; z-index: 30; border: none; color: #fff; cursor: pointer; padding: 0;
     }
     .hotspot::before { 
       content: ''; position: absolute; inset: -4px; border-radius: 50%; 
@@ -216,30 +226,25 @@
       0% { transform: scale(1); opacity: 0.6; }
       100% { transform: scale(1.6); opacity: 0; }
     }
-    .hotspot-label { 
-      position: absolute; left: 100%; margin-left: 12px; background: #fff; 
-      color: var(--c-ink); padding: 4px 12px; font-family: var(--f-sans); font-size: 14px; 
-      font-weight: 500; border-radius: 20px; white-space: nowrap; pointer-events: none; 
-      opacity: 0; transform: translateX(-10px); transition: all 0.3s var(--ease); 
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1); border: 1px solid var(--c-hairline);
-    }
-    .hotspot:hover .hotspot-label, .hotspot:focus-visible .hotspot-label, .hotspot[aria-expanded="true"] .hotspot-label { 
-      opacity: 1; transform: translateX(0); 
-    }
+    .hotspot-label { display: none !important; }
     
     .map-info { 
       position: absolute; background: #fff; border: 1px solid var(--c-hairline); 
-      border-left: 4px solid var(--c-signal); padding: 24px; width: 320px; z-index: 20; 
+      border-left: 4px solid var(--c-signal); padding: 20px 22px; z-index: 20; 
       display: none; box-shadow: 0 8px 24px rgba(0,0,0,0.08); 
+      left: 50% !important; top: 62% !important; transform: translate(-50%,-50%) !important; 
+      width: min(380px, 34%) !important; pointer-events: none; border-radius: var(--radius);
     }
+    .map-info * { pointer-events: auto; }
+    @media (max-width: 1100px) { .map-info { width: 40% !important; } }
     .map-info.active { display: block; animation: fade 0.3s var(--ease); }
     
-    .chip { display: inline-flex; background: var(--c-panel); border: 1px solid var(--c-hairline); padding: 4px 12px; margin: 4px 4px 4px 0; font-size: 11px; color: var(--c-brand); font-family: var(--f-mono); text-transform: uppercase; border-radius: 0; }
+    .chip { display: inline-flex; background: var(--c-panel); border: 1px solid var(--c-hairline); padding: 4px 12px; margin: 4px 4px 4px 0; font-size: 11px; color: var(--c-brand); font-family: var(--f-mono); text-transform: uppercase; border-radius: var(--radius-pill); }
     
     /* Mobile flow */
     .flow-accordion { display: none; margin-top: 32px; flex-direction: column; gap: 16px; }
-    .mob-card { background: var(--c-panel); border-left: 4px solid var(--c-signal); overflow: hidden; }
-    .mob-card-head { width: 100%; text-align: left; padding: 20px 24px; font-size: 18px; font-family: var(--f-sans); color: var(--c-brand); display: flex; justify-content: space-between; align-items: center; border: none; background: transparent; cursor: pointer; text-transform: none; letter-spacing: 0; font-weight: 400; }
+    .mob-card { background: var(--c-panel); border-left: 4px solid var(--c-signal); overflow: hidden; border-radius: var(--radius); }
+    .mob-card-head { width: 100%; text-align: left; padding: 20px 24px; font-size: 18px; font-family: var(--f-sans); color: var(--c-brand); display: flex; justify-content: space-between; align-items: center; border: none; background: transparent; cursor: pointer; text-transform: none; letter-spacing: 0; font-weight: 400; border-radius: 0; }
     .mob-card-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s var(--ease); padding: 0 24px; }
     .mob-card-inner { overflow: hidden; color: var(--c-body); font-size: 14px; }
     .mob-card.active .mob-card-body { grid-template-rows: 1fr; padding-bottom: 24px; }
@@ -248,14 +253,13 @@
     
     @media (max-width: 759px) {
       .map-info { display: none !important; }
-      .hotspot-label { display: none; }
       .flow-accordion { display: flex; }
       .flow-map { pointer-events: none; } 
     }
 
     /* Marquee */
     .marquee-sec { background: var(--c-paper); padding: 40px 0; overflow: hidden; }
-    .marquee-pill { margin: 0 auto 32px; border: 1px solid var(--c-hairline); border-radius: 20px; padding: 4px 12px; width: max-content; }
+    .marquee-pill { margin: 0 auto 32px; border: 1px solid var(--c-hairline); border-radius: var(--radius-pill); padding: 4px 12px; width: max-content; }
     .marquee { display: flex; width: max-content; animation: scroll 30s linear infinite; align-items: center; }
     .marquee:hover { animation-play-state: paused; }
     .marquee img { height: 36px; object-fit: contain; margin-right: 80px; filter: grayscale(100%); opacity: 0.6; transition: all 0.3s; }
@@ -271,17 +275,17 @@
     .out-row { display: grid; grid-template-columns: 1fr; margin-bottom: clamp(24px, 4vw, 48px); }
     @media (min-width: 900px) { .out-row { grid-template-columns: 1fr 1fr; } .out-row:nth-child(even) .out-img-col { order: 2; } }
     .out-img-col { aspect-ratio: 4/3; }
-    .out-panel { background: var(--c-panel); padding: clamp(32px, 5vw, 64px); display: flex; flex-direction: column; justify-content: center; }
+    .out-panel { background: var(--c-panel); padding: clamp(32px, 5vw, 64px); display: flex; flex-direction: column; justify-content: center; border-radius: var(--radius-lg); }
     .out-panel h3 { margin: 16px 0 24px; font-size: clamp(28px, 3vw, 40px); color: var(--c-brand); }
     .cap-list { margin: 32px 0; border-top: 1px solid var(--c-hairline); }
     .cap-row { display: flex; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--c-hairline); }
-    .cap-icon { width: 28px; height: 28px; background: var(--c-paper); border: 1px solid var(--c-hairline); display: flex; align-items: center; justify-content: center; color: var(--c-signal); }
+    .cap-icon { width: 28px; height: 28px; background: var(--c-paper); border: 1px solid var(--c-hairline); display: flex; align-items: center; justify-content: center; color: var(--c-signal); border-radius: var(--radius); }
     .cap-icon svg { width: 14px; height: 14px; fill: currentColor; }
 
     /* Tabs */
     .work-sec { background: var(--c-paper); }
     .tabs { display: flex; gap: 16px; border-bottom: 1px solid var(--c-hairline); margin-bottom: 48px; overflow-x: auto; scrollbar-width: none; }
-    .tab { padding: 16px 0; color: var(--c-body); font-size: 18px; position: relative; white-space: nowrap; text-transform: none; font-family: var(--f-sans); font-weight: 400; letter-spacing: 0; background: transparent; border: none; cursor: pointer; }
+    .tab { padding: 16px 0; color: var(--c-body); font-size: 18px; position: relative; white-space: nowrap; text-transform: none; font-family: var(--f-sans); font-weight: 400; letter-spacing: 0; background: transparent; border: none; cursor: pointer; border-radius: 0; }
     .tab[aria-selected="true"] { color: var(--c-brand); font-weight: 500; }
     .tab[aria-selected="true"]::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 2px; background: var(--c-signal); }
     .tab-panel { display: none; }
@@ -290,69 +294,69 @@
     
     .ww-grid { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: center; }
     @media (min-width: 900px) { .ww-grid { grid-template-columns: 1fr 1fr; } }
-    .ww-img { aspect-ratio: 4/3; object-fit: cover; }
+    .ww-img { aspect-ratio: 4/3; object-fit: cover; border-radius: var(--radius-lg); }
     .num-list { border-top: 1px solid var(--c-hairline); margin-bottom: 32px; }
     .num-row { display: flex; gap: 24px; padding: 24px 0; border-bottom: 1px solid var(--c-hairline); }
     .num { color: var(--c-signal); }
 
     /* Location */
     .loc-wrapper { position: relative; margin: 48px 0; }
-    .loc-img { width: 100%; aspect-ratio: 16/9; min-height: 400px; object-fit: cover; }
-    .loc-tooltip { position: absolute; top: 10%; left: 5%; padding: 24px; min-width: 260px; }
+    .loc-img { width: 100%; aspect-ratio: 16/9; min-height: 400px; object-fit: cover; border-radius: var(--radius-lg); }
+    .loc-tooltip { position: absolute; top: 10%; left: 5%; padding: 24px; min-width: 260px; border-radius: var(--radius); }
     @media (max-width: 600px) { .loc-tooltip { position: relative; top: auto; left: auto; margin-top: 16px; background: var(--c-brand); border-color: transparent; } }
     
-    .impact-grid-wrap { background: var(--c-paper); padding: 1px; }
+    .impact-grid-wrap { background: var(--c-paper); padding: 1px; border-radius: var(--radius-lg); }
     .impact-grid { display: grid; grid-template-columns: 1fr; gap: 1px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.15); margin-top: 64px; }
     @media (min-width: 600px) { .impact-grid { grid-template-columns: 1fr 1fr; } }
     @media (min-width: 900px) { .impact-grid { grid-template-columns: repeat(4, 1fr); } }
-    .ig-tile { background: var(--c-brand); padding: 40px 24px; position: relative; overflow: hidden; }
-    .ig-tile::before { content: '+'; position: absolute; top: 8px; left: 8px; font-family: var(--f-mono); opacity: 0.4; color: #fff; }
-    .ig-tile::after { content: '+'; position: absolute; bottom: 8px; right: 8px; font-family: var(--f-mono); opacity: 0.4; color: #fff; }
-    .ig-val { font-size: clamp(32px, 4vw, 48px); font-weight: 300; color: #fff; margin-bottom: 8px; line-height: 1; display: inline-block; }
-    .ig-unit { color: rgba(255,255,255,0.7); }
-    .ig-tile p { color: rgba(255,255,255,0.85); }
+    .ig-tile { padding: 40px 24px; position: relative; overflow: hidden; border-radius: var(--radius); margin: 2px; }
+    .ig-tile::before { content: '+'; position: absolute; top: 8px; left: 8px; font-family: var(--f-mono); opacity: 0.4; }
+    .ig-tile::after { content: '+'; position: absolute; bottom: 8px; right: 8px; font-family: var(--f-mono); opacity: 0.4; }
+    .ig-val { font-size: clamp(32px, 4vw, 48px); font-weight: 300; margin-bottom: 8px; line-height: 1; display: inline-block; }
+    .ig-unit { opacity: 0.9; }
     
-    .progress-rule { position: absolute; top: 0; left: 0; height: 2px; background: var(--c-signal); width: 0; transition: width 1.2s var(--ease); }
+    .progress-rule { position: absolute; top: 0; left: 0; height: 2px; background: #fff; width: 0; transition: width 1.2s var(--ease); }
     .ig-tile.draw-line .progress-rule { width: 100%; }
 
     /* Timeline */
     .timeline-sec { background: var(--c-paper); }
     .tl-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; }
     .tl-nav { display: flex; gap: 8px; }
-    .tl-btn { width: 44px; height: 44px; border: 1px solid var(--c-hairline); background: var(--c-panel); }
+    .tl-btn { width: 44px; height: 44px; border: 1px solid var(--c-hairline); background: var(--c-panel); border-radius: var(--radius-pill); }
     .tl-btn:hover { background: var(--c-hairline); }
     .tl-track { display: flex; gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 24px; }
-    .tl-card { flex: 0 0 85vw; max-width: 400px; scroll-snap-align: start; position: relative; display: flex; flex-direction: column; background: var(--c-panel); border-left: 4px solid var(--c-signal); padding: 16px; }
-    .tl-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; margin-bottom: 24px; }
+    .tl-card { flex: 0 0 85vw; max-width: 400px; scroll-snap-align: start; position: relative; display: flex; flex-direction: column; background: var(--c-panel); border-left: 4px solid var(--c-signal); padding: 16px; border-radius: var(--radius); }
+    .tl-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; margin-bottom: 24px; border-radius: var(--radius); }
     .tl-card h3 { color: var(--c-brand); font-family: var(--f-mono); font-size: 14px; font-weight: 500; }
-    .now-mark { background: var(--c-signal); color: var(--c-paper); padding: 2px 8px; display: inline-block; margin-left: 8px; font-size: 10px; vertical-align: middle; font-family: var(--f-mono); }
+    .now-mark { background: var(--c-signal); color: var(--c-paper); padding: 2px 8px; display: inline-block; margin-left: 8px; font-size: 10px; vertical-align: middle; font-family: var(--f-mono); border-radius: var(--radius-pill); }
 
     /* News */
     .news-sec { background: var(--c-paper); }
     .news-grid { display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 48px; }
     @media (min-width: 768px) { .news-grid { grid-template-columns: repeat(2, 1fr); } }
-    .n-card { text-decoration: none; color: inherit; display: block; border: 1px solid var(--c-hairline); }
+    .n-card { text-decoration: none; color: inherit; display: block; border: 1px solid var(--c-hairline); border-radius: var(--radius); overflow: hidden; }
     .n-card:hover { background: var(--c-panel); }
+    .n-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
     .n-content { padding: 24px; }
     .n-date { color: var(--c-signal); margin-bottom: 16px; display: block; }
 
     /* FAQ */
     .faq-sec { background: var(--c-paper); }
     .faq-list { max-width: 800px; margin-top: 48px; border-top: 1px solid var(--c-hairline); }
-    .faq-item { border-bottom: 1px solid var(--c-hairline); transition: all 0.3s var(--ease); }
-    .faq-btn { width: 100%; text-align: left; padding: 32px 24px; font-size: 20px; font-family: var(--f-sans); font-weight: 300; color: var(--c-ink); display: flex; justify-content: space-between; align-items: center; text-transform: none; letter-spacing: 0; }
+    .faq-item { border-bottom: 1px solid var(--c-hairline); transition: all 0.3s var(--ease); border-radius: var(--radius); }
+    .faq-btn { width: 100%; text-align: left; padding: 32px 24px; font-size: 20px; font-family: var(--f-sans); font-weight: 300; color: var(--c-ink); display: flex; justify-content: space-between; align-items: center; text-transform: none; letter-spacing: 0; border-radius: 0; }
     .faq-icon { font-family: var(--f-mono); font-size: 24px; font-weight: 300; transition: transform 0.3s; color: var(--c-signal); }
     .faq-ans { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s var(--ease); padding: 0 24px; }
     .faq-ans-inner { overflow: hidden; color: var(--c-body); }
-    .faq-item.is-open { background: var(--c-panel); border-bottom-color: transparent; margin: 16px 0; border-radius: 0; border-left: 4px solid var(--c-signal); }
-    .faq-item.is-open .faq-btn { padding-bottom: 16px; color: var(--c-brand); }
+    
+    .faq-item.is-open { margin: 16px 0; border-left: 4px solid var(--c-signal); background: var(--grad); border-bottom-color: transparent; }
+    .faq-item.is-open .faq-btn { padding-bottom: 16px; color: #fff; }
     .faq-item.is-open .faq-ans { grid-template-rows: 1fr; padding-bottom: 32px; }
-    .faq-item.is-open .faq-icon { transform: rotate(45deg); }
+    .faq-item.is-open .faq-ans-inner { color: rgba(255,255,255,0.9); }
+    .faq-item.is-open .faq-icon { transform: rotate(45deg); color: #fff; }
 
     /* CTA */
-    .cta-sec { text-align: center; padding: 120px max(20px, 4vw); position: relative; overflow: hidden; background: var(--c-brand); color: #fff; margin: 0; width: 100%; }
-    .cta-sec h2 { color: #fff; }
-    .cta-sec .mono { color: rgba(255,255,255,0.7); }
+    .cta-sec { text-align: center; padding: 120px max(20px, 4vw); position: relative; overflow: hidden; margin: 0 16px 16px; width: auto; }
     .rings { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 800px; height: 800px; pointer-events: none; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1); }
     .rings::before, .rings::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%; border: 1px solid rgba(255,255,255,0.1); }
     .rings::before { width: 600px; height: 600px; }
@@ -360,7 +364,7 @@
     .cta-content { position: relative; z-index: 1; }
     
     /* Footer */
-    .footer { padding: 64px max(20px, 4vw) 32px; background: var(--c-brand); color: #fff; }
+    .footer { padding: 64px max(20px, 4vw) 32px; background: linear-gradient(to bottom, #215732 0%, #0F2A1C 100%); color: #fff; border-top: 1px solid rgba(255,255,255,0.18); }
     .f-grid { display: grid; grid-template-columns: 1fr; gap: 48px; margin-bottom: 64px; }
     @media (min-width: 900px) { .f-grid { grid-template-columns: 2fr 1fr 1fr 1fr; } }
     .f-col h4 { color: rgba(255,255,255,0.6); margin-bottom: 24px; font-size: 11px; text-transform: uppercase; font-family: var(--f-mono); letter-spacing: 0.08em; }
@@ -369,7 +373,7 @@
     .f-links a { color: #fff; text-decoration: none; font-size: 14px; opacity: 0.9; transition: opacity 0.3s; display: inline-block; padding: 6px 0; }
     .f-links a:hover { opacity: 1; color: var(--c-lime); }
     .email-form { display: flex; gap: 8px; margin-top: 24px; max-width: 400px; }
-    .email-input { flex: 1; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); padding: 0 16px; color: #fff; font-family: var(--f-sans); min-height: 44px; outline: none; }
+    .email-input { flex: 1; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); padding: 0 16px; color: #fff; font-family: var(--f-sans); min-height: 44px; outline: none; border-radius: var(--radius-pill); }
     .email-input:focus { border-color: var(--c-lime); }
     
     .f-giant { font-size: clamp(72px, 13vw, 220px); font-weight: 500; color: var(--c-signal); line-height: 0.8; letter-spacing: -0.04em; margin-bottom: 48px; word-break: break-all; }
@@ -378,8 +382,8 @@
     /* Modal */
     dialog { margin: auto; border: none; background: transparent; padding: 0; max-width: 600px; width: calc(100% - 40px); }
     dialog::backdrop { background: rgba(11,15,12,0.8); backdrop-filter: var(--blur); }
-    .modal-panel { background: var(--c-paper); padding: clamp(32px, 5vw, 64px); position: relative; color: var(--c-ink); }
-    .modal-close { position: absolute; top: 16px; right: 16px; width: 44px; height: 44px; font-size: 24px; color: var(--c-ink); background: transparent; border: none; cursor: pointer; }
+    .modal-panel { background: var(--c-paper); padding: clamp(32px, 5vw, 64px); position: relative; color: var(--c-ink); border-radius: var(--radius-lg); }
+    .modal-close { position: absolute; top: 16px; right: 16px; width: 44px; height: 44px; font-size: 24px; color: var(--c-ink); background: transparent; border: none; cursor: pointer; border-radius: var(--radius-pill); }
     .form-group { margin-bottom: 24px; }
     .form-control { width: 100%; border: none; border-bottom: 1px solid var(--c-hairline); padding: 12px 0; font-family: var(--f-sans); font-size: 16px; color: var(--c-ink); background: transparent; outline: none; transition: border-color 0.3s; }
     .form-control:focus { border-bottom-color: var(--c-signal); }
@@ -391,15 +395,16 @@
       .glass { width: 100%; max-width: 100%; box-sizing: border-box; overflow: hidden; }
       .glass * { max-width: 100%; overflow-wrap: anywhere; }
     }
-      /* v6 fixes */
-    .map-info { width: min(360px, 34%); padding: 20px 22px; pointer-events: none; }
-    .map-info * { pointer-events: auto; }
-    @media (max-width: 1100px) { .map-info { width: 40%; } }
-    .flow-map .hotspot { z-index: 30; }
-    .cta-sec { background: var(--c-ink); margin: 0 20px 20px; width: auto; }
-    .cta-sec h2 { color: #fff; }
-    .footer { border-top: 1px solid rgba(255,255,255,0.18); }
-      .mob-only{display:none}@media (max-width:759px){.desk-only{display:none}.mob-only{display:inline}}
+    .mob-only{display:none}@media (max-width:759px){.desk-only{display:none}.mob-only{display:inline}}
+      /* v7 fixes */
+    @media (min-width: 760px) {
+      .map-info { position: static !important; transform: none !important; width: min(760px, 100%) !important; max-width: 760px; margin: 28px auto 0; pointer-events: auto; }
+      .flow-map { margin-bottom: 0; }
+    }
+    .hero h1, .hero-content h1 { text-shadow: 0 2px 24px rgba(0,0,0,0.45), 0 1px 2px rgba(0,0,0,0.35); }
+    .hero-bg::after, .hero-panel::after { content:''; position:absolute; inset:0; background: linear-gradient(180deg, rgba(14,19,15,0.42) 0%, rgba(14,19,15,0) 45%, rgba(14,19,15,0.35) 100%); pointer-events:none; }
+    .f-giant { color: var(--c-lime) !important; }
+    @media (max-width: 759px) { .hotspot { width: 22px !important; height: 22px !important; font-size: 10px !important; } .hotspot::before, .hotspot::after { display:none; } }
   </style>
 </head>
 <body id="top">
@@ -416,8 +421,8 @@
 
   <nav class="nav" id="mainNav">
     <a href="#top" class="nav-logo" aria-label="Home">
-      <img src="assets/img/kalfresh-bioenergy-logo-white.png" alt="" class="logo-white">
-      <img src="assets/img/kalfresh-bioenergy-logo.png" alt="" class="logo-dark">
+      <img src="assets/img/kalfresh-bioenergy-logo-white.png" alt="Kalfresh Bioenergy" class="logo-white">
+      <img src="assets/img/kalfresh-bioenergy-logo.png" alt="Kalfresh Bioenergy" class="logo-dark">
     </a>
     <div class="nav-links">
       <a href="#how" class="nav-link">How it works</a>
@@ -429,13 +434,13 @@
       <a href="#questions" class="nav-link">Questions</a>
     </div>
     <div class="nav-right">
-      <button class="btn btn-lime notch" onclick="openModal('Other', 'General')">Contact us <svg width="12" height="12"><use href="#ic-arrow"/></svg></button>
-      <button class="menu-btn notch" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="menuOverlay">⋯</button>
+      <button class="btn btn-lime pill" onclick="openModal('Other', 'General')">Contact us <svg width="12" height="12"><use href="#ic-arrow"/></svg></button>
+      <button class="menu-btn pill" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="menuOverlay">⋯</button>
     </div>
   </nav>
 
   <div class="menu-overlay" id="menuOverlay">
-    <button class="menu-close notch-sm" id="menuClose" aria-label="Close menu"><svg width="24" height="24"><use href="#ic-close"/></svg></button>
+    <button class="menu-close pill" id="menuClose" aria-label="Close menu"><svg width="24" height="24"><use href="#ic-close"/></svg></button>
     <nav class="menu-nav">
       <a href="#how" class="menu-link">How it works</a>
       <a href="#outputs" class="menu-link">Outputs</a>
@@ -452,28 +457,31 @@
     </div>
   </div>
 
-  <header class="hero hero-cut" data-theme="dark">
-    <div class="hero-bg">
-      <img src="assets/img/hero-ai-02.jpg" alt="Artist's impression of the Kalfresh Bioenergy facility at Kalbar" class="img-fluid">
-    </div>
-    
-    <div class="hero-content">
-      <div class="hero-top reveal">
-        <p class="hero-desc" style="border-top: 1px solid var(--c-lime); padding-top: 16px;">Renewable natural gas, electricity, biogenic CO2 and bio-fertiliser from the region's crop residues and food waste. First production <span>2027</span>.</p>
+  <header class="hero" data-theme="dark">
+    <div class="hero-inner">
+      <div class="hero-bg">
+        <img src="assets/img/real/hero-drone-19.jpg" alt="Kalfresh Bioenergy digester base under construction at Kalbar, September 2026" class="img-fluid">
       </div>
       
-      <div class="hero-mid">
-        <h1 class="hero-h1 reveal" style="transition-delay: 0.1s">We grow vegetables.<br>Now we grow energy.</h1>
-        <div class="hero-card glass notch reveal" style="transition-delay: 0.3s">
-          <div class="row"><span class="lbl">Location</span><span>Kalbar, Scenic Rim</span></div>
-          <div class="row"><span class="lbl">Process</span><span>Anaerobic digestion</span></div>
-          <div class="row"><span class="lbl">First production</span><span>2027</span></div>
-          <div class="row"><span class="lbl">Developer</span><span>Kalfresh</span></div>
+      <div class="hero-content">
+        <div class="hero-top reveal">
+          <h1 class="hero-h1">We grow vegetables.<br>Now we grow energy.</h1>
         </div>
-      </div>
-      
-      <div class="hero-bottom reveal" style="transition-delay: 0.2s">
-         <button class="btn btn-lime notch" onclick="openModal('Other', 'General')">Talk to our team <span class="arrow">→</span></button>
+        
+        <div class="hero-mid reveal" style="transition-delay: 0.1s">
+          <p class="hero-desc">Renewable natural gas, electricity, biogenic CO2 and bio-fertiliser from the region's crop residues and food waste. First production <span>2027</span>.</p>
+        </div>
+        
+        <div class="hero-bottom reveal" style="transition-delay: 0.2s">
+           <button class="btn btn-lime pill" onclick="openModal('Other', 'General')">Talk to our team <span class="arrow">→</span></button>
+           
+           <div class="hero-card grad">
+            <div class="row"><span class="lbl">Location</span><span>Kalbar, Scenic Rim</span></div>
+            <div class="row"><span class="lbl">Process</span><span>Anaerobic digestion</span></div>
+            <div class="row"><span class="lbl">First production</span><span>2027</span></div>
+            <div class="row"><span class="lbl">Developer</span><span>Kalfresh</span></div>
+          </div>
+        </div>
       </div>
     </div>
   </header>
@@ -484,118 +492,152 @@
          <div class="label" style="margin-bottom:24px;">How it works</div>
          <h2>From paddock to power and back to the paddock.</h2>
       </div>
-      <p class="how-desc"><span class="desk-only">Hover or tap a point on the map.</span><span class="mob-only">Tap a stage below.</span></p>
+      <p class="how-desc"><span class="desk-only">Hover or tap a point on the diagram.</span><span class="mob-only">Tap a stage below.</span></p>
     </div>
 
     <div class="flow-map-wrap reveal" id="flowWrap">
       <div class="flow-map" id="flowMap">
         <!-- Hotspots -->
-        <button class="hotspot notch-sm" data-stage="0" aria-expanded="true" aria-controls="map-info-0" style="left:19.6%; top:27%">
+        <button class="hotspot pill" data-stage="0" aria-expanded="true" aria-controls="map-info-0" style="left:50%; top:13%">
           <span class="mono">1</span>
-          <span class="hotspot-label">Grow</span>
+          <span class="hotspot-label">Mixed feedstock</span>
         </button>
-        <button class="hotspot notch-sm" data-stage="1" aria-expanded="false" aria-controls="map-info-1" style="left:51%; top:21%">
+        <button class="hotspot pill" data-stage="1" aria-expanded="false" aria-controls="map-info-1" style="left:74%; top:20%">
           <span class="mono">2</span>
           <span class="hotspot-label">Collect</span>
         </button>
-        <button class="hotspot notch-sm" data-stage="2" aria-expanded="false" aria-controls="map-info-2" style="left:80.7%; top:31%">
+        <button class="hotspot pill" data-stage="2" aria-expanded="false" aria-controls="map-info-2" style="left:50%; top:41%">
           <span class="mono">3</span>
-          <span class="hotspot-label" style="left:auto; right:100%; margin-left:0; margin-right:12px; transform:translateX(10px);">Digest</span>
+          <span class="hotspot-label">Anaerobic digester</span>
         </button>
-        <button class="hotspot notch-sm" data-stage="3" aria-expanded="false" aria-controls="map-info-3" style="left:80%; top:73%">
+        <button class="hotspot pill" data-stage="3" aria-expanded="false" aria-controls="map-info-3" style="left:27%; top:35%">
           <span class="mono">4</span>
-          <span class="hotspot-label" style="left:auto; right:100%; margin-left:0; margin-right:12px; transform:translateX(10px);">Upgrade &amp; generate</span>
+          <span class="hotspot-label">Digestate fertiliser</span>
         </button>
-        <button class="hotspot notch-sm" data-stage="4" aria-expanded="false" aria-controls="map-info-4" style="left:48.7%; top:78%">
+        <button class="hotspot pill" data-stage="4" aria-expanded="false" aria-controls="map-info-4" style="left:21%; top:61%">
           <span class="mono">5</span>
-          <span class="hotspot-label">Deliver to the precinct</span>
+          <span class="hotspot-label">CO2</span>
         </button>
-        <button class="hotspot notch-sm" data-stage="5" aria-expanded="false" aria-controls="map-info-5" style="left:19%; top:64%">
+        <button class="hotspot pill" data-stage="5" aria-expanded="false" aria-controls="map-info-5" style="left:34%; top:84%">
           <span class="mono">6</span>
-          <span class="hotspot-label">Return</span>
+          <span class="hotspot-label">Renewable natural gas</span>
+        </button>
+        <button class="hotspot pill" data-stage="6" aria-expanded="false" aria-controls="map-info-6" style="left:65%; top:84%">
+          <span class="mono">7</span>
+          <span class="hotspot-label">Electricity</span>
+        </button>
+        <button class="hotspot pill" data-stage="7" aria-expanded="false" aria-controls="map-info-7" style="left:81%; top:61%">
+          <span class="mono">8</span>
+          <span class="hotspot-label">Green gas</span>
         </button>
 
         <!-- Info Cards Desktop -->
-        <div class="map-info notch active" id="map-info-0" style="left:50%; top:56%; transform:translate(-50%,-50%);">
+        <div class="map-info active" id="map-info-0">
           <span class="mono c-signal" style="display:block; margin-bottom:8px;">STAGE 01</span>
-          <h3 class="h-brand" style="margin-bottom:12px;">Grow</h3>
-          <p style="font-size:14px; margin-bottom:16px;">Kalfresh grows carrots, sweet corn, green beans, onions and more across the Scenic Rim. Every harvest leaves residues and rotational crops.</p>
-          <div style="display:flex; flex-wrap:wrap;"><span class="chip">Crop residues</span><span class="chip">Rotational crops</span><span class="chip">Since 1992</span></div>
+          <h3 class="h-brand" style="margin-bottom:12px;">Mixed feedstock</h3>
+          <p style="font-size:14px; margin-bottom:16px;">Crop residues from horticulture, rotational crops grown between food crops, and food-processing off-cuts.</p>
+          <div style="display:flex; flex-wrap:wrap;"><span class="chip">Crop residues</span><span class="chip">Rotational crops</span><span class="chip">Food waste</span></div>
         </div>
-        <div class="map-info notch" id="map-info-1" style="left:50%; top:56%; transform:translate(-50%,-50%);">
+        <div class="map-info" id="map-info-1">
           <span class="mono c-signal" style="display:block; margin-bottom:8px;">STAGE 02</span>
           <h3 class="h-brand" style="margin-bottom:12px;">Collect</h3>
-          <p style="font-size:14px; margin-bottom:16px;">Residues, rotational crops and food-processing waste from farms and manufacturers around Kalbar are collected and brought to the facility.</p>
+          <p style="font-size:14px; margin-bottom:16px;">Feedstock is collected from farms and food manufacturers around Kalbar and brought to the facility.</p>
           <div style="display:flex; flex-wrap:wrap;"><span class="chip">Farms</span><span class="chip">Food manufacturers</span><span class="chip">Councils</span></div>
         </div>
-        <div class="map-info notch" id="map-info-2" style="left:50%; top:56%; transform:translate(-50%,-50%);">
+        <div class="map-info" id="map-info-2">
           <span class="mono c-signal" style="display:block; margin-bottom:8px;">STAGE 03</span>
-          <h3 class="h-brand" style="margin-bottom:12px;">Digest</h3>
-          <p style="font-size:14px; margin-bottom:16px;">Inside sealed tanks, microbes break the material down without oxygen and release biogas. The technology is delivered with WELTEC BIOPOWER.</p>
+          <h3 class="h-brand" style="margin-bottom:12px;">Anaerobic digester</h3>
+          <p style="font-size:14px; margin-bottom:16px;">Inside sealed tanks, microbes break the material down without oxygen and release biogas. Delivered with WELTEC BIOPOWER.</p>
           <div style="display:flex; flex-wrap:wrap;"><span class="chip">Anaerobic digestion</span><span class="chip">Sealed tanks</span><span class="chip">WELTEC BIOPOWER</span></div>
         </div>
-        <div class="map-info notch" id="map-info-3" style="left:50%; top:56%; transform:translate(-50%,-50%);">
+        <div class="map-info" id="map-info-3">
           <span class="mono c-signal" style="display:block; margin-bottom:8px;">STAGE 04</span>
-          <h3 class="h-brand" style="margin-bottom:12px;">Upgrade and generate</h3>
-          <p style="font-size:14px; margin-bottom:16px;">Biogas is upgraded to renewable natural gas or used to generate electricity, with biogenic CO2 captured on the way.</p>
-          <div style="display:flex; flex-wrap:wrap;"><span class="chip">Renewable natural gas</span><span class="chip">Electricity</span><span class="chip">Biogenic CO2</span></div>
-        </div>
-        <div class="map-info notch" id="map-info-4" style="left:50%; top:56%; transform:translate(-50%,-50%);">
-          <span class="mono c-signal" style="display:block; margin-bottom:8px;">STAGE 05</span>
-          <h3 class="h-brand" style="margin-bottom:12px;">Deliver to the precinct</h3>
-          <p style="font-size:14px; margin-bottom:16px;">Renewable gas and electricity are supplied to the Scenic Rim Agricultural Industrial Precinct around the facility, to the grid and to transport fleets.</p>
-          <div style="display:flex; flex-wrap:wrap;"><span class="chip">Precinct</span><span class="chip">Grid</span><span class="chip">Transport</span></div>
-        </div>
-        <div class="map-info notch" id="map-info-5" style="left:50%; top:56%; transform:translate(-50%,-50%);">
-          <span class="mono c-signal" style="display:block; margin-bottom:8px;">STAGE 06</span>
-          <h3 class="h-brand" style="margin-bottom:12px;">Return</h3>
-          <p style="font-size:14px; margin-bottom:16px;">The digestate left after digestion is a nutrient-rich fertiliser. It goes back onto local paddocks, closing the loop.</p>
+          <h3 class="h-brand" style="margin-bottom:12px;">Digestate fertiliser</h3>
+          <p style="font-size:14px; margin-bottom:16px;">The nutrient-rich digestate left after digestion goes back onto local paddocks as a replacement for synthetic fertilisers.</p>
           <div style="display:flex; flex-wrap:wrap;"><span class="chip">Bio-fertiliser</span><span class="chip">Back to the paddock</span><span class="chip">Closed loop</span></div>
+        </div>
+        <div class="map-info" id="map-info-4">
+          <span class="mono c-signal" style="display:block; margin-bottom:8px;">STAGE 05</span>
+          <h3 class="h-brand" style="margin-bottom:12px;">CO2 for food and drink manufacturing</h3>
+          <p style="font-size:14px; margin-bottom:16px;">Biogenic carbon dioxide captured from the process, for manufacturers in the precinct.</p>
+          <div style="display:flex; flex-wrap:wrap;"><span class="chip">Biogenic CO2</span><span class="chip">Precinct</span></div>
+        </div>
+        <div class="map-info" id="map-info-5">
+          <span class="mono c-signal" style="display:block; margin-bottom:8px;">STAGE 06</span>
+          <h3 class="h-brand" style="margin-bottom:12px;">Renewable natural gas fuel</h3>
+          <p style="font-size:14px; margin-bottom:16px;">Biomethane for transport. Fuel for up to 98 million truck or bus kilometres a year.</p>
+          <div style="display:flex; flex-wrap:wrap;"><span class="chip">Transport</span><span class="chip">98 million km a year</span></div>
+        </div>
+        <div class="map-info" id="map-info-6">
+          <span class="mono c-signal" style="display:block; margin-bottom:8px;">STAGE 07</span>
+          <h3 class="h-brand" style="margin-bottom:12px;">Electricity to the grid</h3>
+          <p style="font-size:14px; margin-bottom:16px;">A regional peaking power plant fed by agriculture, available 24/7. Enough for up to 31,000 homes.</p>
+          <div style="display:flex; flex-wrap:wrap;"><span class="chip">Up to 31,000 homes</span><span class="chip">24/7</span></div>
+        </div>
+        <div class="map-info" id="map-info-7">
+          <span class="mono c-signal" style="display:block; margin-bottom:8px;">STAGE 08</span>
+          <h3 class="h-brand" style="margin-bottom:12px;">Green gas for industry</h3>
+          <p style="font-size:14px; margin-bottom:16px;">Renewable natural gas injected for industrial users, replacing fossil gas.</p>
+          <div style="display:flex; flex-wrap:wrap;"><span class="chip">Industry</span><span class="chip">Renewable natural gas</span></div>
         </div>
       </div>
       
       <!-- Mobile Accordion -->
       <div class="flow-accordion">
-        <div class="mob-card notch-sm active" data-mob-stage="0">
-          <button class="mob-card-head" aria-expanded="true"><span><span class="mono c-signal" style="margin-right:8px;">01</span> Grow</span> <span class="mob-card-icon">+</span></button>
+        <div class="mob-card active" data-mob-stage="0">
+          <button class="mob-card-head" aria-expanded="true"><span><span class="mono c-signal" style="margin-right:8px;">01</span> Mixed feedstock</span> <span class="mob-card-icon">+</span></button>
           <div class="mob-card-body"><div class="mob-card-inner">
-            <p style="margin-bottom:16px;">Kalfresh grows carrots, sweet corn, green beans, onions and more across the Scenic Rim. Every harvest leaves residues and rotational crops.</p>
-            <div style="display:flex; flex-wrap:wrap; margin-bottom:8px;"><span class="chip">Crop residues</span><span class="chip">Rotational crops</span><span class="chip">Since 1992</span></div>
+            <p style="margin-bottom:16px;">Crop residues from horticulture, rotational crops grown between food crops, and food-processing off-cuts.</p>
+            <div style="display:flex; flex-wrap:wrap; margin-bottom:8px;"><span class="chip">Crop residues</span><span class="chip">Rotational crops</span><span class="chip">Food waste</span></div>
           </div></div>
         </div>
-        <div class="mob-card notch-sm" data-mob-stage="1">
+        <div class="mob-card" data-mob-stage="1">
           <button class="mob-card-head" aria-expanded="false"><span><span class="mono c-signal" style="margin-right:8px;">02</span> Collect</span> <span class="mob-card-icon">+</span></button>
           <div class="mob-card-body"><div class="mob-card-inner">
-            <p style="margin-bottom:16px;">Residues, rotational crops and food-processing waste from farms and manufacturers around Kalbar are collected and brought to the facility.</p>
+            <p style="margin-bottom:16px;">Feedstock is collected from farms and food manufacturers around Kalbar and brought to the facility.</p>
             <div style="display:flex; flex-wrap:wrap; margin-bottom:8px;"><span class="chip">Farms</span><span class="chip">Food manufacturers</span><span class="chip">Councils</span></div>
           </div></div>
         </div>
-        <div class="mob-card notch-sm" data-mob-stage="2">
-          <button class="mob-card-head" aria-expanded="false"><span><span class="mono c-signal" style="margin-right:8px;">03</span> Digest</span> <span class="mob-card-icon">+</span></button>
+        <div class="mob-card" data-mob-stage="2">
+          <button class="mob-card-head" aria-expanded="false"><span><span class="mono c-signal" style="margin-right:8px;">03</span> Anaerobic digester</span> <span class="mob-card-icon">+</span></button>
           <div class="mob-card-body"><div class="mob-card-inner">
-            <p style="margin-bottom:16px;">Inside sealed tanks, microbes break the material down without oxygen and release biogas. The technology is delivered with WELTEC BIOPOWER.</p>
+            <p style="margin-bottom:16px;">Inside sealed tanks, microbes break the material down without oxygen and release biogas. Delivered with WELTEC BIOPOWER.</p>
             <div style="display:flex; flex-wrap:wrap; margin-bottom:8px;"><span class="chip">Anaerobic digestion</span><span class="chip">Sealed tanks</span><span class="chip">WELTEC BIOPOWER</span></div>
           </div></div>
         </div>
-        <div class="mob-card notch-sm" data-mob-stage="3">
-          <button class="mob-card-head" aria-expanded="false"><span><span class="mono c-signal" style="margin-right:8px;">04</span> Upgrade and generate</span> <span class="mob-card-icon">+</span></button>
+        <div class="mob-card" data-mob-stage="3">
+          <button class="mob-card-head" aria-expanded="false"><span><span class="mono c-signal" style="margin-right:8px;">04</span> Digestate fertiliser</span> <span class="mob-card-icon">+</span></button>
           <div class="mob-card-body"><div class="mob-card-inner">
-            <p style="margin-bottom:16px;">Biogas is upgraded to renewable natural gas or used to generate electricity, with biogenic CO2 captured on the way.</p>
-            <div style="display:flex; flex-wrap:wrap; margin-bottom:8px;"><span class="chip">Renewable natural gas</span><span class="chip">Electricity</span><span class="chip">Biogenic CO2</span></div>
-          </div></div>
-        </div>
-        <div class="mob-card notch-sm" data-mob-stage="4">
-          <button class="mob-card-head" aria-expanded="false"><span><span class="mono c-signal" style="margin-right:8px;">05</span> Deliver to the precinct</span> <span class="mob-card-icon">+</span></button>
-          <div class="mob-card-body"><div class="mob-card-inner">
-            <p style="margin-bottom:16px;">Renewable gas and electricity are supplied to the Scenic Rim Agricultural Industrial Precinct around the facility, to the grid and to transport fleets.</p>
-            <div style="display:flex; flex-wrap:wrap; margin-bottom:8px;"><span class="chip">Precinct</span><span class="chip">Grid</span><span class="chip">Transport</span></div>
-          </div></div>
-        </div>
-        <div class="mob-card notch-sm" data-mob-stage="5">
-          <button class="mob-card-head" aria-expanded="false"><span><span class="mono c-signal" style="margin-right:8px;">06</span> Return</span> <span class="mob-card-icon">+</span></button>
-          <div class="mob-card-body"><div class="mob-card-inner">
-            <p style="margin-bottom:16px;">The digestate left after digestion is a nutrient-rich fertiliser. It goes back onto local paddocks, closing the loop.</p>
+            <p style="margin-bottom:16px;">The nutrient-rich digestate left after digestion goes back onto local paddocks as a replacement for synthetic fertilisers.</p>
             <div style="display:flex; flex-wrap:wrap; margin-bottom:8px;"><span class="chip">Bio-fertiliser</span><span class="chip">Back to the paddock</span><span class="chip">Closed loop</span></div>
+          </div></div>
+        </div>
+        <div class="mob-card" data-mob-stage="4">
+          <button class="mob-card-head" aria-expanded="false"><span><span class="mono c-signal" style="margin-right:8px;">05</span> CO2 for food and drink manufacturing</span> <span class="mob-card-icon">+</span></button>
+          <div class="mob-card-body"><div class="mob-card-inner">
+            <p style="margin-bottom:16px;">Biogenic carbon dioxide captured from the process, for manufacturers in the precinct.</p>
+            <div style="display:flex; flex-wrap:wrap; margin-bottom:8px;"><span class="chip">Biogenic CO2</span><span class="chip">Precinct</span></div>
+          </div></div>
+        </div>
+        <div class="mob-card" data-mob-stage="5">
+          <button class="mob-card-head" aria-expanded="false"><span><span class="mono c-signal" style="margin-right:8px;">06</span> Renewable natural gas fuel</span> <span class="mob-card-icon">+</span></button>
+          <div class="mob-card-body"><div class="mob-card-inner">
+            <p style="margin-bottom:16px;">Biomethane for transport. Fuel for up to 98 million truck or bus kilometres a year.</p>
+            <div style="display:flex; flex-wrap:wrap; margin-bottom:8px;"><span class="chip">Transport</span><span class="chip">98 million km a year</span></div>
+          </div></div>
+        </div>
+        <div class="mob-card" data-mob-stage="6">
+          <button class="mob-card-head" aria-expanded="false"><span><span class="mono c-signal" style="margin-right:8px;">07</span> Electricity to the grid</span> <span class="mob-card-icon">+</span></button>
+          <div class="mob-card-body"><div class="mob-card-inner">
+            <p style="margin-bottom:16px;">A regional peaking power plant fed by agriculture, available 24/7. Enough for up to 31,000 homes.</p>
+            <div style="display:flex; flex-wrap:wrap; margin-bottom:8px;"><span class="chip">Up to 31,000 homes</span><span class="chip">24/7</span></div>
+          </div></div>
+        </div>
+        <div class="mob-card" data-mob-stage="7">
+          <button class="mob-card-head" aria-expanded="false"><span><span class="mono c-signal" style="margin-right:8px;">08</span> Green gas for industry</span> <span class="mob-card-icon">+</span></button>
+          <div class="mob-card-body"><div class="mob-card-inner">
+            <p style="margin-bottom:16px;">Renewable natural gas injected for industrial users, replacing fossil gas.</p>
+            <div style="display:flex; flex-wrap:wrap; margin-bottom:8px;"><span class="chip">Industry</span><span class="chip">Renewable natural gas</span></div>
           </div></div>
         </div>
       </div>
@@ -636,67 +678,85 @@
     <h2 class="reveal" style="margin-bottom: 64px;">What we produce.</h2>
     
     <div class="out-row reveal">
-      <div class="img-wrap notch-lg"><img src="assets/img/hero-ai-02.jpg" alt="Artist's impression of the Kalfresh Bioenergy facility at Kalbar" class="img-fluid" loading="lazy"></div>
-      <div class="out-panel notch-lg">
+      <div class="img-wrap rounded-lg"><img src="assets/img/real/hero-drone-13.jpg" alt="Renewable natural gas output at Kalfresh Bioenergy" class="img-fluid" loading="lazy"></div>
+      <div class="out-panel rounded-lg">
         <span class="mono c-signal">01</span>
         <h3 class="h-brand">Renewable natural gas</h3>
         <p>Biomethane for industry and transport. Fuel for up to 98 million truck or bus kilometres a year.</p>
         <div class="cap-list">
           <span class="mono c-signal" style="margin-bottom:16px; display:block;">Capabilities:</span>
-          <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-pipe"/></svg></div><span class="mono-value">Biomethane for industry and transport</span></div>
-          <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-pipe"/></svg></div><span class="mono-value">Renewable natural gas</span></div>
-          <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-pipe"/></svg></div><span class="mono-value">First production 2027</span></div>
+          <div class="cap-row"><div class="cap-icon rounded"><svg><use href="#ic-pipe"/></svg></div><span class="mono-value">Biomethane for industry and transport</span></div>
+          <div class="cap-row"><div class="cap-icon rounded"><svg><use href="#ic-pipe"/></svg></div><span class="mono-value">Renewable natural gas</span></div>
+          <div class="cap-row"><div class="cap-icon rounded"><svg><use href="#ic-pipe"/></svg></div><span class="mono-value">First production 2027</span></div>
         </div>
-        <button class="btn btn-grey notch-sm" style="width: max-content;" onclick="openModal('Off-taker', 'Renewable natural gas')">Request a briefing <span class="arrow">→</span></button>
+        <button class="btn btn-grey pill" style="width: max-content;" onclick="openModal('Off-taker', 'Renewable natural gas')">Request a briefing <span class="arrow">→</span></button>
       </div>
     </div>
     
     <div class="out-row reveal">
-      <div class="out-panel notch-lg">
+      <div class="out-panel rounded-lg">
         <span class="mono c-signal">02</span>
         <h3 class="h-brand">Electricity</h3>
         <p>Electricity for up to 31,000 homes, generated from biogas.</p>
         <div class="cap-list">
           <span class="mono c-signal" style="margin-bottom:16px; display:block;">Capabilities:</span>
-          <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-zap"/></svg></div><span class="mono-value">Up to 31,000 homes</span></div>
-          <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-zap"/></svg></div><span class="mono-value">Generated from biogas</span></div>
-          <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-zap"/></svg></div><span class="mono-value">First production 2027</span></div>
+          <div class="cap-row"><div class="cap-icon rounded"><svg><use href="#ic-zap"/></svg></div><span class="mono-value">Up to 31,000 homes</span></div>
+          <div class="cap-row"><div class="cap-icon rounded"><svg><use href="#ic-zap"/></svg></div><span class="mono-value">Generated from biogas</span></div>
+          <div class="cap-row"><div class="cap-icon rounded"><svg><use href="#ic-zap"/></svg></div><span class="mono-value">First production 2027</span></div>
         </div>
-        <button class="btn btn-grey notch-sm" style="width: max-content;" onclick="openModal('Off-taker', 'Electricity')">Request a briefing <span class="arrow">→</span></button>
+        <button class="btn btn-grey pill" style="width: max-content;" onclick="openModal('Off-taker', 'Electricity')">Request a briefing <span class="arrow">→</span></button>
       </div>
-      <div class="img-wrap notch-lg out-img-col"><img src="assets/img/scenic-rim-ag-precinct-overview.jpg" alt="Aerial of the region" class="img-fluid" loading="lazy"></div>
+      <div class="img-wrap rounded-lg out-img-col"><img src="assets/img/real/pour-117.jpg" alt="Electricity generation at Kalfresh Bioenergy" class="img-fluid" loading="lazy"></div>
     </div>
 
     <div class="out-row reveal">
-      <div class="img-wrap notch-lg"><img src="assets/img/precinct-render-co2.jpg" alt="Artist's impression of the precinct" class="img-fluid" loading="lazy"></div>
-      <div class="out-panel notch-lg">
+      <div class="img-wrap rounded-lg"><img src="assets/img/real/kalfresh-ad-render.jpg" alt="Artist's impression of the Scenic Rim Agricultural Industrial Precinct" class="img-fluid" style="object-position: 20% 60%;" loading="lazy"></div>
+      <div class="out-panel rounded-lg">
         <span class="mono c-signal">03</span>
         <h3 class="h-brand">Biogenic CO2</h3>
         <p>Biogenic carbon dioxide captured from the digestion process.</p>
         <div class="cap-list">
           <span class="mono c-signal" style="margin-bottom:16px; display:block;">Capabilities:</span>
-          <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-cloud"/></svg></div><span class="mono-value">Biogenic CO2</span></div>
-          <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-cloud"/></svg></div><span class="mono-value">Captured from the process</span></div>
-          <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-cloud"/></svg></div><span class="mono-value">First production 2027</span></div>
+          <div class="cap-row"><div class="cap-icon rounded"><svg><use href="#ic-cloud"/></svg></div><span class="mono-value">Biogenic CO2</span></div>
+          <div class="cap-row"><div class="cap-icon rounded"><svg><use href="#ic-cloud"/></svg></div><span class="mono-value">Captured from the process</span></div>
+          <div class="cap-row"><div class="cap-icon rounded"><svg><use href="#ic-cloud"/></svg></div><span class="mono-value">First production 2027</span></div>
         </div>
-        <button class="btn btn-grey notch-sm" style="width: max-content;" onclick="openModal('Off-taker', 'Biogenic CO2')">Request a briefing <span class="arrow">→</span></button>
+        <button class="btn btn-grey pill" style="width: max-content;" onclick="openModal('Off-taker', 'Biogenic CO2')">Request a briefing <span class="arrow">→</span></button>
       </div>
     </div>
 
     <div class="out-row reveal">
-      <div class="out-panel notch-lg">
+      <div class="out-panel rounded-lg">
         <span class="mono c-signal">04</span>
         <h3 class="h-brand">Bio-fertiliser</h3>
         <p>Nutrient-rich digestate that goes back to local paddocks as bio-fertiliser.</p>
         <div class="cap-list">
           <span class="mono c-signal" style="margin-bottom:16px; display:block;">Capabilities:</span>
-          <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-leaf"/></svg></div><span class="mono-value">Returned to farms</span></div>
-          <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-leaf"/></svg></div><span class="mono-value">Nutrients back to the paddock</span></div>
-          <div class="cap-row"><div class="cap-icon notch-sm"><svg><use href="#ic-leaf"/></svg></div><span class="mono-value">Closes the loop</span></div>
+          <div class="cap-row"><div class="cap-icon rounded"><svg><use href="#ic-leaf"/></svg></div><span class="mono-value">Returned to farms</span></div>
+          <div class="cap-row"><div class="cap-icon rounded"><svg><use href="#ic-leaf"/></svg></div><span class="mono-value">Nutrients back to the paddock</span></div>
+          <div class="cap-row"><div class="cap-icon rounded"><svg><use href="#ic-leaf"/></svg></div><span class="mono-value">Closes the loop</span></div>
         </div>
-        <button class="btn btn-grey notch-sm" style="width: max-content;" onclick="openModal('Off-taker', 'Bio-fertiliser')">Request a briefing <span class="arrow">→</span></button>
+        <button class="btn btn-grey pill" style="width: max-content;" onclick="openModal('Off-taker', 'Bio-fertiliser')">Request a briefing <span class="arrow">→</span></button>
       </div>
-      <div class="img-wrap notch-lg out-img-col"><img src="assets/img/kalfresh-vegetables-scenic-rim-fassifern-valley-farmers-growers-products.jpg" alt="Farm harvest" class="img-fluid" loading="lazy"></div>
+      <div class="img-wrap rounded-lg out-img-col"><img src="assets/img/real/drone-30-fields.jpg" alt="Local paddocks receiving bio-fertiliser" class="img-fluid" loading="lazy"></div>
+    </div>
+  </section>
+  
+  <section class="section" style="padding-top:0;" data-theme="light">
+    <div class="label reveal" style="margin-bottom: 24px;">● On site, September 2026</div>
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;" class="reveal">
+      <div>
+        <img src="assets/img/real/slab-team-132.jpg" alt="The crew on the first digester slab" class="img-fluid rounded-lg" style="aspect-ratio:4/3; margin-bottom:12px;" loading="lazy">
+        <p style="font-size:14px; color:var(--c-ink);">The crew on the first digester slab</p>
+      </div>
+      <div>
+        <img src="assets/img/real/crew-134.jpg" alt="Pouring the first digester base at Kalbar" class="img-fluid rounded-lg" style="aspect-ratio:4/3; margin-bottom:12px;" loading="lazy">
+        <p style="font-size:14px; color:var(--c-ink);">Pouring the first digester base at Kalbar</p>
+      </div>
+      <div>
+        <img src="assets/img/real/leaders-155.jpg" alt="Kalfresh and WELTEC BIOPOWER on site" class="img-fluid rounded-lg" style="aspect-ratio:4/3; margin-bottom:12px;" loading="lazy">
+        <p style="font-size:14px; color:var(--c-ink);">Kalfresh and WELTEC BIOPOWER on site</p>
+      </div>
     </div>
   </section>
 
@@ -705,62 +765,62 @@
     <h2 class="reveal" style="margin-bottom: 48px;">Four ways in.</h2>
     
     <div class="tabs reveal" role="tablist">
-      <button class="tab notch-sm" role="tab" aria-selected="true" aria-controls="panel-1" id="tab-1">Off-takers</button>
-      <button class="tab notch-sm" role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2">Feedstock suppliers</button>
-      <button class="tab notch-sm" role="tab" aria-selected="false" aria-controls="panel-3" id="tab-3">Precinct tenants</button>
-      <button class="tab notch-sm" role="tab" aria-selected="false" aria-controls="panel-4" id="tab-4">Government and investors</button>
+      <button class="tab" role="tab" aria-selected="true" aria-controls="panel-1" id="tab-1">Off-takers</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2">Feedstock suppliers</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="panel-3" id="tab-3">Precinct tenants</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="panel-4" id="tab-4">Government and investors</button>
     </div>
 
     <div class="tab-content reveal">
       <div id="panel-1" class="tab-panel active" role="tabpanel" aria-labelledby="tab-1">
         <div class="ww-grid">
-          <div class="img-wrap notch-lg"><img src="assets/img/Scenic-Rim-Agricultural-Industrial-Precinct.jpg" alt="Artist's impression of the precinct" class="img-fluid ww-img" loading="lazy"></div>
+          <div class="img-wrap rounded-lg"><img src="assets/img/real/hero-drone-00.jpg" alt="Off-takers aerial site view" class="img-fluid ww-img" loading="lazy"></div>
           <div>
             <div class="num-list">
               <div class="num-row"><span class="mono num">01</span><p class="mono-value">Buy renewable gas, electricity, CO2 or bio-fertiliser</p></div>
               <div class="num-row"><span class="mono num">02</span><p class="mono-value">Volumes and contract terms on request</p></div>
               <div class="num-row"><span class="mono num">03</span><p class="mono-value">First production 2027</p></div>
             </div>
-            <button class="btn btn-lime notch" onclick="openModal('Off-taker', 'General')">Talk about offtake <span class="arrow">→</span></button>
+            <button class="btn btn-lime pill" onclick="openModal('Off-taker', 'General')">Talk about offtake <span class="arrow">→</span></button>
           </div>
         </div>
       </div>
       <div id="panel-2" class="tab-panel" role="tabpanel" aria-labelledby="tab-2">
         <div class="ww-grid">
-          <div class="img-wrap notch-lg"><img src="assets/img/kalfresh-vegetables-scenic-rim-fassifern-valley-farmers-growers-products.jpg" alt="Farming fields" class="img-fluid ww-img" loading="lazy"></div>
+          <div class="img-wrap rounded-lg"><img src="assets/img/real/drone-32-valley.jpg" alt="Feedstock suppliers valley view" class="img-fluid ww-img" loading="lazy"></div>
           <div>
             <div class="num-list">
               <div class="num-row"><span class="mono num">01</span><p class="mono-value">Crop residues and rotational crops</p></div>
               <div class="num-row"><span class="mono num">02</span><p class="mono-value">Food-processing waste</p></div>
               <div class="num-row"><span class="mono num">03</span><p class="mono-value">Council organics and farm waste</p></div>
             </div>
-            <button class="btn btn-lime notch" onclick="openModal('Feedstock supplier', 'Feedstock supply')">Request an assessment <span class="arrow">→</span></button>
+            <button class="btn btn-lime pill" onclick="openModal('Feedstock supplier', 'Feedstock supply')">Request an assessment <span class="arrow">→</span></button>
           </div>
         </div>
       </div>
       <div id="panel-3" class="tab-panel" role="tabpanel" aria-labelledby="tab-3">
         <div class="ww-grid">
-          <div class="img-wrap notch-lg"><img src="assets/img/precinct-aerial.jpg" alt="Aerial of Kalbar" class="img-fluid ww-img" loading="lazy"></div>
+          <div class="img-wrap rounded-lg"><img src="assets/img/real/precinct-earthworks-173.jpg" alt="Precinct tenants site earthworks" class="img-fluid ww-img" loading="lazy"></div>
           <div>
             <div class="num-list">
               <div class="num-row"><span class="mono num">01</span><p class="mono-value">Inside the 40 ha Scenic Rim Agricultural Industrial Precinct</p></div>
               <div class="num-row"><span class="mono num">02</span><p class="mono-value">75 km from retail distribution centres</p></div>
               <div class="num-row"><span class="mono num">03</span><p class="mono-value">Next to the bioenergy facility inside the precinct</p></div>
             </div>
-            <a href="https://www.agprecinct.com.au/" class="btn btn-lime notch">Visit agprecinct.com.au <span class="arrow">→</span></a>
+            <a href="https://www.agprecinct.com.au/" class="btn btn-lime pill">Visit agprecinct.com.au <span class="arrow">→</span></a>
           </div>
         </div>
       </div>
       <div id="panel-4" class="tab-panel" role="tabpanel" aria-labelledby="tab-4">
         <div class="ww-grid">
-          <div class="img-wrap notch-lg"><img src="assets/img/Euro-trip-DK.jpeg" alt="Kalfresh team visiting a biogas plant in Denmark" class="img-fluid ww-img" loading="lazy"></div>
+          <div class="img-wrap rounded-lg"><img src="assets/img/real/handshake-157.jpg" alt="Government and investors partnership" class="img-fluid ww-img" loading="lazy"></div>
           <div>
             <div class="num-list">
               <div class="num-row"><span class="mono num">01</span><p class="mono-value">Queensland Government coordinated project since 2019, approved 2024</p></div>
               <div class="num-row"><span class="mono num">02</span><p class="mono-value">$<span data-count="291">291</span>M precinct; <span data-count="641">641</span> construction and <span data-count="475">475</span> operational jobs</p></div>
               <div class="num-row"><span class="mono num">03</span><p class="mono-value">$<span data-count="80">80</span>M from Wollemi Capital and QIC</p></div>
             </div>
-            <button class="btn btn-lime notch" onclick="openModal('Investor', 'General')">Contact the team <span class="arrow">→</span></button>
+            <button class="btn btn-lime pill" onclick="openModal('Investor', 'General')">Contact the team <span class="arrow">→</span></button>
           </div>
         </div>
       </div>
@@ -772,20 +832,20 @@
     <h2 class="reveal">Where we are.</h2>
     
     <div class="loc-wrapper reveal">
-      <div class="img-wrap notch-lg"><img src="assets/img/Scenic-Rim-Industrial-Agricultural-Precinct.jpg" alt="Lot plan aerial map" class="img-fluid loc-img" loading="lazy"></div>
-      <div class="loc-tooltip glass notch">
+      <div class="img-wrap rounded-lg"><img src="assets/img/real/drone-29-precinct.jpg" alt="Scenic Rim Agricultural Industrial Precinct aerial location view" class="img-fluid loc-img" loading="lazy"></div>
+      <div class="loc-tooltip glass rounded">
         <span class="mono" style="display:block; margin-bottom:8px; color:rgba(255,255,255,0.6);">SITE</span>
         <p class="mono-value" style="color:#fff; margin-bottom:16px;">Kalbar, Scenic Rim, Queensland</p>
         <p style="font-size:14px; color:rgba(255,255,255,0.8);">Inside the Scenic Rim Agricultural Industrial Precinct. 75 km to retail distribution centres. New Cunningham Highway intersection in 2027.</p>
       </div>
     </div>
     
-    <div class="impact-grid-wrap notch-lg reveal">
+    <div class="impact-grid-wrap rounded-lg reveal">
       <div class="impact-grid">
-        <div class="ig-tile"><div class="ig-val" data-count="40">40</div> <span class="ig-unit mono">[ha]</span><p>hectare precinct</p><div class="progress-rule"></div></div>
-        <div class="ig-tile"><div class="ig-val" data-count="31000">31,000</div> <span class="ig-unit mono">[homes]</span><p>homes, electricity for up to</p><div class="progress-rule"></div></div>
-        <div class="ig-tile"><div class="ig-val" data-count="430000">430,000</div> <span class="ig-unit mono">[t CO2-e]</span><p>CO2-e avoided a year, up to</p><div class="progress-rule"></div></div>
-        <div class="ig-tile"><div class="ig-val" data-count="21" data-suffix="M">21M</div> <span class="ig-unit mono">[trees]</span><p>trees equivalent, about</p><div class="progress-rule"></div></div>
+        <div class="ig-tile grad"><div class="ig-val" data-count="40">40</div> <span class="ig-unit mono">[ha]</span><p>hectare precinct</p><div class="progress-rule"></div></div>
+        <div class="ig-tile grad"><div class="ig-val" data-count="31000">31,000</div> <span class="ig-unit mono">[homes]</span><p>homes, electricity for up to</p><div class="progress-rule"></div></div>
+        <div class="ig-tile grad"><div class="ig-val" data-count="430000">430,000</div> <span class="ig-unit mono">[t CO2-e]</span><p>CO2-e avoided a year, up to</p><div class="progress-rule"></div></div>
+        <div class="ig-tile grad"><div class="ig-val" data-count="21" data-suffix="M">21M</div> <span class="ig-unit mono">[trees]</span><p>trees equivalent, about</p><div class="progress-rule"></div></div>
       </div>
     </div>
   </section>
@@ -797,34 +857,34 @@
         <h2>Timeline.</h2>
       </div>
       <div class="tl-nav">
-        <button class="tl-btn notch-sm" id="tl-prev" aria-label="Previous">←</button>
-        <button class="tl-btn notch-sm" id="tl-next" aria-label="Next">→</button>
+        <button class="tl-btn pill" id="tl-prev" aria-label="Previous">←</button>
+        <button class="tl-btn pill" id="tl-next" aria-label="Next">→</button>
       </div>
     </div>
     
     <div class="tl-track reveal" id="tl-track">
-      <div class="tl-card notch-lg">
-        <div class="img-wrap"><img src="assets/img/Scenic-Rim-Agricultural-Industrial-Precinct.jpg" alt="Artist's impression of the precinct" class="img-fluid tl-img" loading="lazy"></div>
+      <div class="tl-card rounded-lg">
+        <div class="img-wrap"><img src="assets/img/real/kalfresh-ad-render.jpg" alt="Artist's impression of the precinct 2019" class="img-fluid tl-img" loading="lazy"></div>
         <h3 class="mono-value c-brand" style="margin-bottom: 16px;">[2019]</h3>
         <p>Queensland Government coordinated project</p>
       </div>
-      <div class="tl-card notch-lg">
-        <div class="img-wrap"><img src="assets/img/precinct-render-co2.jpg" alt="Artist's impression of the precinct" class="img-fluid tl-img" loading="lazy"></div>
+      <div class="tl-card rounded-lg">
+        <div class="img-wrap"><img src="assets/img/real/earthworks-172.jpg" alt="Precinct and bioenergy facility approved 2024" class="img-fluid tl-img" loading="lazy"></div>
         <h3 class="mono-value c-brand" style="margin-bottom: 16px;">[2024]</h3>
         <p>Precinct and bioenergy facility approved</p>
       </div>
-      <div class="tl-card notch-lg">
-        <div class="img-wrap"><img src="assets/img/Scenic-Rim-Industrial-Agricultural-Precinct.jpg" alt="Lot plan map" class="img-fluid tl-img" loading="lazy"></div>
+      <div class="tl-card rounded-lg">
+        <div class="img-wrap"><img src="assets/img/real/earthworks-176.jpg" alt="Bulk earthworks 2025" class="img-fluid tl-img" loading="lazy"></div>
         <h3 class="mono-value c-brand" style="margin-bottom: 16px;">[2025]</h3>
         <p>Bulk earthworks began</p>
       </div>
-      <div class="tl-card notch-lg">
-        <div class="img-wrap"><img src="assets/img/Kalfresh-Sep-2026_068.jpg" alt="Concrete base pouring on site" class="img-fluid tl-img" loading="lazy"></div>
-        <h3 class="mono-value c-brand" style="margin-bottom: 16px;">[2026] <span class="now-mark notch-sm">NOW</span></h3>
+      <div class="tl-card rounded-lg">
+        <div class="img-wrap"><img src="assets/img/real/pour-110.jpg" alt="Concrete base pouring on site 2026" class="img-fluid tl-img" loading="lazy"></div>
+        <h3 class="mono-value c-brand" style="margin-bottom: 16px;">[2026] <span class="now-mark pill">NOW</span></h3>
         <p>Civil construction; $80M from Wollemi Capital and QIC; WELTEC BIOPOWER appointed</p>
       </div>
-      <div class="tl-card notch-lg">
-        <div class="img-wrap"><img src="assets/img/precinct-aerial.jpg" alt="Aerial of Kalbar" class="img-fluid tl-img" loading="lazy"></div>
+      <div class="tl-card rounded-lg">
+        <div class="img-wrap"><img src="assets/img/real/hero-drone-19.jpg" alt="First renewable energy production 2027" class="img-fluid tl-img" loading="lazy"></div>
         <h3 class="mono-value c-brand" style="margin-bottom: 16px;">[2027]</h3>
         <p>New Cunningham Highway intersection; first renewable energy production</p>
       </div>
@@ -837,13 +897,15 @@
       <a href="https://www.agprecinct.com.au/news/" class="link-hover mono reveal">All news →</a>
     </div>
     <div class="news-grid reveal">
-      <a href="https://www.agprecinct.com.au/news/" class="n-card notch-sm">
+      <a href="https://www.agprecinct.com.au/news/" class="n-card rounded">
+        <div class="img-wrap" style="border-radius:0;"><img src="assets/img/real/leaders-155.jpg" alt="WELTEC BIOPOWER secured as technology partner" class="img-fluid n-img" loading="lazy"></div>
         <div class="n-content">
           <span class="mono n-date">[8 Jul 2026]</span>
           <p class="mono-value" style="color:var(--c-ink);">WELTEC BIOPOWER secured as technology partner</p>
         </div>
       </a>
-      <a href="https://www.agprecinct.com.au/news/" class="n-card notch-sm">
+      <a href="https://www.agprecinct.com.au/news/" class="n-card rounded">
+        <div class="img-wrap" style="border-radius:0;"><img src="assets/img/real/walk-159.jpg" alt="$80M backing for paddock to power precinct" class="img-fluid n-img" loading="lazy"></div>
         <div class="n-content">
           <span class="mono n-date">[19 Feb 2026]</span>
           <p class="mono-value" style="color:var(--c-ink);">$80M backing for paddock to power precinct</p>
@@ -882,22 +944,23 @@
     </div>
   </section>
 
-  <section class="cta-sec notch-lg cross-corners" data-theme="dark">
+  <section class="cta-sec rounded-lg grad cross-corners" data-theme="dark">
     <div class="rings"></div>
     <div class="cta-content reveal">
       <h2 style="margin-bottom: 32px;">Ready to talk?</h2>
-      <button class="btn btn-lime notch-sm" style="margin-bottom: 24px;" onclick="openModal('Other','General')">Start a conversation <span class="arrow">→</span></button>
+      <button class="btn btn-lime pill" style="margin-bottom: 24px;" onclick="openModal('Other','General')">Start a conversation <span class="arrow">→</span></button>
       <p class="mono">or email <a href="mailto:info@agprecinct.com.au" class="link-hover" style="color:var(--c-signal);">info@agprecinct.com.au</a></p>
     </div>
   </section>
 
-  <footer class="footer notch-lg" data-theme="dark">
+  <footer class="footer" data-theme="dark">
     <div class="f-grid">
       <div class="f-col">
+        <img src="assets/img/kalfresh-bioenergy-logo-white.png" alt="Kalfresh Bioenergy" style="width:220px; display:block; margin-bottom:32px;">
         <p style="color:#fff; font-size:18px; max-width:20ch;">Get project updates by email</p>
         <form class="email-form" onsubmit="newsletter(event)">
-          <input type="email" class="email-input notch-sm" placeholder="Your email" aria-label="Email address" required>
-          <button type="submit" class="btn btn-lime notch-sm" style="padding:0 16px;">Sign up</button>
+          <input type="email" class="email-input pill" placeholder="Your email" aria-label="Email address" required>
+          <button type="submit" class="btn btn-lime pill" style="padding:0 16px;">Sign up</button>
         </form>
       </div>
       <div class="f-col">
@@ -934,13 +997,13 @@
     
     <div class="f-bottom">
       <div>A Kalfresh company · © 2026<br>We acknowledge the Traditional Owners of the land and pay respects to Elders past and present.</div>
-      <button id="back-to-top" class="btn btn-grey notch-sm" style="background:transparent; color:var(--c-lime); border-color:rgba(255,255,255,0.3);">Back to top ↑</button>
+      <button id="back-to-top" class="btn btn-grey pill" style="background:transparent; color:var(--c-lime); border-color:rgba(255,255,255,0.3);">Back to top ↑</button>
     </div>
   </footer>
 
   <dialog id="contactModal">
-    <div class="modal-panel notch-lg">
-      <button class="modal-close notch-sm" onclick="closeModal()" aria-label="Close modal"><svg width="24" height="24"><use href="#ic-close"/></svg></button>
+    <div class="modal-panel rounded-lg">
+      <button class="modal-close pill" onclick="closeModal()" aria-label="Close modal"><svg width="24" height="24"><use href="#ic-close"/></svg></button>
       <h2 style="margin-bottom: 32px;">Talk to Kalfresh Bioenergy</h2>
       
       <form id="modalForm" onsubmit="submitContact(event)">
@@ -973,13 +1036,13 @@
         <div class="form-group"><input type="email" class="form-control" id="m-email" aria-label="Email" placeholder="Email" required></div>
         <div class="form-group"><textarea class="form-control" id="m-msg" aria-label="Message" placeholder="Message" rows="3" required></textarea></div>
         
-        <button type="submit" class="btn btn-lime notch" style="width:100%;">Send message <span class="arrow">→</span></button>
+        <button type="submit" class="btn btn-lime pill" style="width:100%;">Send message <span class="arrow">→</span></button>
       </form>
       
       <div id="modalSuccess" style="display:none; text-align:center; padding: 48px 0;">
         <h3 class="h-brand" style="margin-bottom:16px;">Opening mail client...</h3>
         <p style="margin-bottom:24px;">If your email app didn't open, copy the details below.</p>
-        <button class="btn btn-grey notch-sm" onclick="copyDetails()">Copy details</button>
+        <button class="btn btn-grey pill" onclick="copyDetails()">Copy details</button>
       </div>
     </div>
   </dialog>
