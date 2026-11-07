@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalfresh Bioenergy | Energy by Nature</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --c-white: #FFFFFF;
+      --c-sage: #F3F5EE;
+      --c-border: #E4E8DC;
+      --c-ink: #101510;
+      --c-grey: #7A8277;
+      --c-green-deep: #215732;
+      --c-green-bright: #00B140;
+      --c-lime: #D0DF00;
+      --c-pale-lime: #F2F7C8;
+      --c-dark-panel: #0F2A1C;
+      
+      --f-sans: 'Outfit', sans-serif;
+      --f-mono: 'IBM Plex Mono', monospace;
+      
+      --radius-lg: 28px;
+      --radius-md: 20px;
+      --radius-sm: 12px;
+      
+      --pad-page: clamp(16px, 4vw, 48px);
+      --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--f-sans); color: var(--c-ink); background: var(--c-white);
+      line-height: 1.5; overflow-x: hidden; -webkit-font-smoothing: antialiased;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 { font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; }
+    .t-hero { font-size: clamp(40px, 6vw, 84px); }
+    .t-h2 { font-size: clamp(28px, 3.4vw, 44px); }
+    .t-h3 { font-size: 1.5rem; }
+    .t-mono { font-family: var(--f-mono); font-size: 0.875rem; }
+    
+    .eyebrow { 
+      font-family: var(--f-mono); font-size: 0.75rem; text-transform: uppercase; 
+      letter-spacing: 0.05em; color: var(--c-green-deep); margin-bottom: 1.5rem; 
+      display: inline-flex; align-items: center; gap: 8px; font-weight: 500;
+    }
+    .eyebrow svg { width: 12px; height: 12px; fill: currentColor; }
+    .eyebrow-white { color: var(--c-white); }
+    
+    p { margin-bottom: 1rem; }
+    .text-grey { color: var(--c-grey); }
+    .text-ink { color: var(--c-ink); }
+
+    /* Layout */
+    .container { max-width: 1600px; margin: 0 auto; padding: 0 var(--pad-page); }
+    section { padding: clamp(60px, 8vw, 120px) 0; }
+    
+    /* Buttons / Pills */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: var(--f-sans); font-size: 1rem; font-weight: 500;
+      padding: 0 24px; min-height: 44px; border-radius: 22px; text-decoration: none;
+      cursor: pointer; transition: all 0.3s var(--ease); border: 1px solid transparent;
+    }
+    .btn-white { background: var(--c-white); color: var(--c-ink); }
+    .btn-white:hover { background: var(--c-sage); }
+    .btn-lime { background: var(--c-lime); color: var(--c-ink); }
+    .btn-lime:hover { background: #E4F500; }
+    .btn-dark { background: var(--c-ink); color: var(--c-white); }
+    
+    .chip { 
+      display: inline-flex; align-items: center; padding: 4px 12px; 
+      border-radius: 16px; background: rgba(255,255,255,0.15); backdrop-filter: blur(8px);
+      color: var(--c-white); font-family: var(--f-mono); font-size: 0.75rem; 
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .chip-dark { background: var(--c-white); color: var(--c-ink); border-color: var(--c-border); }
+
+    /* Hero */
+    .hero-wrap { padding: clamp(10px, 2vw, 16px); }
+    .hero-panel {
+      position: relative; border-radius: var(--radius-lg); overflow: hidden;
+      min-height: calc(100svh - 32px); display: flex; flex-direction: column;
+      color: var(--c-white); background: var(--c-ink);
+    }
+    .hero-bg { position: absolute; inset: 0; z-index: 0; }
+    .hero-bg img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-bg::after { 
+      content: ''; position: absolute; inset: 0; 
+      background: linear-gradient(45deg, rgba(16,21,16,0.9) 0%, rgba(16,21,16,0) 60%); 
+    }
+
+    /* Nav */
+    .nav {
+      position: relative; z-index: 10; padding: 24px clamp(24px, 4vw, 48px);
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+    }
+    .nav-left { display: flex; align-items: center; gap: 48px; }
+    .nav-logo img { height: 32px; width: auto; }
+    .nav-links { display: none; gap: 32px; }
+    .nav-links a { color: var(--c-white); text-decoration: none; font-size: 0.9375rem; font-weight: 500; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--c-lime); }
+    .nav-right { display: flex; align-items: center; gap: 24px; }
+    .nav-status { font-family: var(--f-mono); font-size: 0.75rem; opacity: 0.8; display: none; }
+    
+    .menu-toggle { display: flex; font-family: var(--f-mono); text-transform: uppercase; background: transparent; color: var(--c-white); border: 1px solid rgba(255,255,255,0.3); padding: 8px 16px; border-radius: 20px; cursor: pointer; }
+
+    @media (min-width: 1024px) {
+      .nav-links, .nav-status { display: flex; }
+      .menu-toggle { display: none; }
+    }
+
+    /* Mobile Menu Overlay */
+    .mobile-menu {
+      position: fixed; inset: 0; background: var(--c-white); z-index: 99;
+      display: flex; flex-direction: column; padding: 100px var(--pad-page) 40px;
+      transform: translateY(-100%); transition: transform 0.4s var(--ease);
+    }
+    .mobile-menu.open { transform: translateY(0); }
+    .mobile-menu a { color: var(--c-ink); font-size: 2rem; text-decoration: none; margin-bottom: 24px; font-weight: 500; }
+
+    /* Hero Content */
+    .hero-content { position: relative; z-index: 1; margin-top: auto; padding: 0 clamp(24px, 4vw, 48px) 120px; max-width: 800px; }
+    .hero-content h1 { margin-bottom: 16px; }
+    .hero-content p { font-size: clamp(18px, 2vw, 22px); margin-bottom: 32px; opacity: 0.9; }
+    .hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    
+    /* Hero Glass Card */
+    .hero-glass {
+      position: absolute; right: clamp(24px, 4vw, 48px); bottom: 120px;
+      background: rgba(255,255,255,0.1); backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.2); border-radius: var(--radius-md);
+      padding: 24px; z-index: 2; min-width: 280px;
+    }
+    .hg-title { font-family: var(--f-mono); font-size: 0.75rem; text-transform: uppercase; margin-bottom: 16px; opacity: 0.7; }
+    .hg-row { display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 12px 0; font-size: 0.875rem; }
+    .hg-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .hg-label { opacity: 0.7; }
+    .hg-val { font-weight: 500; text-align: right; }
+    
+    @media (max-width: 1023px) {
+      .hero-glass { position: relative; right: auto; bottom: auto; margin: 24px clamp(24px, 4vw, 48px) 24px; order: 3; }
+      .hero-content { padding-bottom: 0; order: 2; }
+    }
+
+    /* Hero Pins */
+    .hero-pin { position: absolute; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .pin-dot { width: 8px; height: 8px; background: var(--c-white); border-radius: 50%; box-shadow: 0 0 0 4px rgba(255,255,255,0.2); }
+    .pin-line { width: 1px; height: 40px; background: rgba(255,255,255,0.5); }
+    .pin-label { background: var(--c-white); color: var(--c-ink); font-family: var(--f-mono); font-size: 0.75rem; padding: 4px 12px; border-radius: 12px; white-space: nowrap; font-weight: 500; }
+    .pin-1 { top: 20%; left: 52%; }
+    .pin-2 { top: 40%; left: 60%; }
+    .pin-3 { top: 16%; left: 70%; }
+    .pin-4 { top: 34%; left: 82%; }
+    @media (max-width: 1023px) { .hero-pin { display: none; } }
+
+    /* Feedstock Bar */
+    .hero-bottom-bar {
+      position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
+      border-top: 1px solid rgba(255,255,255,0.15); padding: 16px clamp(24px, 4vw, 48px);
+      display: flex; gap: 24px; overflow-x: auto; scrollbar-width: none;
+    }
+    .hero-bottom-bar::-webkit-scrollbar { display: none; }
+    .feed-word { font-family: var(--f-mono); font-size: 0.875rem; white-space: nowrap; opacity: 0.6; }
+    .feed-word.active { opacity: 1; font-weight: 500; color: var(--c-lime); }
+
+    /* Intro */
+    .intro-p { font-size: clamp(24px, 3vw, 36px); font-weight: 400; max-width: 1000px; line-height: 1.3; }
+
+    /* Strip */
+    .strip-scroll { display: flex; gap: 16px; margin-top: 48px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 16px; }
+    .strip-scroll::-webkit-scrollbar { display: none; }
+    .strip-card { flex-shrink: 0; border-radius: var(--radius-md); overflow: hidden; position: relative; scroll-snap-align: start; min-height: 320px; }
+    .sc-lime { background: var(--c-lime); color: var(--c-ink); padding: 32px; display: flex; flex-direction: column; width: 300px; justify-content: space-between; }
+    .sc-fact { margin-bottom: 24px; }
+    .sc-num { font-size: 2rem; font-weight: 500; line-height: 1; margin-bottom: 4px; }
+    .sc-desc { font-family: var(--f-mono); font-size: 0.875rem; opacity: 0.8; }
+    .sc-img { width: 300px; }
+    .sc-img.wide { width: 450px; }
+    .sc-img img { width: 100%; height: 100%; object-fit: cover; }
+    .sc-pill { position: absolute; bottom: 16px; left: 16px; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); color: var(--c-white); font-family: var(--f-mono); font-size: 0.75rem; padding: 4px 12px; border-radius: 12px; }
+    @media (max-width: 767px) { .strip-card { width: 85vw; } .sc-img.wide { width: 85vw; } }
+
+    /* Bento Grid */
+    .header-row { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; margin-bottom: 48px; }
+    .bento { display: grid; gap: 16px; grid-template-columns: 1fr; }
+    @media (min-width: 768px) { .bento { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { 
+      .bento { grid-template-columns: repeat(4, 1fr); }
+      .b-tall { grid-row: auto; }
+      .b-wide { grid-column: auto; }
+    }
+    
+    .b-card { background: var(--c-sage); border: 1px solid var(--c-border); border-radius: var(--radius-md); overflow: hidden; display: flex; flex-direction: column; }
+    .b-img { width: 100%; height: 200px; object-fit: cover; }
+    .b-tall .b-img { height: 200px; }
+    .b-content { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+    .b-title { font-size: 1.25rem; font-weight: 500; margin-bottom: 8px; }
+    .b-text { font-size: 0.9375rem; color: var(--c-grey); margin-bottom: 24px; }
+    
+    .bento-footer { margin-top: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; padding: 24px; background: var(--c-sage); border: 1px solid var(--c-border); border-radius: var(--radius-md); }
+
+    /* Loop */
+    .loop-cards { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 48px; }
+    @media (min-width: 768px) { .loop-cards { grid-template-columns: repeat(3, 1fr); } }
+    .l-card { position: relative; padding-top: 24px; }
+    .l-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--c-border); }
+    .l-card:first-child::before { background: var(--c-lime); } /* Progress highlight */
+    .l-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: var(--radius-md); margin-bottom: 16px; }
+    .l-step { font-family: var(--f-mono); font-size: 0.75rem; color: var(--c-grey); margin-bottom: 8px; display: block; }
+    .l-title { font-weight: 500; margin-bottom: 8px; }
+
+    .loop-svg-wrap { margin-top: 64px; overflow-x: auto; background: var(--c-white); border: 1px solid var(--c-border); border-radius: var(--radius-md); padding: 48px 24px; }
+    .loop-svg { min-width: 760px; width: 100%; height: auto; display: block; }
+
+    /* Impact Panel */
+    .impact-panel { 
+      background: var(--c-dark-panel); border-radius: var(--radius-lg); overflow: hidden; 
+      position: relative; padding: clamp(48px, 8vw, 96px) clamp(24px, 4vw, 64px); color: var(--c-white);
+      margin: 0 var(--pad-page);
+    }
+    .impact-bg { position: absolute; inset: 0; opacity: 0.15; object-fit: cover; width: 100%; height: 100%; mix-blend-mode: luminosity; }
+    .impact-content { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr; gap: 64px; align-items: center; }
+    @media (min-width: 1024px) { .impact-content { grid-template-columns: 1fr 1fr; } }
+    .impact-giant { white-space: nowrap; font-size: clamp(56px, 7.5vw, 112px); font-weight: 500; color: var(--c-lime); line-height: 1; letter-spacing: -0.04em; margin-bottom: 16px; }
+    
+    .glass-list { background: rgba(255,255,255,0.05); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); padding: 0 24px; }
+    .glass-row { padding: 24px 0; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; gap: 16px; }
+    .glass-row:last-child { border-bottom: none; }
+    .glass-icon { color: var(--c-lime); font-family: var(--f-mono); }
+
+    /* Feedstock & Precinct */
+    .split { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: center; }
+    @media (min-width: 900px) { .split { grid-template-columns: 1fr 1fr; } }
+    .split-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: var(--radius-md); }
+    .num-row { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--c-border); }
+    .num-row:first-of-type { border-top: 1px solid var(--c-border); margin-top: 32px; }
+    .num-col { font-family: var(--f-mono); font-size: 0.875rem; color: var(--c-grey); }
+
+    /* Timeline */
+    .timeline { display: flex; flex-direction: column; gap: 24px; margin-top: 48px; }
+    @media (min-width: 768px) { .timeline { flex-direction: row; gap: 0; border-top: 1px solid var(--c-border); padding-top: 24px; } }
+    .tl-item { flex: 1; position: relative; padding-left: 16px; border-left: 2px solid var(--c-border); }
+    @media (min-width: 768px) { .tl-item { padding-left: 0; padding-right: 24px; border-left: none; } }
+    .tl-year { font-family: var(--f-mono); font-size: 1.25rem; font-weight: 500; margin-bottom: 12px; color: var(--c-ink); }
+    .tl-item.now { border-color: var(--c-lime); }
+    @media (min-width: 768px) { .tl-item.now { position: relative; } .tl-item.now::before { content:''; position: absolute; top:-27px; left:0; width:40px; height:4px; background:var(--c-lime); } }
+    .tl-pill { background: var(--c-lime); color: var(--c-ink); font-size: 0.7rem; padding: 2px 8px; border-radius: 12px; vertical-align: middle; margin-left: 8px; }
+
+    /* Quote */
+    .quote-wrap { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 900px) { .quote-wrap { grid-template-columns: 1fr 1fr; } }
+    .q-card { background: var(--c-pale-lime); border-radius: var(--radius-md); padding: clamp(32px, 5vw, 64px); display: flex; flex-direction: column; justify-content: center; }
+    .q-text { font-size: clamp(24px, 3vw, 36px); font-weight: 400; line-height: 1.3; margin-bottom: 32px; }
+    .q-author { display: flex; align-items: center; gap: 12px; font-family: var(--f-mono); font-size: 0.875rem; font-weight: 500; }
+    .q-author img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+    .q-img { width: 100%; height: 100%; min-height: 400px; object-fit: cover; border-radius: var(--radius-md); }
+    .q-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 16px; }
+    .q-tile { background: var(--c-white); border: 1px solid var(--c-border); padding: 24px; border-radius: var(--radius-md); font-weight: 500; text-align: center; }
+
+    /* Partners / News */
+    .partner-row { display: flex; flex-wrap: wrap; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid var(--c-border); margin-bottom: 48px; }
+    .p-item span { display: block; font-family: var(--f-mono); font-size: 0.75rem; color: var(--c-grey); margin-bottom: 4px; text-transform: uppercase; }
+    .p-item { font-size: 1.125rem; font-weight: 500; }
+    
+    .news-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 768px) { .news-grid { grid-template-columns: repeat(3, 1fr); } }
+    .n-card { background: var(--c-sage); border: 1px solid var(--c-border); border-radius: var(--radius-md); overflow: hidden; display: block; text-decoration: none; color: inherit; transition: opacity 0.3s; }
+    .n-card:hover { opacity: 0.8; }
+    .n-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+    .n-content { padding: 24px; }
+    .n-date { font-family: var(--f-mono); font-size: 0.75rem; color: var(--c-grey); margin-bottom: 8px; display: block; }
+
+    /* FAQ */
+    .faq-item { border-bottom: 1px solid var(--c-border); }
+    .faq-btn { width: 100%; text-align: left; padding: 24px 0; background: none; border: none; font-size: 1.125rem; font-weight: 500; font-family: var(--f-sans); cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--c-ink); }
+    .faq-icon { font-family: var(--f-mono); color: var(--c-grey); }
+    .faq-content { display: none; padding-bottom: 24px; color: var(--c-grey); max-width: 800px; }
+    .faq-item.active .faq-content { display: block; }
+    .faq-item.active { background: var(--c-lime); margin: 0 -24px; padding: 0 24px; border-radius: var(--radius-md); border-bottom: none; }
+    .faq-item.active .faq-btn { padding: 24px 0 12px; }
+    .faq-item.active .faq-icon { color: var(--c-ink); }
+    .faq-item.active .faq-content { color: var(--c-ink); }
+
+    /* Closing */
+    .closing-panel {
+      background: var(--c-dark-panel); border-radius: var(--radius-lg);
+      margin: 0 var(--pad-page) 24px; color: var(--c-white); overflow: hidden;
+    }
+    .closing-grid { display: grid; grid-template-columns: 1fr; }
+    @media (min-width: 1024px) { .closing-grid { grid-template-columns: 1fr 1fr; } }
+    .c-form-wrap { padding: clamp(48px, 6vw, 96px) clamp(24px, 4vw, 64px); }
+    .c-img { width: 100%; height: 100%; min-height: 400px; object-fit: cover; }
+    
+    .form-group { margin-bottom: 16px; }
+    .form-control { width: 100%; padding: 16px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.2); color: var(--c-white); font-family: var(--f-sans); border-radius: var(--radius-sm); font-size: 1rem; }
+    .form-control:focus { outline: none; border-color: var(--c-lime); }
+    select.form-control { appearance: none; }
+    
+    .pill-select { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+    .p-btn { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: var(--c-white); padding: 8px 16px; border-radius: 20px; font-family: var(--f-mono); font-size: 0.75rem; cursor: pointer; }
+    .p-btn.active { background: var(--c-lime); border-color: var(--c-lime); color: var(--c-ink); }
+
+    /* Footer */
+    .footer { padding: 48px clamp(24px, 4vw, 64px); border-top: 1px solid rgba(255,255,255,0.1); }
+    .f-grid { display: grid; grid-template-columns: 1fr; gap: 48px; margin-bottom: 48px; }
+    @media (min-width: 768px) { .f-grid { grid-template-columns: 2fr 1fr 1fr 1fr; } }
+    .f-links { list-style: none; }
+    .f-links li { margin-bottom: 12px; font-size: 0.9375rem; }
+    .f-links a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s; }
+    .f-links a:hover { color: var(--c-lime); }
+    .f-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; font-size: 0.875rem; color: rgba(255,255,255,0.5); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+
+    /* Utils */
+    .reveal { opacity: 0; transform: translateY(16px); transition: all 0.8s var(--ease); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) { .reveal { transition: none; opacity: 1; transform: none; } }
+    
+    svg.leaf { display: inline-block; width: 14px; height: 14px; }
+      /* late overrides */
+    @media (max-width: 1023px) {
+      .hero-panel { display: flex; flex-direction: column; }
+      .hero-bottom-bar { position: relative; bottom: auto; order: 4; margin-top: 8px; }
+      .hero-content { margin-top: 36vh; }
+    }
+    @media (max-width: 759px) { .loop-svg-wrap { display: none; } }
+  </style>
+</head>
+<body>
+
+  <!-- Icons -->
+  <svg style="display:none;">
+    <symbol id="icon-leaf" viewBox="0 0 24 24">
+      <path d="M17 8C17 8 17 3 12 3C7 3 7 8 7 8C7 13 12 18 12 21C12 18 17 13 17 8Z" fill="currentColor"/>
+    </symbol>
+  </svg>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#products" class="menu-link">Products</a>
+    <a href="#feedstock" class="menu-link">Feedstock</a>
+    <a href="#precinct" class="menu-link">Precinct</a>
+    <a href="#news" class="menu-link">News</a>
+    <a href="#contact" class="btn btn-dark menu-link" style="margin-top:auto; width:max-content;">Talk to our team</a>
+  </div>
+
+  <div class="hero-wrap">
+    <div class="hero-panel">
+      <div class="hero-bg">
+        <img src="assets/img/bioenergy-aerial.jpg" alt="Render of Kalfresh Bioenergy facility">
+      </div>
+      
+      <nav class="nav">
+        <div class="nav-left">
+          <a href="#" class="nav-logo">
+            <img src="assets/img/kalfresh-bioenergy-logo-white.png" alt="Kalfresh Bioenergy">
+          </a>
+          <div class="nav-links">
+            <a href="#products">Products</a>
+            <a href="#feedstock">Feedstock</a>
+            <a href="#precinct">Precinct</a>
+            <a href="#news">News</a>
+          </div>
+        </div>
+        <div class="nav-right">
+          <span class="nav-status">First production 2027</span>
+          <button class="menu-toggle" id="menuBtn">Menu</button>
+          <a href="#contact" class="btn btn-white" style="display:none;" id="desktopCta">Talk to our team</a>
+        </div>
+      </nav>
+
+      <!-- Pins -->
+      <div class="hero-pin pin-1 reveal" style="transition-delay:0.2s;">
+        <div class="pin-dot"></div><div class="pin-line"></div><div class="pin-label">Renewable natural gas</div>
+      </div>
+      <div class="hero-pin pin-2 reveal" style="transition-delay:0.3s;">
+        <div class="pin-dot"></div><div class="pin-line"></div><div class="pin-label">Electricity</div>
+      </div>
+      <div class="hero-pin pin-3 reveal" style="transition-delay:0.4s;">
+        <div class="pin-dot"></div><div class="pin-line"></div><div class="pin-label">Biogenic CO2</div>
+      </div>
+      <div class="hero-pin pin-4 reveal" style="transition-delay:0.5s;">
+        <div class="pin-dot"></div><div class="pin-line"></div><div class="pin-label">Bio-fertiliser</div>
+      </div>
+
+      <div class="hero-glass reveal" style="transition-delay:0.1s;">
+        <div class="hg-title">Facility at a glance</div>
+        <div class="hg-row"><span class="hg-label">Location</span><span class="hg-val">Kalbar, Scenic Rim</span></div>
+        <div class="hg-row"><span class="hg-label">Process</span><span class="hg-val">Anaerobic digestion</span></div>
+        <div class="hg-row"><span class="hg-label">First production</span><span class="hg-val">2027</span></div>
+        <div class="hg-row"><span class="hg-label">Developer</span><span class="hg-val">Kalfresh</span></div>
+      </div>
+
+      <div class="hero-content reveal">
+        <div class="eyebrow eyebrow-white"><svg><use href="#icon-leaf"/></svg> ENERGY BY NATURE · SCENIC RIM, QUEENSLAND</div>
+        <h1 class="t-hero">Renewable gas and power, grown on Queensland farms.</h1>
+        <p>Turning the region's crop residues and food waste into clean energy.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-white">Talk to our team</a>
+          <div class="chip">First production 2027</div>
+          <div class="chip">Technology by WELTEC BIOPOWER</div>
+          <div class="chip">Backed by Wollemi Capital and QIC</div>
+        </div>
+      </div>
+
+      <div class="hero-bottom-bar reveal">
+        <span class="feed-word active">Crop residues</span>
+        <span class="feed-word">·</span>
+        <span class="feed-word">Rotational crops</span>
+        <span class="feed-word">·</span>
+        <span class="feed-word">Food-processing waste</span>
+        <span class="feed-word">·</span>
+        <span class="feed-word">Council organics</span>
+        <span class="feed-word">·</span>
+        <span class="feed-word">Farm waste</span>
+      </div>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="container">
+      <div class="eyebrow"><svg><use href="#icon-leaf"/></svg> WHY KALFRESH BIOENERGY</div>
+      <p class="intro-p reveal">
+        <span class="text-ink">Kalfresh has farmed the Scenic Rim since 1992.</span>
+        <span class="text-grey">Now we turn the region's crop residues and food waste into renewable gas, electricity and bio-fertiliser, and send the nutrients back to the paddock.</span>
+      </p>
+
+      <div class="strip-scroll reveal">
+        <div class="strip-card sc-lime">
+          <div>
+            <div class="sc-fact">
+              <div class="sc-num">1992</div>
+              <div class="sc-desc">Farming the Scenic Rim since</div>
+            </div>
+            <div class="sc-fact">
+              <div class="sc-num">2027</div>
+              <div class="sc-desc">First renewable energy</div>
+            </div>
+            <div class="sc-fact">
+              <div class="sc-num">4</div>
+              <div class="sc-desc">Products from one plant</div>
+            </div>
+          </div>
+          <a href="#loop" class="btn btn-dark" style="align-self: flex-start;">How it works</a>
+        </div>
+        <div class="strip-card sc-img">
+          <img src="assets/img/kalfresh-vegetables-scenic-rim-fassifern-valley-farmers-growers-products.jpg" alt="Carrots in soil" loading="lazy">
+          <div class="sc-pill">Grown locally</div>
+        </div>
+        <div class="strip-card sc-img wide">
+          <img src="assets/img/scenic-rim-ag-precinct-overview.jpg" alt="Sweet-corn sunset" loading="lazy">
+          <div class="sc-pill">Scenic Rim</div>
+        </div>
+        <div class="strip-card sc-img">
+          <img src="assets/img/Kalfresh-Sep-2026_068.jpg" alt="Digester base construction" loading="lazy">
+          <div class="sc-pill">Under construction</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="products" style="background: var(--c-white); padding-top: 0;">
+    <div class="container">
+      <div class="header-row">
+        <div>
+          <div class="eyebrow"><svg><use href="#icon-leaf"/></svg> OUTPUTS</div>
+          <h2 class="t-h2 reveal">Four products from one plant.</h2>
+        </div>
+      </div>
+
+      <div class="bento reveal">
+        <div class="b-card b-tall">
+          <img src="assets/img/bioenergy-aerial.jpg" alt="Render of the anaerobic digesters at Kalbar" class="b-img" loading="lazy">
+          <div class="b-content">
+            <div class="chip chip-dark" style="width: max-content; margin-bottom: 16px;">Output 01</div>
+            <h3 class="b-title">Renewable natural gas</h3>
+            <p class="b-text">Pipeline-quality biomethane for industry and transport. Fuel for up to 98 million truck or bus kilometres a year.</p>
+          </div>
+        </div>
+        <div class="b-card">
+          <img src="assets/img/precinct-aerial.jpg" alt="Precinct render" class="b-img" loading="lazy">
+          <div class="b-content">
+            <div class="chip chip-dark" style="width: max-content; margin-bottom: 16px;">Output 02</div>
+            <h3 class="b-title">Electricity</h3>
+            <p class="b-text">A regional peaking plant fed by agriculture, available 24/7.</p>
+          </div>
+        </div>
+        <div class="b-card">
+          <img src="assets/img/precinct-render-co2.jpg" alt="CO2" class="b-img" loading="lazy">
+          <div class="b-content">
+            <div class="chip chip-dark" style="width: max-content; margin-bottom: 16px;">Output 03</div>
+            <h3 class="b-title">Biogenic CO2</h3>
+            <p class="b-text">Food-grade carbon dioxide for growers and manufacturers.</p>
+          </div>
+        </div>
+        <div class="b-card">
+          <img src="assets/img/scenic-rim-ag-precinct-overview.jpg" alt="Sweet-corn field at sunset in the Scenic Rim" class="b-img" loading="lazy">
+          <div class="b-content">
+            <div class="chip chip-dark" style="width: max-content; margin-bottom: 16px;">Output 04</div>
+            <h3 class="b-title">Bio-fertiliser</h3>
+            <p class="b-text">Nutrient-rich digestate that replaces synthetic fertiliser.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bento-footer reveal">
+        <p class="t-mono" style="margin:0; color: var(--c-grey);">Contract structures, volumes and certification pathways are available on request.</p>
+        <a href="#contact" class="btn btn-dark" onclick="selectForm('Off-taker')">Request an offtake briefing</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="loop">
+    <div class="container">
+      <div class="eyebrow"><svg><use href="#icon-leaf"/></svg> THE LOOP</div>
+      <h2 class="t-h2 reveal">From paddock to power and back to the paddock.</h2>
+
+      <div class="loop-cards reveal">
+        <div class="l-card">
+          <img src="assets/img/kalfresh-vegetables-scenic-rim-fassifern-valley-farmers-growers-products.jpg" alt="Collect" class="l-img" loading="lazy">
+          <span class="l-step">01 / Collect</span>
+          <h3 class="l-title">Residues arrive</h3>
+          <p class="text-grey" style="font-size: 0.9375rem;">Crop residues and food waste from farms and processors.</p>
+        </div>
+        <div class="l-card">
+          <img src="assets/img/bioenergy-aerial.jpg" alt="Digest" class="l-img" loading="lazy">
+          <span class="l-step">02 / Digest and upgrade</span>
+          <h3 class="l-title">Microbes break it down</h3>
+          <p class="text-grey" style="font-size: 0.9375rem;">Biogas is captured and cleaned to biomethane or burned for power.</p>
+        </div>
+        <div class="l-card">
+          <img src="assets/img/Scenic-Rim-Industrial-Agricultural-Precinct.jpg" alt="Scenic Rim farmland from the air" class="l-img" loading="lazy">
+          <span class="l-step">03 / Return</span>
+          <h3 class="l-title">Back to the soil</h3>
+          <p class="text-grey" style="font-size: 0.9375rem;">Digestate goes back to local paddocks as nutrient-rich bio-fertiliser.</p>
+        </div>
+      </div>
+
+      <div class="loop-svg-wrap reveal">
+        <!-- Simplified horizontal loop SVG -->
+        <svg class="loop-svg" viewBox="0 -10 1000 135" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="40" width="160" height="40" rx="20" fill="#F3F5EE" stroke="#E4E8DC"/>
+          <text x="90" y="65" font-family="Outfit" font-size="14" fill="#101510" text-anchor="middle">Farm & Food Waste</text>
+          
+          <path d="M 170 60 L 250 60" fill="none" stroke="#00B140" stroke-width="2" stroke-dasharray="4"/>
+          
+          <rect x="250" y="30" width="180" height="60" rx="30" fill="#215732"/>
+          <rect x="280" y="20" width="120" height="20" rx="10" fill="#D0DF00"/>
+          <text x="340" y="34" font-family="Outfit" font-size="12" font-weight="600" fill="#0F2A1C" text-anchor="middle">Anaerobic Digestion</text>
+          
+          <path d="M 430 60 L 510 60" fill="none" stroke="#00B140" stroke-width="2" stroke-dasharray="4"/>
+          
+          <rect x="510" y="40" width="160" height="40" rx="20" fill="#0F2A1C"/>
+          <text x="590" y="65" font-family="Outfit" font-size="14" fill="#FFFFFF" text-anchor="middle">Energy & CO2</text>
+          
+          <path d="M 670 60 L 750 60" fill="none" stroke="#00B140" stroke-width="2" stroke-dasharray="4"/>
+          
+          <rect x="750" y="40" width="160" height="40" rx="20" fill="#0F2A1C"/>
+          <text x="830" y="65" font-family="Outfit" font-size="14" fill="#FFFFFF" text-anchor="middle">Bio-fertiliser</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <div class="impact-panel reveal">
+    <img src="assets/img/Scenic-Rim-Industrial-Agricultural-Precinct.jpg" alt="Farmland" class="impact-bg" loading="lazy">
+    <div class="impact-content">
+      <div>
+        <div class="impact-giant">430,000 t</div>
+        <h2 class="t-h2">CO2-e avoided a year, up to.</h2>
+      </div>
+      <div class="glass-list">
+        <div class="glass-row">
+          <span class="glass-icon">+</span>
+          <span>Electricity for up to 31,000 homes</span>
+        </div>
+        <div class="glass-row">
+          <span class="glass-icon">+</span>
+          <span>Fuel for up to 98 million truck or bus kilometres a year</span>
+        </div>
+        <div class="glass-row">
+          <span class="glass-icon">+</span>
+          <span>Emissions reduction equal to about 21 million trees a year</span>
+        </div>
+        <div class="glass-row">
+          <span class="glass-icon">+</span>
+          <span>Digestate returned to local farms as fertiliser</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="feedstock">
+    <div class="container">
+      <div class="split">
+        <img src="assets/img/kalfresh-vegetables-scenic-rim-fassifern-valley-farmers-growers-products.jpg" alt="Carrots" class="split-img reveal" loading="lazy">
+        <div class="reveal">
+          <div class="eyebrow"><svg><use href="#icon-leaf"/></svg> FEEDSTOCK</div>
+          <h2 class="t-h2">Have organic residues? We can take them.</h2>
+          
+          <div class="num-row">
+            <span class="num-col">01</span>
+            <p style="margin:0;">Crop residues and rotational crops</p>
+          </div>
+          <div class="num-row">
+            <span class="num-col">02</span>
+            <p style="margin:0;">Food-processing waste</p>
+          </div>
+          <div class="num-row">
+            <span class="num-col">03</span>
+            <p style="margin:0;">Council organics and farm waste</p>
+          </div>
+          
+          <a href="#contact" class="btn btn-dark" style="margin-top: 32px;" onclick="selectForm('Feedstock supplier')">Ask about a feedstock assessment</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="precinct" style="background: var(--c-sage);">
+    <div class="container">
+      <div class="split">
+        <div class="reveal">
+          <div class="eyebrow"><svg><use href="#icon-leaf"/></svg> LOCATION</div>
+          <h2 class="t-h2" style="margin-bottom: 24px;">Built inside a food precinct.</h2>
+          <p class="text-grey" style="margin-bottom: 32px;">The facility sits inside the Scenic Rim Agricultural Industrial Precinct, delivering energy directly to neighbouring food manufacturers.</p>
+          
+          <div style="display: flex; gap: 48px; margin-bottom: 32px;">
+            <div><span class="t-h3" style="color:var(--c-green-deep);">40 ha</span><br><span class="t-mono text-grey">Precinct</span></div>
+            <div><span class="t-h3" style="color:var(--c-green-deep);">75 km</span><br><span class="t-mono text-grey">To distribution centres</span></div>
+          </div>
+          
+          <a href="#" class="btn btn-dark">About the precinct</a>
+        </div>
+        <img src="assets/img/precinct-aerial.jpg" alt="Precinct Render" class="split-img reveal" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="eyebrow"><svg><use href="#icon-leaf"/></svg> ROADMAP</div>
+      <h2 class="t-h2 reveal">Timeline.</h2>
+      
+      <div class="timeline reveal">
+        <div class="tl-item">
+          <div class="tl-year">2019</div>
+          <p class="text-grey">Queensland Government coordinated project</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2024</div>
+          <p class="text-grey">Precinct and bioenergy facility approved</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2025</div>
+          <p class="text-grey">Bulk earthworks began</p>
+        </div>
+        <div class="tl-item now">
+          <div class="tl-year">2026<span class="tl-pill">NOW</span></div>
+          <p class="text-grey">Civil construction, $80M from Wollemi Capital & QIC, WELTEC BIOPOWER appointed</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2027</div>
+          <p class="text-grey">First renewable energy production</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0;">
+    <div class="container">
+      <div class="quote-wrap reveal">
+        <div class="q-card">
+          <p class="q-text">"Our mission is to grow a better farming future for our community, consumers and the environment."</p>
+          <div class="q-author">
+            <img src="assets/img/kalfresh-bioenergy-logo.png" alt="Kalfresh" style="border-radius:0; object-fit:contain; background:none;">
+            Kalfresh
+          </div>
+        </div>
+        <div>
+          <img src="assets/img/0033_Kalfresh-Vegetables-Community.jpg" alt="Community" class="q-img" loading="lazy">
+        </div>
+      </div>
+      
+      <div class="q-tiles reveal">
+        <div class="q-tile">Energy from farm residues</div>
+        <div class="q-tile">Nutrients back to the paddock</div>
+        <div class="q-tile">Power and gas for the region</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="news" style="background: var(--c-sage);">
+    <div class="container">
+      <div class="partner-row reveal">
+        <div class="p-item"><span>Investors</span> Wollemi Capital, QIC</div>
+        <div class="p-item"><span>Technology</span> WELTEC BIOPOWER</div>
+        <div class="p-item"><span>Developer</span> Kalfresh</div>
+      </div>
+      
+      <div class="eyebrow"><svg><use href="#icon-leaf"/></svg> NEWS</div>
+      <div class="news-grid reveal">
+        <a href="#" class="n-card">
+          <img src="assets/img/Alexander-and-Andreas-e1791345198816.jpg" alt="Team" class="n-img" loading="lazy">
+          <div class="n-content">
+            <span class="n-date">8 Jul 2026</span>
+            <p style="font-weight:500; margin:0;">WELTEC BIOPOWER secured as technology partner</p>
+          </div>
+        </a>
+        <a href="#" class="n-card">
+          <img src="assets/img/Euro-trip-DK.jpeg" alt="Study trip" class="n-img" loading="lazy">
+          <div class="n-content">
+            <span class="n-date">19 Feb 2026</span>
+            <p style="font-weight:500; margin:0;">$80M backing for paddock to power precinct</p>
+          </div>
+        </a>
+        <a href="#" class="n-card">
+          <img src="assets/img/Kalfresh-Sep-2026_068.jpg" alt="Construction pour" class="n-img" loading="lazy">
+          <div class="n-content">
+            <span class="n-date">Sep 2026</span>
+            <p style="font-weight:500; margin:0;">Digester base poured at Kalbar</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="eyebrow"><svg><use href="#icon-leaf"/></svg> QUESTIONS</div>
+      <h2 class="t-h2 reveal" style="margin-bottom: 48px;">What buyers and growers ask first.</h2>
+      
+      <div class="faq-list reveal">
+        <div class="faq-item active">
+          <button class="faq-btn" aria-expanded="true">What will you produce? <span class="faq-icon">+</span></button>
+          <div class="faq-content">Renewable natural gas, electricity, biogenic CO2 and bio-fertiliser.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false">Where is the plant? <span class="faq-icon">+</span></button>
+          <div class="faq-content">Inside the 40 ha Scenic Rim Agricultural Industrial Precinct in Kalbar, Queensland.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false">When does production start? <span class="faq-icon">+</span></button>
+          <div class="faq-content">First renewable energy production is scheduled for 2027.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false">What feedstock do you take? <span class="faq-icon">+</span></button>
+          <div class="faq-content">Crop residues, rotational crops, food-processing waste, council organics and farm waste.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false">Who is building the technology? <span class="faq-icon">+</span></button>
+          <div class="faq-content">Our technology partner is WELTEC BIOPOWER.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false">Who is backing the project? <span class="faq-icon">+</span></button>
+          <div class="faq-content">The project is developed by Kalfresh and backed by $80M from Wollemi Capital and QIC.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="closing-panel reveal" id="contact">
+    <div class="closing-grid">
+      <div class="c-form-wrap">
+        <h2 class="t-h2" style="margin-bottom: 32px;">Talk to Kalfresh Bioenergy.</h2>
+        
+        <div class="pill-select" id="formPills">
+          <button class="p-btn active" data-val="Off-takers">Off-takers</button>
+          <button class="p-btn" data-val="Feedstock suppliers">Feedstock suppliers</button>
+          <button class="p-btn" data-val="Government">Government</button>
+          <button class="p-btn" data-val="Partners">Partners</button>
+        </div>
+
+        <form id="contactForm" onsubmit="submitForm(event)">
+          <div class="form-group">
+            <select class="form-control" id="audienceSelect" required>
+              <option value="Off-takers" selected>Off-takers</option>
+              <option value="Feedstock suppliers">Feedstock suppliers</option>
+              <option value="Government">Government</option>
+              <option value="Partners">Partners</option>
+            </select>
+          </div>
+          <div class="form-group"><input type="text" class="form-control" placeholder="Name" required></div>
+          <div class="form-group"><input type="email" class="form-control" placeholder="Email" required></div>
+          <div class="form-group"><textarea class="form-control" placeholder="Message" rows="4" required></textarea></div>
+          <button type="submit" class="btn btn-lime" style="width:100%;">Send message</button>
+        </form>
+        <div id="formSuccess" style="display:none; text-align:center; padding: 48px 0; color: var(--c-lime);">
+          <h3 class="t-h3">Thank you.</h3>
+          <p style="color:var(--c-white);">We'll be in touch shortly.</p>
+        </div>
+      </div>
+      <div>
+        <img src="assets/img/Kalfresh-Sep-2026_068.jpg" alt="Construction" class="c-img" loading="lazy">
+      </div>
+    </div>
+    
+    <footer class="footer">
+      <div class="f-grid">
+        <div>
+          <img src="assets/img/kalfresh-bioenergy-logo-white.png" alt="Kalfresh Bioenergy" style="height:32px; margin-bottom:16px;" loading="lazy">
+          <p class="t-mono" style="color:var(--c-lime);">Energy by Nature</p>
+        </div>
+        <div>
+          <ul class="f-links">
+            <li><a href="#products">Products</a></li>
+            <li><a href="#feedstock">Feedstock</a></li>
+            <li><a href="#precinct">Precinct</a></li>
+          </ul>
+        </div>
+        <div>
+          <ul class="f-links">
+            <li><a href="#news">News</a></li>
+            <li><a href="#">About Kalfresh</a></li>
+          </ul>
+        </div>
+        <div>
+          <ul class="f-links">
+            <li><a href="mailto:info@agprecinct.com.au">info@agprecinct.com.au</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="f-bottom">
+        <span>A Kalfresh company. Kalbar, Scenic Rim, Queensland.<br>We acknowledge the Traditional Owners of the land and pay respects to Elders past and present.</span>
+        <span>&copy; 2026 Kalfresh Bioenergy</span>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Desktop Nav CTA Visibility
+    const desktopCta = document.getElementById('desktopCta');
+    if (window.innerWidth >= 1024) desktopCta.style.display = 'inline-flex';
+
+    // Mobile Menu
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuLinks = document.querySelectorAll('.menu-link');
+
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+      menuBtn.textContent = mobileMenu.classList.contains('open') ? 'Close' : 'Menu';
+      menuBtn.style.color = mobileMenu.classList.contains('open') ? '#101510' : '#FFF';
+      menuBtn.style.borderColor = mobileMenu.classList.contains('open') ? '#E4E8DC' : 'rgba(255,255,255,0.3)';
+    });
+
+    menuLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        menuBtn.textContent = 'Menu';
+        menuBtn.style.color = '#FFF';
+        menuBtn.style.borderColor = 'rgba(255,255,255,0.3)';
+      });
+    });
+
+    // Reveal Animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // FAQ Accordion
+    const faqBtns = document.querySelectorAll('.faq-btn');
+    faqBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const isActive = item.classList.contains('active');
+        document.querySelectorAll('.faq-item').forEach(el => {
+          el.classList.remove('active');
+          el.querySelector('.faq-btn').setAttribute('aria-expanded', 'false');
+        });
+        if (!isActive) {
+          item.classList.add('active');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    // Form Pills Sync
+    const pills = document.querySelectorAll('.p-btn');
+    const select = document.getElementById('audienceSelect');
+    
+    pills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        pills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        select.value = pill.getAttribute('data-val');
+      });
+    });
+    
+    select.addEventListener('change', (e) => {
+      pills.forEach(p => {
+        if(p.getAttribute('data-val') === e.target.value) p.classList.add('active');
+        else p.classList.remove('active');
+      });
+    });
+
+    // Global form selector helper
+    window.selectForm = function(val) {
+      // Map external values to valid select options if needed, here just basic matching
+      let mappedVal = val;
+      if(val === 'Off-taker') mappedVal = 'Off-takers';
+      if(val === 'Feedstock supplier') mappedVal = 'Feedstock suppliers';
+      
+      select.value = mappedVal;
+      pills.forEach(p => {
+        if(p.getAttribute('data-val') === mappedVal) p.classList.add('active');
+        else p.classList.remove('active');
+      });
+    };
+
+    // Form Submit
+    window.submitForm = function(e) {
+      e.preventDefault();
+      document.getElementById('contactForm').style.display = 'none';
+      document.getElementById('formPills').style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    };
+  </script>
+</body>
+</html>
