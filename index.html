@@ -49,7 +49,8 @@
     .pill { border-radius: var(--radius-pill); }
     
     .grad { background: var(--grad); color: #fff; }
-    .grad * { color: #fff !important; }
+    .grad *:not(.btn-lime):not(.btn-lime *) { color: #fff !important; }
+    .grad .btn-lime, .grad .btn-lime * { color: var(--c-ink) !important; }
     
     .sage-panel {
       background: var(--c-panel);
@@ -532,6 +533,15 @@
         </button>
 
         <!-- Info Cards Desktop -->
+
+
+
+
+
+
+
+      </div>
+      <div class="map-cards">
         <div class="map-info active" id="map-info-0">
           <span class="mono c-signal" style="display:block; margin-bottom:8px;">STAGE 01</span>
           <h3 class="h-brand" style="margin-bottom:12px;">Mixed feedstock</h3>
@@ -541,8 +551,8 @@
         <div class="map-info" id="map-info-1">
           <span class="mono c-signal" style="display:block; margin-bottom:8px;">STAGE 02</span>
           <h3 class="h-brand" style="margin-bottom:12px;">Collect</h3>
-          <p style="font-size:14px; margin-bottom:16px;">Feedstock is collected from farms and food manufacturers around Kalbar and brought to the facility.</p>
-          <div style="display:flex; flex-wrap:wrap;"><span class="chip">Farms</span><span class="chip">Food manufacturers</span><span class="chip">Councils</span></div>
+          <p style="font-size:14px; margin-bottom:16px;">Feedstock is collected from farms and food producers around Kalbar and brought to the facility.</p>
+          <div style="display:flex; flex-wrap:wrap;"><span class="chip">Farms</span><span class="chip">Food producers</span><span class="chip">Livestock</span></div>
         </div>
         <div class="map-info" id="map-info-2">
           <span class="mono c-signal" style="display:block; margin-bottom:8px;">STAGE 03</span>
@@ -559,8 +569,8 @@
         <div class="map-info" id="map-info-4">
           <span class="mono c-signal" style="display:block; margin-bottom:8px;">STAGE 05</span>
           <h3 class="h-brand" style="margin-bottom:12px;">CO2 for food and drink manufacturing</h3>
-          <p style="font-size:14px; margin-bottom:16px;">Biogenic carbon dioxide captured from the process, for manufacturers in the precinct.</p>
-          <div style="display:flex; flex-wrap:wrap;"><span class="chip">Biogenic CO2</span><span class="chip">Precinct</span></div>
+          <p style="font-size:14px; margin-bottom:16px;">Biogenic carbon dioxide captured from the process, for food and drink manufacturing.</p>
+          <div style="display:flex; flex-wrap:wrap;"><span class="chip">Biogenic CO2</span><span class="chip">Food and drink</span></div>
         </div>
         <div class="map-info" id="map-info-5">
           <span class="mono c-signal" style="display:block; margin-bottom:8px;">STAGE 06</span>
@@ -577,7 +587,7 @@
         <div class="map-info" id="map-info-7">
           <span class="mono c-signal" style="display:block; margin-bottom:8px;">STAGE 08</span>
           <h3 class="h-brand" style="margin-bottom:12px;">Green gas for industry</h3>
-          <p style="font-size:14px; margin-bottom:16px;">Renewable natural gas injected for industrial users, replacing fossil gas.</p>
+          <p style="font-size:14px; margin-bottom:16px;">Renewable natural gas supplied to industrial users.</p>
           <div style="display:flex; flex-wrap:wrap;"><span class="chip">Industry</span><span class="chip">Renewable natural gas</span></div>
         </div>
       </div>
@@ -594,8 +604,8 @@
         <div class="mob-card" data-mob-stage="1">
           <button class="mob-card-head" aria-expanded="false"><span><span class="mono c-signal" style="margin-right:8px;">02</span> Collect</span> <span class="mob-card-icon">+</span></button>
           <div class="mob-card-body"><div class="mob-card-inner">
-            <p style="margin-bottom:16px;">Feedstock is collected from farms and food manufacturers around Kalbar and brought to the facility.</p>
-            <div style="display:flex; flex-wrap:wrap; margin-bottom:8px;"><span class="chip">Farms</span><span class="chip">Food manufacturers</span><span class="chip">Councils</span></div>
+            <p style="margin-bottom:16px;">Feedstock is collected from farms and food producers around Kalbar and brought to the facility.</p>
+            <div style="display:flex; flex-wrap:wrap; margin-bottom:8px;"><span class="chip">Farms</span><span class="chip">Food producers</span><span class="chip">Livestock</span></div>
           </div></div>
         </div>
         <div class="mob-card" data-mob-stage="2">
@@ -615,8 +625,8 @@
         <div class="mob-card" data-mob-stage="4">
           <button class="mob-card-head" aria-expanded="false"><span><span class="mono c-signal" style="margin-right:8px;">05</span> CO2 for food and drink manufacturing</span> <span class="mob-card-icon">+</span></button>
           <div class="mob-card-body"><div class="mob-card-inner">
-            <p style="margin-bottom:16px;">Biogenic carbon dioxide captured from the process, for manufacturers in the precinct.</p>
-            <div style="display:flex; flex-wrap:wrap; margin-bottom:8px;"><span class="chip">Biogenic CO2</span><span class="chip">Precinct</span></div>
+            <p style="margin-bottom:16px;">Biogenic carbon dioxide captured from the process, for food and drink manufacturing.</p>
+            <div style="display:flex; flex-wrap:wrap; margin-bottom:8px;"><span class="chip">Biogenic CO2</span><span class="chip">Food and drink</span></div>
           </div></div>
         </div>
         <div class="mob-card" data-mob-stage="5">
@@ -636,7 +646,7 @@
         <div class="mob-card" data-mob-stage="7">
           <button class="mob-card-head" aria-expanded="false"><span><span class="mono c-signal" style="margin-right:8px;">08</span> Green gas for industry</span> <span class="mob-card-icon">+</span></button>
           <div class="mob-card-body"><div class="mob-card-inner">
-            <p style="margin-bottom:16px;">Renewable natural gas injected for industrial users, replacing fossil gas.</p>
+            <p style="margin-bottom:16px;">Renewable natural gas supplied to industrial users.</p>
             <div style="display:flex; flex-wrap:wrap; margin-bottom:8px;"><span class="chip">Industry</span><span class="chip">Renewable natural gas</span></div>
           </div></div>
         </div>
@@ -678,7 +688,7 @@
     <h2 class="reveal" style="margin-bottom: 64px;">What we produce.</h2>
     
     <div class="out-row reveal">
-      <div class="img-wrap rounded-lg"><img src="assets/img/real/hero-drone-13.jpg" alt="Renewable natural gas output at Kalfresh Bioenergy" class="img-fluid" loading="lazy"></div>
+      <div class="img-wrap rounded-lg"><img src="assets/img/real/hero-drone-13.jpg" alt="Digester tank wall and crane at Kalbar, September 2026" class="img-fluid" loading="lazy"></div>
       <div class="out-panel rounded-lg">
         <span class="mono c-signal">01</span>
         <h3 class="h-brand">Renewable natural gas</h3>
@@ -706,7 +716,7 @@
         </div>
         <button class="btn btn-grey pill" style="width: max-content;" onclick="openModal('Off-taker', 'Electricity')">Request a briefing <span class="arrow">→</span></button>
       </div>
-      <div class="img-wrap rounded-lg out-img-col"><img src="assets/img/real/pour-117.jpg" alt="Electricity generation at Kalfresh Bioenergy" class="img-fluid" loading="lazy"></div>
+      <div class="img-wrap rounded-lg out-img-col"><img src="assets/img/real/pour-117.jpg" alt="Concrete pump truck and crew finishing the digester base" class="img-fluid" loading="lazy"></div>
     </div>
 
     <div class="out-row reveal">
@@ -738,20 +748,20 @@
         </div>
         <button class="btn btn-grey pill" style="width: max-content;" onclick="openModal('Off-taker', 'Bio-fertiliser')">Request a briefing <span class="arrow">→</span></button>
       </div>
-      <div class="img-wrap rounded-lg out-img-col"><img src="assets/img/real/drone-30-fields.jpg" alt="Local paddocks receiving bio-fertiliser" class="img-fluid" loading="lazy"></div>
+      <div class="img-wrap rounded-lg out-img-col"><img src="assets/img/real/drone-32-valley.jpg" alt="Farmland and paddocks in the Scenic Rim near Kalbar" class="img-fluid" loading="lazy"></div>
     </div>
   </section>
   
   <section class="section" style="padding-top:0;" data-theme="light">
-    <div class="label reveal" style="margin-bottom: 24px;">● On site, September 2026</div>
+    <div class="label reveal" style="margin-bottom: 24px;">On site, September 2026</div>
     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;" class="reveal">
       <div>
         <img src="assets/img/real/slab-team-132.jpg" alt="The crew on the first digester slab" class="img-fluid rounded-lg" style="aspect-ratio:4/3; margin-bottom:12px;" loading="lazy">
         <p style="font-size:14px; color:var(--c-ink);">The crew on the first digester slab</p>
       </div>
       <div>
-        <img src="assets/img/real/crew-134.jpg" alt="Pouring the first digester base at Kalbar" class="img-fluid rounded-lg" style="aspect-ratio:4/3; margin-bottom:12px;" loading="lazy">
-        <p style="font-size:14px; color:var(--c-ink);">Pouring the first digester base at Kalbar</p>
+        <img src="assets/img/real/crew-134.jpg" alt="The construction crew at Kalbar, September 2026" class="img-fluid rounded-lg" style="aspect-ratio:4/3; margin-bottom:12px;" loading="lazy">
+        <p style="font-size:14px; color:var(--c-ink);">The construction crew at Kalbar, September 2026</p>
       </div>
       <div>
         <img src="assets/img/real/leaders-155.jpg" alt="Kalfresh and WELTEC BIOPOWER on site" class="img-fluid rounded-lg" style="aspect-ratio:4/3; margin-bottom:12px;" loading="lazy">
@@ -774,7 +784,7 @@
     <div class="tab-content reveal">
       <div id="panel-1" class="tab-panel active" role="tabpanel" aria-labelledby="tab-1">
         <div class="ww-grid">
-          <div class="img-wrap rounded-lg"><img src="assets/img/real/hero-drone-00.jpg" alt="Off-takers aerial site view" class="img-fluid ww-img" loading="lazy"></div>
+          <div class="img-wrap rounded-lg"><img src="assets/img/real/hero-drone-00.jpg" alt="Aerial of the digester base and site sheds at Kalbar" class="img-fluid ww-img" loading="lazy"></div>
           <div>
             <div class="num-list">
               <div class="num-row"><span class="mono num">01</span><p class="mono-value">Buy renewable gas, electricity, CO2 or bio-fertiliser</p></div>
@@ -787,12 +797,12 @@
       </div>
       <div id="panel-2" class="tab-panel" role="tabpanel" aria-labelledby="tab-2">
         <div class="ww-grid">
-          <div class="img-wrap rounded-lg"><img src="assets/img/real/drone-32-valley.jpg" alt="Feedstock suppliers valley view" class="img-fluid ww-img" loading="lazy"></div>
+          <div class="img-wrap rounded-lg"><img src="assets/img/real/drone-32-valley.jpg" alt="Farmland and paddocks near Kalbar" class="img-fluid ww-img" loading="lazy"></div>
           <div>
             <div class="num-list">
               <div class="num-row"><span class="mono num">01</span><p class="mono-value">Crop residues and rotational crops</p></div>
               <div class="num-row"><span class="mono num">02</span><p class="mono-value">Food-processing waste</p></div>
-              <div class="num-row"><span class="mono num">03</span><p class="mono-value">Council organics and farm waste</p></div>
+              <div class="num-row"><span class="mono num">03</span><p class="mono-value">Livestock waste and residues</p></div>
             </div>
             <button class="btn btn-lime pill" onclick="openModal('Feedstock supplier', 'Feedstock supply')">Request an assessment <span class="arrow">→</span></button>
           </div>
@@ -800,7 +810,7 @@
       </div>
       <div id="panel-3" class="tab-panel" role="tabpanel" aria-labelledby="tab-3">
         <div class="ww-grid">
-          <div class="img-wrap rounded-lg"><img src="assets/img/real/precinct-earthworks-173.jpg" alt="Precinct tenants site earthworks" class="img-fluid ww-img" loading="lazy"></div>
+          <div class="img-wrap rounded-lg"><img src="assets/img/real/precinct-earthworks-173.jpg" alt="Aerial of precinct earthworks beside green paddocks" class="img-fluid ww-img" loading="lazy"></div>
           <div>
             <div class="num-list">
               <div class="num-row"><span class="mono num">01</span><p class="mono-value">Inside the 40 ha Scenic Rim Agricultural Industrial Precinct</p></div>
@@ -813,7 +823,7 @@
       </div>
       <div id="panel-4" class="tab-panel" role="tabpanel" aria-labelledby="tab-4">
         <div class="ww-grid">
-          <div class="img-wrap rounded-lg"><img src="assets/img/real/handshake-157.jpg" alt="Government and investors partnership" class="img-fluid ww-img" loading="lazy"></div>
+          <div class="img-wrap rounded-lg"><img src="assets/img/real/handshake-157.jpg" alt="Two project leaders shaking hands on site at Kalbar" class="img-fluid ww-img" loading="lazy"></div>
           <div>
             <div class="num-list">
               <div class="num-row"><span class="mono num">01</span><p class="mono-value">Queensland Government coordinated project since 2019, approved 2024</p></div>
@@ -832,7 +842,7 @@
     <h2 class="reveal">Where we are.</h2>
     
     <div class="loc-wrapper reveal">
-      <div class="img-wrap rounded-lg"><img src="assets/img/real/drone-29-precinct.jpg" alt="Scenic Rim Agricultural Industrial Precinct aerial location view" class="img-fluid loc-img" loading="lazy"></div>
+      <div class="img-wrap rounded-lg"><img src="assets/img/real/drone-29-precinct.jpg" alt="Aerial of the precinct earthworks beside the Cunningham Highway" class="img-fluid loc-img" loading="lazy"></div>
       <div class="loc-tooltip glass rounded">
         <span class="mono" style="display:block; margin-bottom:8px; color:rgba(255,255,255,0.6);">SITE</span>
         <p class="mono-value" style="color:#fff; margin-bottom:16px;">Kalbar, Scenic Rim, Queensland</p>
@@ -869,22 +879,22 @@
         <p>Queensland Government coordinated project</p>
       </div>
       <div class="tl-card rounded-lg">
-        <div class="img-wrap"><img src="assets/img/real/earthworks-172.jpg" alt="Precinct and bioenergy facility approved 2024" class="img-fluid tl-img" loading="lazy"></div>
+        <div class="img-wrap"><img src="assets/img/real/earthworks-172.jpg" alt="Aerial of precinct earthworks" class="img-fluid tl-img" loading="lazy"></div>
         <h3 class="mono-value c-brand" style="margin-bottom: 16px;">[2024]</h3>
         <p>Precinct and bioenergy facility approved</p>
       </div>
       <div class="tl-card rounded-lg">
-        <div class="img-wrap"><img src="assets/img/real/earthworks-176.jpg" alt="Bulk earthworks 2025" class="img-fluid tl-img" loading="lazy"></div>
+        <div class="img-wrap"><img src="assets/img/real/earthworks-176.jpg" alt="Aerial of bulk earthworks and site sheds" class="img-fluid tl-img" loading="lazy"></div>
         <h3 class="mono-value c-brand" style="margin-bottom: 16px;">[2025]</h3>
         <p>Bulk earthworks began</p>
       </div>
       <div class="tl-card rounded-lg">
-        <div class="img-wrap"><img src="assets/img/real/pour-110.jpg" alt="Concrete base pouring on site 2026" class="img-fluid tl-img" loading="lazy"></div>
+        <div class="img-wrap"><img src="assets/img/real/pour-110.jpg" alt="Concrete boom pouring the digester base" class="img-fluid tl-img" loading="lazy"></div>
         <h3 class="mono-value c-brand" style="margin-bottom: 16px;">[2026] <span class="now-mark pill">NOW</span></h3>
         <p>Civil construction; $80M from Wollemi Capital and QIC; WELTEC BIOPOWER appointed</p>
       </div>
       <div class="tl-card rounded-lg">
-        <div class="img-wrap"><img src="assets/img/real/hero-drone-19.jpg" alt="First renewable energy production 2027" class="img-fluid tl-img" loading="lazy"></div>
+        <div class="img-wrap"><img src="assets/img/real/hero-drone-19.jpg" alt="Digester base under construction at Kalbar, September 2026" class="img-fluid tl-img" loading="lazy"></div>
         <h3 class="mono-value c-brand" style="margin-bottom: 16px;">[2027]</h3>
         <p>New Cunningham Highway intersection; first renewable energy production</p>
       </div>
@@ -898,14 +908,14 @@
     </div>
     <div class="news-grid reveal">
       <a href="https://www.agprecinct.com.au/news/" class="n-card rounded">
-        <div class="img-wrap" style="border-radius:0;"><img src="assets/img/real/leaders-155.jpg" alt="WELTEC BIOPOWER secured as technology partner" class="img-fluid n-img" loading="lazy"></div>
+        <div class="img-wrap" style="border-radius:0;"><img src="assets/img/real/leaders-155.jpg" alt="Kalfresh and WELTEC BIOPOWER leaders on site" class="img-fluid n-img" loading="lazy"></div>
         <div class="n-content">
           <span class="mono n-date">[8 Jul 2026]</span>
           <p class="mono-value" style="color:var(--c-ink);">WELTEC BIOPOWER secured as technology partner</p>
         </div>
       </a>
       <a href="https://www.agprecinct.com.au/news/" class="n-card rounded">
-        <div class="img-wrap" style="border-radius:0;"><img src="assets/img/real/walk-159.jpg" alt="$80M backing for paddock to power precinct" class="img-fluid n-img" loading="lazy"></div>
+        <div class="img-wrap" style="border-radius:0;"><img src="assets/img/real/walk-159.jpg" alt="Three people in hi-vis beside the digester base" class="img-fluid n-img" loading="lazy"></div>
         <div class="n-content">
           <span class="mono n-date">[19 Feb 2026]</span>
           <p class="mono-value" style="color:var(--c-ink);">$80M backing for paddock to power precinct</p>
@@ -931,7 +941,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-btn" aria-expanded="false">What feedstock do you take? <span class="faq-icon">+</span></button>
-        <div class="faq-ans"><div class="faq-ans-inner">Crop residues, rotational crops, food-processing waste, council organics and farm waste.</div></div>
+        <div class="faq-ans"><div class="faq-ans-inner">Crop residues, rotational crops, food-processing waste, and livestock waste and residues.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-btn" aria-expanded="false">Who is building the technology? <span class="faq-icon">+</span></button>
